@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E33935212AE0E1EA00CC9672 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E33935202AE0E1EA00CC9672 /* main.cpp */; };
+		E33935332AE0E8E700CC9672 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33935322AE0E8E700CC9672 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		E339351D2AE0E1EA00CC9672 /* SoftBodyTetris */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SoftBodyTetris; sourceTree = BUILT_PRODUCTS_DIR; };
 		E33935202AE0E1EA00CC9672 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E33935322AE0E8E700CC9672 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E33935332AE0E8E700CC9672 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +46,7 @@
 			children = (
 				E339351F2AE0E1EA00CC9672 /* SoftBodyTetris */,
 				E339351E2AE0E1EA00CC9672 /* Products */,
+				E33935272AE0E37E00CC9672 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +64,14 @@
 				E33935202AE0E1EA00CC9672 /* main.cpp */,
 			);
 			path = SoftBodyTetris;
+			sourceTree = "<group>";
+		};
+		E33935272AE0E37E00CC9672 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E33935322AE0E8E700CC9672 /* SDL2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,8 +250,22 @@
 		E33935252AE0E1EA00CC9672 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/opt/homebrew/Cellar/sdl2/2.28.4/include/**",
+					"/opt/homebrew/Cellar/sdl2/2.28.4/lib/**",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks/SDL2.framework/Versions/A",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -247,6 +273,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/opt/homebrew/Cellar/sdl2/2.28.4/include/**",
+					"/opt/homebrew/Cellar/sdl2/2.28.4/lib/**",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks/SDL2.framework/Versions/A",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

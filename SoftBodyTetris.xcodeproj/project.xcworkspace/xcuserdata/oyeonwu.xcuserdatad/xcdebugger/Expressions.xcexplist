@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Position::size():Types.hpp">
+      </ContextState>
+      <ContextState
+         contextName = "Position::operator-(Position) const:Types.hpp">
+      </ContextState>
+      <ContextState
+         contextName = "Window::renderSpring(Spring const&amp;):Window.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "(pos0 - pos1)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Spring::update():Spring.cpp">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -1,57 +1,51 @@
-/*This source code copyrighted by Lazy Foo' Productions 2004-2023
-and may not be redistributed without written permission.*/
+#include <SDL2/SDL_timer.h>
+#include <vector>
 
-//Using SDL and standard IO
-#include <SDL2/SDL.h>
-#include <stdio.h>
+#include "graphics/graphics.hpp"
+#include "physics/physics.hpp"
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
 
-int main( int argc, char* args[] )
-{
-    //The window we'll be rendering to
-    SDL_Window* window = NULL;
+int main () {
+    Window window( SCREEN_WIDTH, SCREEN_HEIGHT );
     
-    //The surface contained by the window
-    SDL_Surface* screenSurface = NULL;
-
-    //Initialize SDL
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-    {
-        printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
-    }
-    else
-    {
-        //Create window
-        window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-        if( window == NULL )
-        {
-            printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-        }
-        else
-        {
-            //Get window surface
-            screenSurface = SDL_GetWindowSurface( window );
-
-            //Fill the surface white
-            SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
+    MassPoint p1{10, {200, 200}, {0, 0}, {0, 0}};
+    MassPoint p2{20, {500, 400}, {0, 0}, {0, 0}};
+    Spring s(&p1, &p2, 200, 50);
+    
+    
+    SDL_Event e;
+    bool quit = false;
+    Time_millis last_render = SDL_GetTicks64();
+    Time_millis last_update = SDL_GetTicks64();
+    
+    while ( !quit ) {
+        if (SDL_GetTicks() < last_render + 32) {
+            // update
+            while ( SDL_PollEvent( &e ) ) {
+                if (e.type == SDL_QUIT) quit = true;
+            }
             
-            //Update the surface
-            SDL_UpdateWindowSurface( window );
+            Time_sec dt = (double)(SDL_GetTicks64() - last_update) / 1000.0;            
+        
+            s.update();
+            p1.update( dt );
+            p2.update( dt );
             
-            //Hack to get window to stay up
-            SDL_Event e; bool quit = false; while( quit == false ){ while( SDL_PollEvent( &e ) ){ if( e.type == SDL_QUIT ) quit = true; } }
+            last_update = SDL_GetTicks64();
+            
+        } else {
+            // render
+            window.clear();
+            
+            window.renderMassPoint(p1);
+            window.renderMassPoint(p2);
+            window.renderSpring(s);
+            
+            window.update();
+            
+            last_render = SDL_GetTicks64();
         }
     }
-
-    //Destroy window
-    SDL_DestroyWindow( window );
-
-    //Quit SDL subsystems
-    SDL_Quit();
-
-    return 0;
 }
-

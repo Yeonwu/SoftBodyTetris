@@ -68,11 +68,11 @@ void Window::renderFixedPoint ( const FixedPoint& p ) {
     SDL_RenderDrawRectF(renderer, &rect);
 }
 
-void Window::renderSpring ( const Spring& s ) {
-    Position pos0 = s.getPoint(0) -> getPosition();
-    Position pos1 = s.getPoint(1) -> getPosition();
+void Window::renderElasticConnector ( const ElasticConnector& ec ) {
+    Position pos0 = ec.getPoint(0) -> getPosition();
+    Position pos1 = ec.getPoint(1) -> getPosition();
     
-    double l = s.getLength();
+    double l = ec.getLength();
     double d = (pos0 - pos1).size();
     Position m = (pos0 + pos1) / 2;
     

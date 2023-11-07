@@ -14,6 +14,6 @@
 #include "MassPoint.hpp"
 #include "FixedPoint.hpp"
 
-#include "Spring.hpp"
+#include "ElasticConnector.hpp"
 
 #endif /* physics_h */

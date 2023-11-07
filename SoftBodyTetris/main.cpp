@@ -20,8 +20,8 @@ int main () {
     FixedPoint p1{{200, 200}};
     MassPoint p2{20, {500, 400}, {0, 0}, {0, 0}};
     MassPoint p3{40, {600, 700}, {0, 0}, {0, 0}};
-    Spring s(&p1, &p2, 200, 50);
-    Spring s2(&p2, &p3, 300, 50);
+    ElasticConnector s(&p1, &p2, 200, 50);
+    ElasticConnector s2(&p2, &p3, 300, 50);
     
     
     SDL_Event e;
@@ -58,8 +58,8 @@ int main () {
             window.renderMassPoint(p2);
             window.renderMassPoint(p3);
             
-            window.renderSpring(s);
-            window.renderSpring(s2);
+            window.renderElasticConnector(s);
+            window.renderElasticConnector(s2);
             
             window.update();
             

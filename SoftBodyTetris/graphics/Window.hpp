@@ -26,7 +26,7 @@ public:
     void renderMassPoint ( const MassPoint& p );
     void renderFixedPoint ( const FixedPoint& p );
     
-    void renderSpring ( const Spring& s );
+    void renderElasticConnector ( const ElasticConnector& ec );
 };
 
 

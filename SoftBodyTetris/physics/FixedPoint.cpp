@@ -14,3 +14,9 @@ Position FixedPoint::getPosition() const {
 }
 
 void FixedPoint::update( Time_sec dt ) {}
+
+bool FixedPoint::isMovable() const {
+    return false;
+}
+
+void FixedPoint::addForce( Force _F ) {}

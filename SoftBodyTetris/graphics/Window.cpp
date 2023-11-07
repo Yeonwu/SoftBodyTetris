@@ -69,8 +69,8 @@ void Window::renderFixedPoint ( const FixedPoint& p ) {
 }
 
 void Window::renderSpring ( const Spring& s ) {
-    Position pos0 = s.getMassPoint(0) -> getPosition();
-    Position pos1 = s.getMassPoint(1) -> getPosition();
+    Position pos0 = s.getPoint(0) -> getPosition();
+    Position pos1 = s.getPoint(1) -> getPosition();
     
     double l = s.getLength();
     double d = (pos0 - pos1).size();

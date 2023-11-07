@@ -26,6 +26,10 @@ void MassPoint::update( Time_sec dt ) {
     F.y = 0;
 }
 
+bool MassPoint::isMovable() const {
+    return true;
+}
+
 void MassPoint::updateVelocity( Time_sec dt ) {
     V += F / M * dt;
 }

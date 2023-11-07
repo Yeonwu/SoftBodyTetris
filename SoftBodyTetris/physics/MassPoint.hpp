@@ -11,7 +11,7 @@
 #include "Types.hpp"
 #include "IPoint.hpp"
 
-class MassPoint: IPoint {
+class MassPoint: public IPoint {
 private:
     Mass M;
     Position pos;
@@ -23,11 +23,11 @@ public:
     
     Position getPosition() const;
     void update( Time_sec dt );
+    bool isMovable() const;
     
     void updatePosition( Time_sec dt );
     void updateVelocity( Time_sec dt );
     void addForce( Force _F );
-    
 };
 
 #endif /* MassPoint_hpp */

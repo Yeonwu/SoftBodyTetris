@@ -12,14 +12,14 @@
 #include "MassPoint.hpp"
 
 class Spring {
-    MassPoint* p[2];
+    IPoint* p[2];
     double length;
     double K;
 
 public:
-    Spring(MassPoint* _p1, MassPoint * _p2, double _length, double _K);
+    Spring(IPoint* _p1, IPoint * _p2, double _length, double _K);
     
-    const MassPoint* getMassPoint( int idx ) const;
+    const IPoint* getPoint( int idx ) const;
     
     double getLength() const;
     

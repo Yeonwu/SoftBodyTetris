@@ -6,9 +6,8 @@
 //
 
 #include "Spring.hpp"
-#include <stdio.h>
 
-Spring::Spring(MassPoint* _p0, MassPoint * _p1, double _length, double _K):
+Spring::Spring(IPoint* _p0, IPoint * _p1, double _length, double _K):
     length(_length),
     K(_K)
 {
@@ -46,7 +45,7 @@ void Spring::update() {
     }
 }
 
-const MassPoint* Spring::getMassPoint( int idx ) const {
+const IPoint* Spring::getPoint( int idx ) const {
     return p[idx];
 }
 

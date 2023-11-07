@@ -11,8 +11,11 @@
 #include "Types.hpp"
 
 class IPoint {
+public:
     virtual Position getPosition() const = 0;
-    virtual void update(Time_sec dt) = 0;
+    virtual void update( Time_sec dt ) = 0;
+    virtual bool isMovable() const = 0;
+    virtual void addForce( Force _F ) = 0;
 };
 
 #endif /* Point_hpp */

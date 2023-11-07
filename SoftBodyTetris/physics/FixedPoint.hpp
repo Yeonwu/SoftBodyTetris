@@ -11,13 +11,15 @@
 #include "Types.hpp"
 #include "IPoint.hpp"
 
-class FixedPoint: IPoint {
+class FixedPoint: public IPoint {
     Position pos;
 public:
     FixedPoint( Position _pos );
     
     Position getPosition() const;
     void update( Time_sec dt );
+    bool isMovable() const;
+    void addForce( Force _F );
 };
 
 #endif /* FixedPoint_hpp */

@@ -13,20 +13,25 @@
 #include "physics.hpp"
 
 class Window {
-private:
+public:
     SDL_Window *window;
     SDL_Renderer *renderer;
-public:
+    
     Window( int screen_width, int screen_height );
     ~Window();
     
     void update();
     void clear();
     
-    void renderMassPoint ( const MassPoint& p );
-    void renderFixedPoint ( const FixedPoint& p );
+    void renderPoint ( const IPoint& p );
+    void renderPoint ( const MassPoint& p );
+    void renderPoint ( const FixedPoint& p );
     
-    void renderElasticConnector ( const ElasticConnector& ec );
+    void renderConnector ( const IConnector& c, int flag=0 );
+    void renderConnector ( const NonElasticConnector& nec );
+    void renderConnector ( const ElasticConnector& ec );
+    
+    void renderBody ( const IBody& b, int flag=0 );
 };
 
 

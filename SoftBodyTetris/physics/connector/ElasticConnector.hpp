@@ -17,7 +17,8 @@ class ElasticConnector: public IConnector {
     double K;
 
 public:
-    ElasticConnector(IPoint* _p1, IPoint * _p2, double _length, double _K);
+    ElasticConnector(IPoint* _p0, IPoint * _p1, double _K);
+    ElasticConnector(IPoint* _p0, IPoint * _p1, double _length, double _K);
     
     const IPoint* getPoint( int idx ) const;
     

@@ -1,27 +1,51 @@
 #include <SDL2/SDL_timer.h>
 #include <vector>
 
-#include "graphics/graphics.hpp"
-#include "physics/physics.hpp"
+#include "graphics.hpp"
+#include "physics.hpp"
 
 const int SCREEN_WIDTH = 720;
 const int SCREEN_HEIGHT = 1280;
 
-const double G = 9800;
-
-void addGravity(IPoint &p) {
-    Force gravity(0, G);
-    p.addForce(gravity);
-}
-
 int main () {
     Window window( SCREEN_WIDTH, SCREEN_HEIGHT );
     
-    FixedPoint p1{{200, 200}};
-    MassPoint p2{20, {500, 400}, {0, 0}, {0, 0}};
-    MassPoint p3{40, {600, 700}, {0, 0}, {0, 0}};
-    ElasticConnector s(&p1, &p2, 200, 50);
-    ElasticConnector s2(&p2, &p3, 300, 50);
+    FixedPoint p1({360, 200});
+    
+    SoftBody sb1({200, 200}, 1000);
+    MassPoint * sb1Right = new MassPoint({50, 0}, 10);
+    
+    sb1.addPoint(new MassPoint({0, 50}, 10))
+    .addPoint(sb1Right)
+    .addPoint(new MassPoint({0, -50}, 10))
+    .addPoint(new MassPoint({-50, 0}, 10))
+    .connectPoints(0, 1)
+    .connectPoints(1, 2)
+    .connectPoints(2, 3)
+    .connectPoints(3, 0)
+    
+    .connectPoints(0, 2, 1000)
+    .connectPoints(1, 3, 1000);
+    
+    ElasticConnector ec1(&p1, sb1Right, 300);
+    
+    
+    SoftBody sb2({520, 200}, 1000);
+    MassPoint * sbLeft = new MassPoint({-50, 0}, 10);
+    
+    sb2.addPoint(new MassPoint({0, 50}, 10))
+    .addPoint(new MassPoint({50, 0}, 10))
+    .addPoint(new MassPoint({0, -50}, 10))
+    .addPoint(sbLeft)
+    .connectPoints(0, 1)
+    .connectPoints(1, 2)
+    .connectPoints(2, 3)
+    .connectPoints(3, 0)
+    
+    .connectPoints(0, 2, 1000)
+    .connectPoints(1, 3, 1000);
+    
+    ElasticConnector ec2(&p1, sbLeft, 300);
     
     
     SDL_Event e;
@@ -29,24 +53,35 @@ int main () {
     Time_millis last_render = SDL_GetTicks64();
     Time_millis last_update = SDL_GetTicks64();
     
+    bool pause = false;
+    
     while ( !quit ) {
         if (SDL_GetTicks() < last_render + 32) {
             // update
             while ( SDL_PollEvent( &e ) ) {
-                if (e.type == SDL_QUIT) quit = true;
+                if ( e.type == SDL_QUIT ) quit = true;
+                
+                if ( e.type == SDL_KEYDOWN ) pause = true;
+    
+                if (e.type == SDL_KEYUP ) pause = false;
             }
             
-            Time_sec dt = (double)(SDL_GetTicks64() - last_update) / 1000.0;
-            
-            addGravity(p1);
-            addGravity(p2);
-        
-            s.update();
-            s2.update();
-            
-            p1.update( dt );
-            p2.update( dt );
-            p3.update( dt );
+            if (!pause) {
+                
+                Time_sec dt = (double)(SDL_GetTicks64() - last_update) / 1000.0;
+                
+                ForceAdder::addGravity(sb1);
+                ForceAdder::addDamping(sb1);
+                
+                ForceAdder::addGravity(sb2);
+                ForceAdder::addDamping(sb2);
+                
+                ec1.update( dt );
+                ec2.update( dt );
+                
+                sb1.update( dt );
+                sb2.update( dt );
+            }
             
             last_update = SDL_GetTicks64();
             
@@ -54,12 +89,15 @@ int main () {
             // render
             window.clear();
             
-            window.renderFixedPoint(p1);
-            window.renderMassPoint(p2);
-            window.renderMassPoint(p3);
+            window.renderPoint( p1 );
+            window.renderConnector( ec1 );
             
-            window.renderElasticConnector(s);
-            window.renderElasticConnector(s2);
+            sb1.didColide( &sb2 );
+            
+            window.renderBody( sb1 );
+            
+            window.renderConnector( ec2 );
+            window.renderBody( sb2 );
             
             window.update();
             

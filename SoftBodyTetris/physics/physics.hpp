@@ -14,6 +14,13 @@
 #include "MassPoint.hpp"
 #include "FixedPoint.hpp"
 
+#include "IConnector.hpp"
 #include "ElasticConnector.hpp"
+#include "NonElasticConnector.hpp"
+
+#include "IBody.hpp"
+#include "SoftBody.hpp"
+
+#include "ForceAdder.hpp"
 
 #endif /* physics_h */

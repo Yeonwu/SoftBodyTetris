@@ -23,7 +23,7 @@ public:
     
     virtual Force calcForceTo( int idx, int otherIdx ) = 0;
     
-    void update();
+    void update( Time_sec dt );
 };
 
 #endif /* IConnector_hpp */

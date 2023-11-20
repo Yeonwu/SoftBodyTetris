@@ -8,14 +8,31 @@
 #include "MassPoint.hpp"
 #include <stdio.h>
 
-MassPoint::MassPoint( Mass _M, Position _pos, Velocity _V, Force _F):
-    M(_M),
+MassPoint::MassPoint( Position _pos, Mass _M ):
     pos(_pos),
+    M(_M),
+    F({0, 0}),
+    V({0, 0})
+{}
+
+
+MassPoint::MassPoint( Position _pos, Mass _M, Velocity _V, Force _F):
+    pos(_pos),
+    M(_M),
     F(_F),
-    V(_V){}
+    V(_V)
+{}
 
 Position MassPoint::getPosition() const {
     return pos;
+}
+
+void MassPoint::setPosition(Position _pos) {
+    pos = _pos;
+}
+
+Velocity MassPoint::getVelocity() const {
+    return V;
 }
 
 void MassPoint::update( Time_sec dt ) {

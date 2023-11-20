@@ -7,7 +7,7 @@
 
 #include "IConnector.hpp"
 
-void IConnector::update() {
+void IConnector::update( Time_sec dt ) {
     
     Force p0F = calcForceTo(0, 1);
     Force p1F = calcForceTo(1, 0);

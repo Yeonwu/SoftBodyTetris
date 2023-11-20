@@ -11,10 +11,16 @@
 		E33935332AE0E8E700CC9672 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33935322AE0E8E700CC9672 /* SDL2.framework */; };
 		E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF592AF4856C00A3F6C1 /* FixedPoint.cpp */; };
 		E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */; };
+		E36B299E2B0B93F800C8C568 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B299C2B0B93F800C8C568 /* Entity.cpp */; };
+		E36B29A62B0B95A800C8C568 /* PointRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B29A42B0B95A800C8C568 /* PointRenderer.cpp */; };
+		E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B29A72B0BA34700C8C568 /* IRenderer.cpp */; };
 		E3B013F72AEA3DAB003C20E6 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3B013F52AEA3DAB003C20E6 /* Window.cpp */; };
 		E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3B013F82AEA45C5003C20E6 /* MassPoint.cpp */; };
-		E3F461742AF9F6FC0078AE76 /* Polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F461722AF9F6FC0078AE76 /* Polygon.cpp */; };
+		E3EF33692B079B94001B6B20 /* ForceAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF33672B079B94001B6B20 /* ForceAdder.cpp */; };
+		E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF336F2B07A859001B6B20 /* IBody.cpp */; };
+		E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF33722B07A861001B6B20 /* SoftBody.cpp */; };
 		E3F4617F2AF9FCE10078AE76 /* IConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F4617D2AF9FCE10078AE76 /* IConnector.cpp */; };
+		E3F461822AF9FFDF0078AE76 /* NonElasticConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F461802AF9FFDF0078AE76 /* NonElasticConnector.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,7 +43,12 @@
 		E350FF5A2AF4856C00A3F6C1 /* FixedPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedPoint.hpp; sourceTree = "<group>"; };
 		E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ElasticConnector.cpp; sourceTree = "<group>"; };
 		E350FF5D2AF48ACA00A3F6C1 /* ElasticConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ElasticConnector.hpp; sourceTree = "<group>"; };
-		E350FF622AF91AB200A3F6C1 /* IPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IPoint.hpp; sourceTree = "<group>"; };
+		E36B299C2B0B93F800C8C568 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		E36B299D2B0B93F800C8C568 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
+		E36B29A42B0B95A800C8C568 /* PointRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointRenderer.cpp; sourceTree = "<group>"; };
+		E36B29A52B0B95A800C8C568 /* PointRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointRenderer.hpp; sourceTree = "<group>"; };
+		E36B29A72B0BA34700C8C568 /* IRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IRenderer.cpp; sourceTree = "<group>"; };
+		E36B29A82B0BA34700C8C568 /* IRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderer.hpp; sourceTree = "<group>"; };
 		E3B013F42AEA3D8F003C20E6 /* graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = graphics.hpp; sourceTree = "<group>"; };
 		E3B013F52AEA3DAB003C20E6 /* Window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		E3B013F62AEA3DAB003C20E6 /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
@@ -45,10 +56,17 @@
 		E3B013F92AEA45C5003C20E6 /* MassPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MassPoint.hpp; sourceTree = "<group>"; };
 		E3B013FB2AEA45F0003C20E6 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
 		E3B013FC2AEA47BC003C20E6 /* physics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = physics.hpp; sourceTree = "<group>"; };
-		E3F461722AF9F6FC0078AE76 /* Polygon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Polygon.cpp; sourceTree = "<group>"; };
-		E3F461732AF9F6FC0078AE76 /* Polygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Polygon.hpp; sourceTree = "<group>"; };
+		E3EF33672B079B94001B6B20 /* ForceAdder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ForceAdder.cpp; sourceTree = "<group>"; };
+		E3EF33682B079B94001B6B20 /* ForceAdder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ForceAdder.hpp; sourceTree = "<group>"; };
+		E3EF336B2B07A6D1001B6B20 /* IPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IPoint.hpp; sourceTree = "<group>"; };
+		E3EF336F2B07A859001B6B20 /* IBody.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IBody.cpp; sourceTree = "<group>"; };
+		E3EF33702B07A859001B6B20 /* IBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBody.hpp; sourceTree = "<group>"; };
+		E3EF33722B07A861001B6B20 /* SoftBody.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoftBody.cpp; sourceTree = "<group>"; };
+		E3EF33732B07A861001B6B20 /* SoftBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SoftBody.hpp; sourceTree = "<group>"; };
 		E3F4617D2AF9FCE10078AE76 /* IConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IConnector.cpp; sourceTree = "<group>"; };
 		E3F4617E2AF9FCE10078AE76 /* IConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IConnector.hpp; sourceTree = "<group>"; };
+		E3F461802AF9FFDF0078AE76 /* NonElasticConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NonElasticConnector.cpp; sourceTree = "<group>"; };
+		E3F461812AF9FFDF0078AE76 /* NonElasticConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NonElasticConnector.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +101,7 @@
 		E339351F2AE0E1EA00CC9672 /* SoftBodyTetris */ = {
 			isa = PBXGroup;
 			children = (
+				E36B299B2B0B93D200C8C568 /* entities */,
 				E3B013F32AEA3D71003C20E6 /* graphics */,
 				E3B013F22AEA3D58003C20E6 /* physics */,
 				E33935202AE0E1EA00CC9672 /* main.cpp */,
@@ -98,15 +117,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E36B299B2B0B93D200C8C568 /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				E36B299C2B0B93F800C8C568 /* Entity.cpp */,
+				E36B299D2B0B93F800C8C568 /* Entity.hpp */,
+			);
+			path = entities;
+			sourceTree = "<group>";
+		};
+		E36B299F2B0B946A00C8C568 /* renderer */ = {
+			isa = PBXGroup;
+			children = (
+				E36B29A42B0B95A800C8C568 /* PointRenderer.cpp */,
+				E36B29A52B0B95A800C8C568 /* PointRenderer.hpp */,
+				E36B29A72B0BA34700C8C568 /* IRenderer.cpp */,
+				E36B29A82B0BA34700C8C568 /* IRenderer.hpp */,
+			);
+			path = renderer;
+			sourceTree = "<group>";
+		};
 		E3B013F22AEA3D58003C20E6 /* physics */ = {
 			isa = PBXGroup;
 			children = (
-				E3F461792AF9F73F0078AE76 /* connector */,
+				E3EF336E2B07A847001B6B20 /* body */,
+				E3EF335B2B079864001B6B20 /* forceAdder */,
 				E3F461782AF9F7270078AE76 /* point */,
+				E3F461792AF9F73F0078AE76 /* connector */,
 				E3B013FB2AEA45F0003C20E6 /* Types.hpp */,
 				E3B013FC2AEA47BC003C20E6 /* physics.hpp */,
-				E3F461722AF9F6FC0078AE76 /* Polygon.cpp */,
-				E3F461732AF9F6FC0078AE76 /* Polygon.hpp */,
 			);
 			path = physics;
 			sourceTree = "<group>";
@@ -114,6 +153,7 @@
 		E3B013F32AEA3D71003C20E6 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				E36B299F2B0B946A00C8C568 /* renderer */,
 				E3B013F42AEA3D8F003C20E6 /* graphics.hpp */,
 				E3B013F52AEA3DAB003C20E6 /* Window.cpp */,
 				E3B013F62AEA3DAB003C20E6 /* Window.hpp */,
@@ -121,14 +161,34 @@
 			path = graphics;
 			sourceTree = "<group>";
 		};
+		E3EF335B2B079864001B6B20 /* forceAdder */ = {
+			isa = PBXGroup;
+			children = (
+				E3EF33672B079B94001B6B20 /* ForceAdder.cpp */,
+				E3EF33682B079B94001B6B20 /* ForceAdder.hpp */,
+			);
+			path = forceAdder;
+			sourceTree = "<group>";
+		};
+		E3EF336E2B07A847001B6B20 /* body */ = {
+			isa = PBXGroup;
+			children = (
+				E3EF336F2B07A859001B6B20 /* IBody.cpp */,
+				E3EF33702B07A859001B6B20 /* IBody.hpp */,
+				E3EF33722B07A861001B6B20 /* SoftBody.cpp */,
+				E3EF33732B07A861001B6B20 /* SoftBody.hpp */,
+			);
+			path = body;
+			sourceTree = "<group>";
+		};
 		E3F461782AF9F7270078AE76 /* point */ = {
 			isa = PBXGroup;
 			children = (
-				E350FF622AF91AB200A3F6C1 /* IPoint.hpp */,
 				E350FF592AF4856C00A3F6C1 /* FixedPoint.cpp */,
 				E350FF5A2AF4856C00A3F6C1 /* FixedPoint.hpp */,
 				E3B013F82AEA45C5003C20E6 /* MassPoint.cpp */,
 				E3B013F92AEA45C5003C20E6 /* MassPoint.hpp */,
+				E3EF336B2B07A6D1001B6B20 /* IPoint.hpp */,
 			);
 			path = point;
 			sourceTree = "<group>";
@@ -136,10 +196,12 @@
 		E3F461792AF9F73F0078AE76 /* connector */ = {
 			isa = PBXGroup;
 			children = (
-				E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */,
-				E350FF5D2AF48ACA00A3F6C1 /* ElasticConnector.hpp */,
 				E3F4617D2AF9FCE10078AE76 /* IConnector.cpp */,
 				E3F4617E2AF9FCE10078AE76 /* IConnector.hpp */,
+				E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */,
+				E350FF5D2AF48ACA00A3F6C1 /* ElasticConnector.hpp */,
+				E3F461802AF9FFDF0078AE76 /* NonElasticConnector.cpp */,
+				E3F461812AF9FFDF0078AE76 /* NonElasticConnector.hpp */,
 			);
 			path = connector;
 			sourceTree = "<group>";
@@ -201,11 +263,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3EF33692B079B94001B6B20 /* ForceAdder.cpp in Sources */,
 				E33935212AE0E1EA00CC9672 /* main.cpp in Sources */,
 				E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */,
 				E3F4617F2AF9FCE10078AE76 /* IConnector.cpp in Sources */,
-				E3F461742AF9F6FC0078AE76 /* Polygon.cpp in Sources */,
+				E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */,
 				E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */,
+				E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */,
+				E36B29A62B0B95A800C8C568 /* PointRenderer.cpp in Sources */,
+				E3F461822AF9FFDF0078AE76 /* NonElasticConnector.cpp in Sources */,
+				E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */,
+				E36B299E2B0B93F800C8C568 /* Entity.cpp in Sources */,
 				E3B013F72AEA3DAB003C20E6 /* Window.cpp in Sources */,
 				E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */,
 			);

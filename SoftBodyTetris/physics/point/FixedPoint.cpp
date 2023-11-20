@@ -13,6 +13,14 @@ Position FixedPoint::getPosition() const {
     return pos;
 }
 
+void FixedPoint::setPosition(Position _pos) {
+    pos = _pos;
+}
+
+Velocity FixedPoint::getVelocity() const {
+    return Velocity(0, 0);
+}
+
 void FixedPoint::update( Time_sec dt ) {}
 
 bool FixedPoint::isMovable() const {

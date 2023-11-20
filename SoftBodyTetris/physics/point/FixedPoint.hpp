@@ -17,6 +17,10 @@ public:
     FixedPoint( Position _pos );
     
     Position getPosition() const;
+    void setPosition(Position _pos);
+    
+    Velocity getVelocity() const;
+    
     void update( Time_sec dt );
     bool isMovable() const;
     void addForce( Force _F );

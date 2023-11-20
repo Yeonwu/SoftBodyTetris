@@ -52,7 +52,7 @@ void Window::clear() {
     SDL_RenderClear( renderer );
 }
 
-void Window::renderMassPoint ( const MassPoint& p ) {
+void Window::renderPoint ( const IPoint& p ) {
     Position pos = p.getPosition();
     SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
     
@@ -60,7 +60,15 @@ void Window::renderMassPoint ( const MassPoint& p ) {
     SDL_RenderDrawRectF(renderer, &rect);
 }
 
-void Window::renderFixedPoint ( const FixedPoint& p ) {
+void Window::renderPoint ( const MassPoint& p ) {
+    Position pos = p.getPosition();
+    SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
+    
+    SDL_SetRenderDrawColor( renderer, 0x00, 0xFF, 0x00, 0xFF );
+    SDL_RenderDrawRectF(renderer, &rect);
+}
+
+void Window::renderPoint ( const FixedPoint& p ) {
     Position pos = p.getPosition();
     SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
     
@@ -68,7 +76,19 @@ void Window::renderFixedPoint ( const FixedPoint& p ) {
     SDL_RenderDrawRectF(renderer, &rect);
 }
 
-void Window::renderElasticConnector ( const ElasticConnector& ec ) {
+void Window::renderConnector ( const IConnector& c, int flag ) {
+    Position pos0 = c.getPoint(0) -> getPosition();
+    Position pos1 = c.getPoint(1) -> getPosition();
+    
+    if (flag) {
+        SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
+    } else {
+        SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    }
+    SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos1.x, pos1.y);
+}
+
+void Window::renderConnector ( const ElasticConnector& ec ) {
     Position pos0 = ec.getPoint(0) -> getPosition();
     Position pos1 = ec.getPoint(1) -> getPosition();
     
@@ -81,11 +101,35 @@ void Window::renderElasticConnector ( const ElasticConnector& ec ) {
     Position pos3 = m + (pos1 - pos0)/d * l/2;
     
     SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
-    SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos1.x, pos1.y);
+    SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos3.x, pos3.y);
     
     SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
     SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos3.x, pos3.y);
 
     SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
     SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos1.x, pos1.y);
+}
+
+
+void Window::renderConnector ( const NonElasticConnector & nec) {
+    Position pos0 = nec.getPoint(0) -> getPosition();
+    Position pos1 = nec.getPoint(1) -> getPosition();
+    
+    if ( (pos0 - pos1).size() < nec.getLength() ) {
+        SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0x00);
+    } else {
+        SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0x00);
+    }
+    
+    SDL_RenderDrawLine( renderer, pos0.x, pos1.y, pos0.x, pos1.y);
+}
+
+void Window::renderBody( const IBody & b, int flag ) {
+    for ( const IPoint* p: b.getPoints() ) {
+        renderPoint(*p);
+    }
+    
+    for ( const IConnector* c: b.getConnectors() ) {
+        renderConnector(*c, flag);
+    }
 }

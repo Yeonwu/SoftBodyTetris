@@ -44,15 +44,29 @@ public:
         y -= pos.y;
     }
     
-    Position operator *(double n) const {
+    Position operator *( double n ) const {
         Position pos( x * n, y * n );
         return pos;
     }
     
-    Position operator /(double n) const {
+    Position operator /( double n ) const {
         Position pos( x / n, y / n );
         return pos;
     }
+    
+    void operator /=( double n ) {
+        x /= n;
+        y /= n;
+    }
+    
+    
+    inline bool operator==(const Position& other) const { return (x == other.x && y == other.y); }
+    inline bool operator!=(const Position& other) const { return !(*this == other); }
+    inline bool operator< (const Position& other) const { return (x < other.x || (x == other.x && y < other.y)); }
+    inline bool operator<=(const Position& other) const { return !(other < *this); }
+    inline bool operator> (const Position& other) const { return (other < *this); }
+    inline bool operator>=(const Position& other) const { return !(*this < other); }
+    
     
     double size() {
         return std::sqrt( x * x + y * y );
@@ -124,5 +138,13 @@ public:
         return std::sqrt( x * x + y * y );
     }
 };
+
+typedef struct _Color {
+    u_int8_t R;
+    u_int8_t G;
+    u_int8_t B;
+    
+    u_int8_t A;
+} Color;
 
 #endif /* Types_h */

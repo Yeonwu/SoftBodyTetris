@@ -7,6 +7,15 @@
 
 #include "ElasticConnector.hpp"
 
+ElasticConnector::ElasticConnector(IPoint* _p0, IPoint * _p1, double _K):
+    K(_K)
+{
+    p[0] = _p0;
+    p[1] = _p1;
+    
+    length = (p[0] -> getPosition() - p[1] -> getPosition()).size();
+}
+
 ElasticConnector::ElasticConnector(IPoint* _p0, IPoint * _p1, double _length, double _K):
     length(_length),
     K(_K)

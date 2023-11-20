@@ -19,9 +19,14 @@ private:
     Velocity V;
     
 public:
-    MassPoint( Mass _M, Position _pos, Velocity _V, Force _F);
+    MassPoint( Position _pos, Mass _M );
+    MassPoint( Position _pos, Mass _M, Velocity _V, Force _F);
     
     Position getPosition() const;
+    void setPosition(Position _pos);
+    
+    Velocity getVelocity() const;
+    
     void update( Time_sec dt );
     bool isMovable() const;
     

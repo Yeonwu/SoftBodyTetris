@@ -24,8 +24,8 @@ int main () {
     .connectPoints(2, 3)
     .connectPoints(3, 0)
     
-    .connectPoints(0, 2, 1000)
-    .connectPoints(1, 3, 1000);
+    .connectPoints(0, 2, false, 1000.0)
+    .connectPoints(1, 3, false, 1000.0);
     
     ElasticConnector ec1(&p1, sb1Right, 300);
     
@@ -42,8 +42,8 @@ int main () {
     .connectPoints(2, 3)
     .connectPoints(3, 0)
     
-    .connectPoints(0, 2, 1000)
-    .connectPoints(1, 3, 1000);
+    .connectPoints(0, 2, false, 1000.0)
+    .connectPoints(1, 3, false, 1000.0);
     
     ElasticConnector ec2(&p1, sbLeft, 300);
     
@@ -92,9 +92,11 @@ int main () {
             window.renderPoint( p1 );
             window.renderConnector( ec1 );
             
-            sb1.didColide( &sb2 );
-            
-            window.renderBody( sb1 );
+            if (sb1.didColide( &sb2 )) {
+                window.renderBody( sb1, 1 );
+            } else {
+                window.renderBody( sb1 );
+            }
             
             window.renderConnector( ec2 );
             window.renderBody( sb2 );

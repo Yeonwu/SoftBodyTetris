@@ -12,7 +12,6 @@
 		E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF592AF4856C00A3F6C1 /* FixedPoint.cpp */; };
 		E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */; };
 		E36B299E2B0B93F800C8C568 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B299C2B0B93F800C8C568 /* Entity.cpp */; };
-		E36B29A62B0B95A800C8C568 /* PointRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B29A42B0B95A800C8C568 /* PointRenderer.cpp */; };
 		E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B29A72B0BA34700C8C568 /* IRenderer.cpp */; };
 		E3B013F72AEA3DAB003C20E6 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3B013F52AEA3DAB003C20E6 /* Window.cpp */; };
 		E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3B013F82AEA45C5003C20E6 /* MassPoint.cpp */; };
@@ -45,8 +44,6 @@
 		E350FF5D2AF48ACA00A3F6C1 /* ElasticConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ElasticConnector.hpp; sourceTree = "<group>"; };
 		E36B299C2B0B93F800C8C568 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		E36B299D2B0B93F800C8C568 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
-		E36B29A42B0B95A800C8C568 /* PointRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointRenderer.cpp; sourceTree = "<group>"; };
-		E36B29A52B0B95A800C8C568 /* PointRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointRenderer.hpp; sourceTree = "<group>"; };
 		E36B29A72B0BA34700C8C568 /* IRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IRenderer.cpp; sourceTree = "<group>"; };
 		E36B29A82B0BA34700C8C568 /* IRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderer.hpp; sourceTree = "<group>"; };
 		E3B013F42AEA3D8F003C20E6 /* graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = graphics.hpp; sourceTree = "<group>"; };
@@ -129,8 +126,6 @@
 		E36B299F2B0B946A00C8C568 /* renderer */ = {
 			isa = PBXGroup;
 			children = (
-				E36B29A42B0B95A800C8C568 /* PointRenderer.cpp */,
-				E36B29A52B0B95A800C8C568 /* PointRenderer.hpp */,
 				E36B29A72B0BA34700C8C568 /* IRenderer.cpp */,
 				E36B29A82B0BA34700C8C568 /* IRenderer.hpp */,
 			);
@@ -270,7 +265,6 @@
 				E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */,
 				E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */,
 				E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */,
-				E36B29A62B0B95A800C8C568 /* PointRenderer.cpp in Sources */,
 				E3F461822AF9FFDF0078AE76 /* NonElasticConnector.cpp in Sources */,
 				E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */,
 				E36B299E2B0B93F800C8C568 /* Entity.cpp in Sources */,

@@ -53,10 +53,14 @@ void Window::clear() {
 }
 
 void Window::renderPoint ( const IPoint& p ) {
+    Window::renderPoint(p, {0xFF, 0xFF, 0xFF, 0xFF});
+}
+
+void Window::renderPoint ( const IPoint& p, Color c ) {
     Position pos = p.getPosition();
     SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
     
-    SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_SetRenderDrawColor( renderer, c.R, c.G, c.B, c.A );
     SDL_RenderDrawRectF(renderer, &rect);
 }
 
@@ -64,15 +68,19 @@ void Window::renderPoint ( const MassPoint& p ) {
     Position pos = p.getPosition();
     SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
     
-    SDL_SetRenderDrawColor( renderer, 0x00, 0xFF, 0x00, 0xFF );
+    SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderDrawRectF(renderer, &rect);
 }
 
 void Window::renderPoint ( const FixedPoint& p ) {
+    renderPoint(p, {0xFF, 0x00, 0x00, 0xFF});
+}
+
+void Window::renderPoint ( const FixedPoint& p, Color c  ) {
     Position pos = p.getPosition();
     SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
     
-    SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
+    SDL_SetRenderDrawColor( renderer, c.R, c.G, c.B, c.A );
     SDL_RenderDrawRectF(renderer, &rect);
 }
 

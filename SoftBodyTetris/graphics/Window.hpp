@@ -24,8 +24,12 @@ public:
     void clear();
     
     void renderPoint ( const IPoint& p );
+    void renderPoint ( const IPoint& p, Color c );
+    
     void renderPoint ( const MassPoint& p );
+    
     void renderPoint ( const FixedPoint& p );
+    void renderPoint ( const FixedPoint& p, Color c );
     
     void renderConnector ( const IConnector& c, int flag=0 );
     void renderConnector ( const NonElasticConnector& nec );

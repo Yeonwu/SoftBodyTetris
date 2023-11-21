@@ -10,4 +10,7 @@
 
 #include "Window.hpp"
 
+#include "IRenderer.hpp"
+
+
 #endif /* graphics_h */

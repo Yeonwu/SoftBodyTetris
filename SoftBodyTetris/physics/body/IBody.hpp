@@ -19,6 +19,7 @@ class IBody {
 protected:
     std::vector<IPoint *> points;
     std::vector<IConnector *> connectors;
+    std::vector<IConnector*> checkColideConnectors;
     
 public:
     IBody();
@@ -26,6 +27,9 @@ public:
     
     const std::vector<IPoint *>& getPoints() const;
     const std::vector<IConnector *>& getConnectors() const;
+    const std::vector<IConnector *>& getCheckColideConnectors() const;
+    
+    bool didColide (IBody * b);
     
     friend class ForceAdder;
     friend class Window;

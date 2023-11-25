@@ -17,14 +17,18 @@
 class IBody {
     
 protected:
+    Position pos;
     std::vector<IPoint *> points;
     std::vector<IConnector *> connectors;
     std::vector<IConnector*> checkColideConnectors;
+    double radius;
     
 public:
-    IBody();
+    IBody(Position _pos);
     void update ( Time_sec dt );
     
+    Position getPosition() const;
+    double getRadius() const;
     const std::vector<IPoint *>& getPoints() const;
     const std::vector<IConnector *>& getConnectors() const;
     const std::vector<IConnector *>& getCheckColideConnectors() const;

@@ -7,6 +7,10 @@
 const int SCREEN_WIDTH = 720;
 const int SCREEN_HEIGHT = 1280;
 
+class App {
+    
+};
+
 int main () {
     Window window( SCREEN_WIDTH, SCREEN_HEIGHT );
     
@@ -53,7 +57,7 @@ int main () {
     Time_millis last_render = SDL_GetTicks64();
     Time_millis last_update = SDL_GetTicks64();
     
-    bool pause = false;
+    bool pause = true;
     
     while ( !quit ) {
         if (SDL_GetTicks() < last_render + 32) {
@@ -61,9 +65,9 @@ int main () {
             while ( SDL_PollEvent( &e ) ) {
                 if ( e.type == SDL_QUIT ) quit = true;
                 
-                if ( e.type == SDL_KEYDOWN ) pause = true;
+                if ( e.type == SDL_KEYDOWN ) pause = false;
     
-                if (e.type == SDL_KEYUP ) pause = false;
+                if (e.type == SDL_KEYUP ) pause = true;
             }
             
             if (!pause) {
@@ -90,7 +94,9 @@ int main () {
             window.clear();
             
             window.renderPoint( p1 );
+            
             window.renderConnector( ec1 );
+            window.renderConnector( ec2 );
             
             if (sb1.didColide( &sb2 )) {
                 window.renderBody( sb1, 1 );
@@ -98,8 +104,12 @@ int main () {
                 window.renderBody( sb1 );
             }
             
-            window.renderConnector( ec2 );
-            window.renderBody( sb2 );
+            
+            if (sb2.didColide( &sb1 )) {
+                window.renderBody( sb2, 1 );
+            } else {
+                window.renderBody( sb2 );
+            }
             
             window.update();
             

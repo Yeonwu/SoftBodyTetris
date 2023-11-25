@@ -9,7 +9,17 @@
 
 bool isIntersect(Position pos0, Position pos1, Position pos2, Position pos3);
 
-IBody::IBody() {}
+IBody::IBody(Position _pos): pos(_pos) {
+    radius = 0;
+}
+
+Position IBody::getPosition() const {
+    return pos;
+}
+
+double IBody::getRadius() const{
+    return radius;
+}
 
 const std::vector<IPoint*>& IBody::getPoints() const {
     return points;
@@ -27,14 +37,22 @@ void IBody::update( Time_sec dt ) {
         c -> update( dt );
     }
     
+    double distance;
+    radius = 0;
     for (IPoint *p: points) {
         p -> update( dt );
+        
+        distance = (p->getPosition() - pos).size();
+        if (radius < distance) {
+            radius = distance;
+        }
     }
 }
 
 bool IBody::didColide (IBody * b) {
-    std::vector<IPoint*>* collidePoints = new std::vector<IPoint*>();
-    std::vector<IConnector*>* collideConnectors = new std::vector<IConnector*>();
+    if (radius + b->getRadius() < (pos - b->getPosition()).size()) {
+        return false;
+    }
     
     std::vector<IConnector *> connectors = b -> getCheckColideConnectors();
     
@@ -51,8 +69,6 @@ bool IBody::didColide (IBody * b) {
             
             if (isIntersect(pos0, pos1, pos_p, pos_out)) {
                 intersectCnt += 1;
-                collidePoints -> push_back(p);
-                collideConnectors -> push_back(c);
             }
         }
         

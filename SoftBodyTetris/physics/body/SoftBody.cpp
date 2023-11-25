@@ -11,7 +11,7 @@
 #include <vector>
 
 SoftBody::SoftBody(Position _pos, double _K):
-    pos(_pos),
+    IBody(_pos),
     K(_K)
 {}
 

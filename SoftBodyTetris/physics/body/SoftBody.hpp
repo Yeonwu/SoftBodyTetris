@@ -15,7 +15,6 @@
 #include "Types.hpp"
 
 class SoftBody: public IBody {
-    Position pos;
     double K;
     
 public:

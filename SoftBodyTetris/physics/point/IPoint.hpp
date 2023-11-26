@@ -10,7 +10,7 @@
 
 #include "Types.hpp"
 
-class IPoint {
+class IPoint: public Renderable {
 public:    
     virtual Position getPosition() const = 0;
     virtual void setPosition(Position _pos) = 0;

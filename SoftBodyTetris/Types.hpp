@@ -147,4 +147,10 @@ typedef struct _Color {
     u_int8_t A;
 } Color;
 
+
+class Renderable {
+public:
+    virtual void update ( Time_sec dt ) = 0;
+};
+
 #endif /* Types_h */

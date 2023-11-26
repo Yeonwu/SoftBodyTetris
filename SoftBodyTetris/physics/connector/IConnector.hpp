@@ -11,7 +11,7 @@
 #include "Types.hpp"
 #include "IPoint.hpp"
 
-class IConnector {
+class IConnector: public Renderable {
 protected:
     IPoint *p[2];
     

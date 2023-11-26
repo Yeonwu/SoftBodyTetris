@@ -11,6 +11,8 @@
 #include "Window.hpp"
 
 #include "IRenderer.hpp"
-
+#include "PointRenderer.hpp"
+#include "ConnectorRenderer.hpp"
+#include "BodyRenderer.hpp"
 
 #endif /* graphics_h */

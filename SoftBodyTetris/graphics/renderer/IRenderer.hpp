@@ -11,7 +11,6 @@
 #include <SDL2/SDL.h>
 #include "Types.hpp"
 
-template <class Renderable>
 class IRenderer {
 protected:
     Color color;
@@ -19,7 +18,7 @@ protected:
 public:
     
     IRenderer( Color _color );
-    void render( Renderable * target, SDL_Renderer* SDLRenderer );
+    virtual void render( Renderable * target, SDL_Renderer* SDLRenderer );
     
     void setColor(Color _color);
 };

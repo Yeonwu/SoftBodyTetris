@@ -8,8 +8,6 @@
 #ifndef physics_h
 #define physics_h
 
-#include "Types.hpp"
-
 #include "IPoint.hpp"
 #include "MassPoint.hpp"
 #include "FixedPoint.hpp"

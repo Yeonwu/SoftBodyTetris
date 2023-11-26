@@ -14,7 +14,7 @@
 #include "IPoint.hpp"
 #include "IConnector.hpp"
 
-class IBody {
+class IBody: public Renderable {
     
 protected:
     Position pos;

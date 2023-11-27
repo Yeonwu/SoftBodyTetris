@@ -84,7 +84,7 @@ void Window::renderPoint ( const FixedPoint& p, Color c  ) {
     SDL_RenderDrawRectF(renderer, &rect);
 }
 
-void Window::renderConnector ( const IConnector& c, int flag ) {
+void Window::renderConnector ( IConnector& c, int flag ) {
     Position pos0 = c.getPoint(0) -> getPosition();
     Position pos1 = c.getPoint(1) -> getPosition();
     
@@ -96,7 +96,7 @@ void Window::renderConnector ( const IConnector& c, int flag ) {
     SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos1.x, pos1.y);
 }
 
-void Window::renderConnector ( const ElasticConnector& ec ) {
+void Window::renderConnector ( ElasticConnector& ec ) {
     Position pos0 = ec.getPoint(0) -> getPosition();
     Position pos1 = ec.getPoint(1) -> getPosition();
     
@@ -105,8 +105,8 @@ void Window::renderConnector ( const ElasticConnector& ec ) {
     Position m = (pos0 + pos1) / 2;
     
     
-    Position pos2 = m + (pos0 - pos1)/d * l/2;
-    Position pos3 = m + (pos1 - pos0)/d * l/2;
+    Position pos2 = m + (pos1 - pos0)/d * l/2;
+    Position pos3 = m + (pos0 - pos1)/d * l/2;
     
     SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
     SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos3.x, pos3.y);
@@ -118,26 +118,12 @@ void Window::renderConnector ( const ElasticConnector& ec ) {
     SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos1.x, pos1.y);
 }
 
-
-void Window::renderConnector ( const NonElasticConnector & nec) {
-    Position pos0 = nec.getPoint(0) -> getPosition();
-    Position pos1 = nec.getPoint(1) -> getPosition();
-    
-    if ( (pos0 - pos1).size() < nec.getLength() ) {
-        SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0x00);
-    } else {
-        SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0x00);
-    }
-    
-    SDL_RenderDrawLine( renderer, pos0.x, pos1.y, pos0.x, pos1.y);
-}
-
 void Window::renderBody( const IBody & b, int flag ) {
     for ( const IPoint* p: b.getPoints() ) {
         renderPoint(*p);
     }
     
-    for ( const IConnector* c: b.getConnectors() ) {
+    for ( IConnector* c: b.getConnectors() ) {
         renderConnector(*c, flag);
     }
 }

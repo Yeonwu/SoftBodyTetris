@@ -10,11 +10,13 @@
 
 #include <cmath>
 #include <stdint.h>
+#include <limits>
 
 typedef uint64_t Time_millis;
 typedef double Time_sec;
 
 typedef double Mass;
+const double MASS_MAX = __DBL_MAX__;
 
 class Position {
 public:
@@ -35,10 +37,11 @@ public:
     }
     
     Position operator -( Position pos ) const {
-        pos.x -= x;
-        pos.y -= y;
+        pos.x = x - pos.x;
+        pos.y = y - pos.y;
         return pos;
     }
+    
     void operator -=( const Position pos) {
         x -= pos.x;
         y -= pos.y;
@@ -52,6 +55,10 @@ public:
     Position operator *( const Position &other ) const {
         Position pos( x * other.x, y * other.y );
         return pos;
+    }
+    
+    double prod( const Position &other ) const {
+        return x * other.x + y * other.y;
     }
     
     Position operator /( double n ) const {
@@ -154,6 +161,19 @@ typedef struct _Color {
     u_int8_t B;
     
     u_int8_t A;
+    
+    _Color(u_int8_t _R, u_int8_t _G, u_int8_t _B, u_int8_t _A):
+    R(_R),
+    G(_G),
+    B(_B),
+    A(_A) {}
+    
+    _Color(u_int8_t _R, u_int8_t _G, u_int8_t _B):
+    R(_R),
+    G(_G),
+    B(_B),
+    A(0xFF) {}
+    
 } Color;
 
 

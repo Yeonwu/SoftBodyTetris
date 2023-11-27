@@ -33,19 +33,15 @@ Force ElasticConnector::calcForceTo( int idx, int otherIdx ) {
     
     if ( distance > length ) {
         
-        Position p0FValue = ( p0Pos - p1Pos ) / distance * forceSize;
+        Position p0FValue = ( p1Pos - p0Pos ) / distance * forceSize;
         return Force(p0FValue.x, p0FValue.y);
         
     } else if ( distance < length ) {
-        Position p0FValue = ( p1Pos - p0Pos ) / distance * forceSize;
+        Position p0FValue = ( p0Pos - p1Pos ) / distance * forceSize;
         return Force(p0FValue.x, p0FValue.y);
     }
     
     return Force(0, 0);
-}
-
-const IPoint* ElasticConnector::getPoint( int idx ) const {
-    return p[idx];
 }
 
 double ElasticConnector::getLength() const {

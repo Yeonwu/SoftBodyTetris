@@ -17,7 +17,7 @@ protected:
     
 public:
     
-    virtual const IPoint* getPoint( int idx ) const = 0;
+    IPoint* getPoint( int idx );
     
     virtual double getLength() const = 0;
     

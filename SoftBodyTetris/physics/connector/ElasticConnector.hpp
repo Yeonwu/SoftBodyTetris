@@ -20,8 +20,6 @@ public:
     ElasticConnector(IPoint* _p0, IPoint * _p1, double _K);
     ElasticConnector(IPoint* _p0, IPoint * _p1, double _length, double _K);
     
-    const IPoint* getPoint( int idx ) const;
-    
     double getLength() const;
     
     Force calcForceTo( int idx, int otherIdx );

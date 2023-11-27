@@ -6,6 +6,17 @@
          contextName = "Position::size():Types.hpp">
       </ContextState>
       <ContextState
+         contextName = "IBody::calcColide(IBody*):IBody.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "v.prod(v)">
+            </PersistentString>
+            <PersistentString
+               value = "u.prod(v)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Position::operator-(Position) const:Types.hpp">
       </ContextState>
       <ContextState

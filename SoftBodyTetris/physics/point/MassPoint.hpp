@@ -22,6 +22,8 @@ public:
     MassPoint( Position _pos, Mass _M );
     MassPoint( Position _pos, Mass _M, Velocity _V, Force _F);
     
+    Mass getMass() const;
+    
     Position getPosition() const;
     void setPosition(Position _pos);
     

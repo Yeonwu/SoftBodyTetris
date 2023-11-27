@@ -11,7 +11,12 @@
 #include "Types.hpp"
 
 class IPoint: public Renderable {
-public:    
+public:
+    
+    virtual ~IPoint() = default;
+    
+    virtual Mass getMass() const = 0;
+    
     virtual Position getPosition() const = 0;
     virtual void setPosition(Position _pos) = 0;
     

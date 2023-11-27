@@ -15,12 +15,12 @@ int main () {
     IEntity::setSDLRenderer(window.renderer);
     
     FixedPoint* fp1 = new FixedPoint({360, 200});
-    IEntity p1( fp1, new PointRenderer({0xFF, 0x00, 0x00, 0xFF}) );
+    IEntity p1( fp1, new PointRenderer({0xFF, 0x00, 0x00}) );
     
     SoftBody sb1({200, 200}, 1000);
     MassPoint * sb1Right = new MassPoint({50, 0}, 10);
     
-    BodyRenderer* sb1r = new BodyRenderer({0xFF, 0xFF, 0xFF, 0xFF}, {0xFF, 0xFF, 0xFF, 0xFF});
+    BodyRenderer* sb1r = new BodyRenderer({0xFF, 0xFF, 0xFF}, {0xFF, 0xFF, 0xFF});
     IEntity sb1e(&sb1, sb1r);
     
     sb1.addPoint(new MassPoint({0, 50}, 10))
@@ -37,12 +37,12 @@ int main () {
     
     
     ElasticConnector ec1(fp1, sb1Right, 300);
-    IEntity ec1e(&ec1, new ConnectorRenderer({0xFF, 0xFF, 0xFF, 0xFF}, {0xFF, 0x00, 0x00, 0xFF}));
+    IEntity ec1e(&ec1, new ConnectorRenderer({0xFF, 0xFF, 0xFF}, {0xFF, 0x00, 0x00}));
     
     
     
     SoftBody sb2({520, 200}, 1000);
-    BodyRenderer* sb2r = new BodyRenderer({0xFF, 0xFF, 0xFF, 0xFF}, {0xFF, 0xFF, 0xFF, 0xFF});
+    BodyRenderer* sb2r = new BodyRenderer({0xFF, 0xFF, 0xFF}, {0xFF, 0xFF, 0xFF});
     IEntity sb2e(&sb2, sb2r);
     
     MassPoint * sbLeft = new MassPoint({-50, 0}, 10);
@@ -100,7 +100,7 @@ int main () {
                 
                 for (int idx = 0; idx < sb1.getPoints().size(); idx++ ) {
                     if ( idx == result.first ) {
-                        sb1r -> setPointRenderer( idx, PointRenderer({0x00, 0xFF, 0x00, 0xFF}) );
+                        sb1r -> setPointRenderer( idx, PointRenderer({0x00, 0xFF, 0x00}) );
                     } else {
                         sb1r -> deletePointRenderer( idx );
                     }
@@ -110,7 +110,7 @@ int main () {
                     if ( idx == result.second ) {
                         sb2r -> setConnectorRenderer(
                                                      idx,
-                                                     ConnectorRenderer({0x00, 0xFF, 0x00, 0xFF},{0x00, 0xFF, 0x00, 0xFF}));
+                                                     ConnectorRenderer({0x00, 0xFF, 0x00}, {0x00, 0xFF, 0x00}));
                     } else {
                         sb2r -> deleteConnectorRenderer( idx );
                     }
@@ -120,18 +120,26 @@ int main () {
             last_update = SDL_GetTicks64();
             
         } else {
-            // render
-            window.clear();
-            
-            p1.render();
-            
-            ec1e.render();
-            window.renderConnector( ec2 );
-            
-            sb1e.render();
-            sb2e.render();
-            
-            window.update();
+            if (!pause) {
+                // render
+                window.clear();
+                
+                p1.render();
+                
+                ec1e.render();
+                window.renderConnector( ec2 );
+                
+                sb1e.render();
+                sb2e.render();
+                
+                IPoint* colidePoint = sb1.calcColide(&sb2);
+                if (colidePoint != NULL) {
+                    window.renderPoint(*colidePoint, {0xFF, 0xFF, 0x00});
+                    delete colidePoint;
+                }
+                
+                window.update();
+            }
             
             last_render = SDL_GetTicks64();
         }

@@ -9,6 +9,10 @@
 
 FixedPoint::FixedPoint( Position _pos ): pos(_pos) {}
 
+Mass FixedPoint::getMass() const {
+    return MASS_MAX;
+}
+
 Position FixedPoint::getPosition() const {
     return pos;
 }

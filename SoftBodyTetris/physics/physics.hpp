@@ -14,7 +14,6 @@
 
 #include "IConnector.hpp"
 #include "ElasticConnector.hpp"
-#include "NonElasticConnector.hpp"
 
 #include "IBody.hpp"
 #include "SoftBody.hpp"

@@ -6,6 +6,7 @@
 //
 
 #include "IBody.hpp"
+#include "MassPoint.hpp"
 
 int crossProduct( Position a, Position b );
 int direction( Position a, Position b, Position c );
@@ -91,6 +92,29 @@ std::pair<int, int> IBody::didColide (IBody * b) {
     }
     
     return std::pair(-1, -1);
+}
+
+IPoint* IBody::calcColide (IBody * b) {
+    std::pair colisionCheckResult = didColide(b);
+    if (colisionCheckResult.first == -1) return NULL;
+    
+    IConnector* c = b->getConnectors().at(colisionCheckResult.second);
+    
+    IPoint* A = c->getPoint(0);
+    IPoint* B = c->getPoint(1);
+    
+    IPoint* P = getPoints().at(colisionCheckResult.first);
+    
+    Position V = B->getPosition() - A->getPosition();
+    Position U = P->getPosition() - A->getPosition();
+
+    Position linePos(0, 0);
+    
+    if ( U.prod(V) < 0 ) linePos = A->getPosition();
+    else if ( U.prod(V) > V.prod(V) ) linePos = B->getPosition();
+    else linePos = A->getPosition() + V * (V.prod(U) / V.prod(V));
+    
+    return new MassPoint(linePos, A->getMass() + B->getMass());
 }
 
 

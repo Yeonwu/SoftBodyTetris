@@ -34,6 +34,7 @@ public:
     const std::vector<IConnector *>& getCheckColideConnectors() const;
     
     std::pair<int, int> didColide (IBody * b);
+    IPoint* calcColide (IBody * b);
     
     friend class ForceAdder;
     friend class Window;

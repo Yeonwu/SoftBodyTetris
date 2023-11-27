@@ -23,6 +23,10 @@ MassPoint::MassPoint( Position _pos, Mass _M, Velocity _V, Force _F):
     V(_V)
 {}
 
+Mass MassPoint::getMass() const {
+    return M;
+}
+
 Position MassPoint::getPosition() const {
     return pos;
 }

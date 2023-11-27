@@ -23,8 +23,8 @@ void ConnectorRenderer::render( Renderable * target, SDL_Renderer* SDLRenderer )
     Position m = (pos0 + pos1) / 2;
     
     
-    Position pos2 = m + (pos0 - pos1)/d * l/2;
-    Position pos3 = m + (pos1 - pos0)/d * l/2;
+    Position pos2 = m + (pos1 - pos0)/d * l/2;
+    Position pos3 = m + (pos0 - pos1)/d * l/2;
     
     SDL_SetRenderDrawColor( SDLRenderer, color.R, color.G, color.B, color.A );
     SDL_RenderDrawLine( SDLRenderer, pos2.x, pos2.y, pos3.x, pos3.y);

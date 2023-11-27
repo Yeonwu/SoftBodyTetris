@@ -23,7 +23,6 @@
 		E3F03B5E2B13365E0080C2AE /* ConnectorRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B5C2B13365E0080C2AE /* ConnectorRenderer.cpp */; };
 		E3F03B622B1395390080C2AE /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B602B1395390080C2AE /* utils.cpp */; };
 		E3F4617F2AF9FCE10078AE76 /* IConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F4617D2AF9FCE10078AE76 /* IConnector.cpp */; };
-		E3F461822AF9FFDF0078AE76 /* NonElasticConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F461802AF9FFDF0078AE76 /* NonElasticConnector.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,8 +73,6 @@
 		E3F03B612B1395390080C2AE /* utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = utils.hpp; sourceTree = "<group>"; };
 		E3F4617D2AF9FCE10078AE76 /* IConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IConnector.cpp; sourceTree = "<group>"; };
 		E3F4617E2AF9FCE10078AE76 /* IConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IConnector.hpp; sourceTree = "<group>"; };
-		E3F461802AF9FFDF0078AE76 /* NonElasticConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NonElasticConnector.cpp; sourceTree = "<group>"; };
-		E3F461812AF9FFDF0078AE76 /* NonElasticConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NonElasticConnector.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,8 +220,6 @@
 				E3F4617E2AF9FCE10078AE76 /* IConnector.hpp */,
 				E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */,
 				E350FF5D2AF48ACA00A3F6C1 /* ElasticConnector.hpp */,
-				E3F461802AF9FFDF0078AE76 /* NonElasticConnector.cpp */,
-				E3F461812AF9FFDF0078AE76 /* NonElasticConnector.hpp */,
 			);
 			path = connector;
 			sourceTree = "<group>";
@@ -298,7 +293,6 @@
 				E3F03B552B1248B70080C2AE /* PointRenderer.cpp in Sources */,
 				E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */,
 				E3F03B622B1395390080C2AE /* utils.cpp in Sources */,
-				E3F461822AF9FFDF0078AE76 /* NonElasticConnector.cpp in Sources */,
 				E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */,
 				E3B013F72AEA3DAB003C20E6 /* Window.cpp in Sources */,
 				E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */,

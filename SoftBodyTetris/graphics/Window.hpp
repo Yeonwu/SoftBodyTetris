@@ -31,9 +31,8 @@ public:
     void renderPoint ( const FixedPoint& p );
     void renderPoint ( const FixedPoint& p, Color c );
     
-    void renderConnector ( const IConnector& c, int flag=0 );
-    void renderConnector ( const NonElasticConnector& nec );
-    void renderConnector ( const ElasticConnector& ec );
+    void renderConnector ( IConnector& c, int flag=0 );
+    void renderConnector ( ElasticConnector& ec );
     
     void renderBody ( const IBody& b, int flag=0 );
 };

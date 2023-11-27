@@ -16,6 +16,8 @@ class FixedPoint: public IPoint {
 public:
     FixedPoint( Position _pos );
     
+    Mass getMass() const;
+    
     Position getPosition() const;
     void setPosition(Position _pos);
     

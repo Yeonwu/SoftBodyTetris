@@ -7,6 +7,10 @@
 
 #include "IConnector.hpp"
 
+IPoint* IConnector::getPoint( int idx ) {
+    return p[idx];
+}
+
 void IConnector::update( Time_sec dt ) {
     
     Force p0F = calcForceTo(0, 1);
@@ -21,17 +25,17 @@ void IConnector::update( Time_sec dt ) {
     }
 }
 
-double IConnector::distanceToPosition( const Position& p ) const {
-    const Position& a = getPoint(0) -> getPosition();
-    const Position& b = getPoint(1) -> getPosition();
+double IConnector::distanceToPosition( const Position& pos ) const {
+    const Position& a = p[0] -> getPosition();
+    const Position& b = p[1] -> getPosition();
     
     double lineLen = a.distanceTo(b);
-    if (lineLen == 0) return a.distanceTo(p);
+    if (lineLen == 0) return a.distanceTo(pos);
     
-    Position prjPos = (p - a) * (b - a);
+    Position prjPos = (pos - a) * (b - a);
     double prj = (prjPos.x + prjPos.y) / lineLen;
     
-    if (prj < 0) return a.distanceTo(p);
-    if (prj > lineLen) return b.distanceTo(p);
-    return abs( (p.y - a.y) * (b.x - a.x) - (p.x - a.x) * (b.y - a.y) ) / lineLen;
+    if (prj < 0) return a.distanceTo(pos);
+    if (prj > lineLen) return b.distanceTo(pos);
+    return abs( (pos.y - a.y) * (b.x - a.x) - (pos.x - a.x) * (b.y - a.y) ) / lineLen;
 }

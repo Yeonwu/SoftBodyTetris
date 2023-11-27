@@ -20,3 +20,18 @@ void IConnector::update( Time_sec dt ) {
         p[1] -> addForce( p1F );
     }
 }
+
+double IConnector::distanceToPosition( const Position& p ) const {
+    const Position& a = getPoint(0) -> getPosition();
+    const Position& b = getPoint(1) -> getPosition();
+    
+    double lineLen = a.distanceTo(b);
+    if (lineLen == 0) return a.distanceTo(p);
+    
+    Position prjPos = (p - a) * (b - a);
+    double prj = (prjPos.x + prjPos.y) / lineLen;
+    
+    if (prj < 0) return a.distanceTo(p);
+    if (prj > lineLen) return b.distanceTo(p);
+    return abs( (p.y - a.y) * (b.x - a.x) - (p.x - a.x) * (b.y - a.y) ) / lineLen;
+}

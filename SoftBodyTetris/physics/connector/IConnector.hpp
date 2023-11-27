@@ -23,6 +23,8 @@ public:
     
     virtual Force calcForceTo( int idx, int otherIdx ) = 0;
     
+    double distanceToPosition( const Position& p ) const;
+    
     void update( Time_sec dt );
 };
 

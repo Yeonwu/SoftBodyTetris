@@ -33,7 +33,7 @@ public:
     const std::vector<IConnector *>& getConnectors() const;
     const std::vector<IConnector *>& getCheckColideConnectors() const;
     
-    bool didColide (IBody * b);
+    std::pair<int, int> didColide (IBody * b);
     
     friend class ForceAdder;
     friend class Window;

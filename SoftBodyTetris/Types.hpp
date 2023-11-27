@@ -49,6 +49,11 @@ public:
         return pos;
     }
     
+    Position operator *( const Position &other ) const {
+        Position pos( x * other.x, y * other.y );
+        return pos;
+    }
+    
     Position operator /( double n ) const {
         Position pos( x / n, y / n );
         return pos;
@@ -68,8 +73,12 @@ public:
     inline bool operator>=(const Position& other) const { return !(*this < other); }
     
     
-    double size() {
+    double size() const {
         return std::sqrt( x * x + y * y );
+    }
+    
+    double distanceTo (const Position& other) const {
+        return (*this - other).size();
     }
 };
 

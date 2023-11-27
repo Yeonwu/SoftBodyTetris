@@ -7,7 +7,9 @@
 
 #include "IBody.hpp"
 
-bool isIntersect(Position pos0, Position pos1, Position pos2, Position pos3);
+int crossProduct( Position a, Position b );
+int direction( Position a, Position b, Position c );
+bool isIntersect( Position pos0, Position pos1, Position pos2, Position pos3 );
 
 IBody::IBody(Position _pos): pos(_pos) {
     radius = 0;
@@ -49,20 +51,24 @@ void IBody::update( Time_sec dt ) {
     }
 }
 
-bool IBody::didColide (IBody * b) {
+std::pair<int, int> IBody::didColide (IBody * b) {
     if (radius + b->getRadius() < (pos - b->getPosition()).size()) {
-        return false;
+        return std::pair(-1, -1);
     }
     
     std::vector<IConnector *> connectors = b -> getCheckColideConnectors();
     
     Position pos_out({-1, -1});
     
-    for (IPoint * p: points) {
+    for (int pointIdx = 0; IPoint * p: points) {
         int intersectCnt = 0;
         
         Position pos_p = p->getPosition();
-        for (IConnector * c: connectors) {
+        
+        int mostCloseConnecterIdx = -1;
+        double minDistance = 10000000;
+        
+        for (int connectorIdx = 0; IConnector * c: connectors) {
             
             Position pos0 = c->getPoint(0)->getPosition();
             Position pos1 = c->getPoint(1)->getPosition();
@@ -70,12 +76,21 @@ bool IBody::didColide (IBody * b) {
             if (isIntersect(pos0, pos1, pos_p, pos_out)) {
                 intersectCnt += 1;
             }
+            
+            if (minDistance > c -> distanceToPosition(pos_p)) {
+                minDistance = c -> distanceToPosition(pos_p);
+                mostCloseConnecterIdx = connectorIdx;
+            }
+            
+            connectorIdx++;
         }
         
-        if ((intersectCnt % 2) == 1) return true;
+        if ((intersectCnt % 2) == 1) return std::pair(pointIdx, mostCloseConnecterIdx);
+        
+        pointIdx++;
     }
     
-    return false;
+    return std::pair(-1, -1);
 }
 
 

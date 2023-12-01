@@ -10,6 +10,7 @@
 
 MassPoint::MassPoint( Position _pos, Mass _M ):
     pos(_pos),
+    oldPos(_pos),
     M(_M),
     F({0, 0}),
     V({0, 0})
@@ -18,6 +19,7 @@ MassPoint::MassPoint( Position _pos, Mass _M ):
 
 MassPoint::MassPoint( Position _pos, Mass _M, Velocity _V, Force _F):
     pos(_pos),
+    oldPos(_pos),
     M(_M),
     F(_F),
     V(_V)
@@ -39,6 +41,10 @@ Velocity MassPoint::getVelocity() const {
     return V;
 }
 
+void MassPoint::setVelocity(Velocity _V) {
+    V = _V;
+}
+
 void MassPoint::update( Time_sec dt ) {
     updateVelocity( dt );
     updatePosition( dt );
@@ -56,8 +62,10 @@ void MassPoint::updateVelocity( Time_sec dt ) {
 }
 
 void MassPoint::updatePosition( Time_sec dt ) {
-    // dx = v * dt, millisec to sec
     pos += V * dt;
+//    Position curPos = pos;
+//    pos += (pos - oldPos) + F/M * dt * dt;
+//    oldPos = curPos;
 }
 
 void MassPoint::addForce( Force _F ) {

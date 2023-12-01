@@ -94,9 +94,9 @@ std::pair<int, int> IBody::didColide (IBody * b) {
     return std::pair(-1, -1);
 }
 
-IPoint* IBody::calcColide (IBody * b) {
+void IBody::calcColide (IBody * b) {
     std::pair colisionCheckResult = didColide(b);
-    if (colisionCheckResult.first == -1) return NULL;
+    if (colisionCheckResult.first == -1) return;
     
     IConnector* c = b->getConnectors().at(colisionCheckResult.second);
     
@@ -114,7 +114,24 @@ IPoint* IBody::calcColide (IBody * b) {
     else if ( U.prod(V) > V.prod(V) ) linePos = B->getPosition();
     else linePos = A->getPosition() + V * (V.prod(U) / V.prod(V));
     
-    return new MassPoint(linePos, A->getMass() + B->getMass());
+    
+    Position moveP = (linePos - P->getPosition());
+    moveP = moveP / moveP.size();
+    P->setPosition(P->getPosition() + moveP + moveP / moveP.size() / 100);
+
+    IPoint* linePoint = new MassPoint(linePos, A->getMass() + B->getMass());
+    linePoint->setVelocity((A->getMass()*A->getVelocity() + B->getMass()*B->getVelocity()) / (A->getMass()+B->getMass()));
+
+
+    IPoint::applyColision(P, linePoint);
+    
+    Position dP = (linePoint->getPosition() - linePos)*10;
+
+    A -> setPosition(A->getPosition() + dP);
+    B -> setPosition(B->getPosition() + dP);
+    
+    A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
+    B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
 }
 
 

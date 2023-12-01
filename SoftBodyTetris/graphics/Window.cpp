@@ -100,22 +100,25 @@ void Window::renderConnector ( ElasticConnector& ec ) {
     Position pos0 = ec.getPoint(0) -> getPosition();
     Position pos1 = ec.getPoint(1) -> getPosition();
     
-    double l = ec.getLength();
-    double d = (pos0 - pos1).size();
-    Position m = (pos0 + pos1) / 2;
-    
-    
-    Position pos2 = m + (pos1 - pos0)/d * l/2;
-    Position pos3 = m + (pos0 - pos1)/d * l/2;
-    
     SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
-    SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos3.x, pos3.y);
+    SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos1.x, pos1.y);
     
-    SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
-    SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos3.x, pos3.y);
-
-    SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
-    SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos1.x, pos1.y);
+//    double l = ec.getLength();
+//    double d = (pos0 - pos1).size();
+//    Position m = (pos0 + pos1) / 2;
+//
+//
+//    Position pos2 = m + (pos1 - pos0)/d * l/2;
+//    Position pos3 = m + (pos0 - pos1)/d * l/2;
+//
+//    SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+//    SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos3.x, pos3.y);
+//
+//    SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
+//    SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos3.x, pos3.y);
+//
+//    SDL_SetRenderDrawColor( renderer, 0xFF, 0x00, 0x00, 0xFF );
+//    SDL_RenderDrawLine( renderer, pos2.x, pos2.y, pos1.x, pos1.y);
 }
 
 void Window::renderBody( const IBody & b, int flag ) {

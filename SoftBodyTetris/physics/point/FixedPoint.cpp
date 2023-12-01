@@ -25,6 +25,8 @@ Velocity FixedPoint::getVelocity() const {
     return Velocity(0, 0);
 }
 
+void FixedPoint::setVelocity(Velocity _V) {}
+
 void FixedPoint::update( Time_sec dt ) {}
 
 bool FixedPoint::isMovable() const {

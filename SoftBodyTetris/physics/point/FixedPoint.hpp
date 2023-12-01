@@ -22,6 +22,7 @@ public:
     void setPosition(Position _pos);
     
     Velocity getVelocity() const;
+    void setVelocity(Velocity _V);
     
     void update( Time_sec dt );
     bool isMovable() const;

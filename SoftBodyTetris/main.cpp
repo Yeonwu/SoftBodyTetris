@@ -80,7 +80,7 @@ int main () {
             
             if (!pause) {
                 
-                Time_sec dt = (double)(SDL_GetTicks64() - last_update) / 1000.0 / 2;
+                Time_sec dt = (double)(SDL_GetTicks64() - last_update) / 1000.0;
                 
                 p1.update( dt );
                 
@@ -96,25 +96,8 @@ int main () {
                 sb1e.update( dt );
                 sb2e.update( dt );
 
-                std::pair result = sb1.didColide(&sb2);
-                
-                for (int idx = 0; idx < sb1.getPoints().size(); idx++ ) {
-                    if ( idx == result.first ) {
-                        sb1r -> setPointRenderer( idx, PointRenderer({0x00, 0xFF, 0x00}) );
-                    } else {
-                        sb1r -> deletePointRenderer( idx );
-                    }
-                }
-                
-                for (int idx = 0; idx < 4; idx++ ) {
-                    if ( idx == result.second ) {
-                        sb2r -> setConnectorRenderer(
-                                                     idx,
-                                                     ConnectorRenderer({0x00, 0xFF, 0x00}, {0x00, 0xFF, 0x00}));
-                    } else {
-                        sb2r -> deleteConnectorRenderer( idx );
-                    }
-                }
+                sb1.calcColide(&sb2);
+                sb2.calcColide(&sb1);
             }
             
             last_update = SDL_GetTicks64();
@@ -132,11 +115,11 @@ int main () {
                 sb1e.render();
                 sb2e.render();
                 
-                IPoint* colidePoint = sb1.calcColide(&sb2);
-                if (colidePoint != NULL) {
-                    window.renderPoint(*colidePoint, {0xFF, 0xFF, 0x00});
-                    delete colidePoint;
-                }
+//                IPoint* colidePoint = sb1.calcColide(&sb2);
+//                if (colidePoint != NULL) {
+//                    window.renderPoint(*colidePoint, {0xFF, 0xFF, 0x00});
+//                    delete colidePoint;
+//                }
                 
                 window.update();
             }

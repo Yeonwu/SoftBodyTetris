@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "calcColisionVelocity(IPoint*, IPoint*):IPoint.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "((A-&gt;getMass() - B-&gt;getMass()) * A-&gt;getVelocity() +2*B-&gt;getMass() * B-&gt;getVelocity()) / (A-&gt;getMass() + B-&gt;getMass())">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Position::size():Types.hpp">
       </ContextState>
       <ContextState
@@ -20,15 +28,21 @@
          contextName = "Position::operator-(Position) const:Types.hpp">
       </ContextState>
       <ContextState
+         contextName = "main:main.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "Spring::update():Spring.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "IPoint::applyColision(IPoint*, IPoint*):IPoint.cpp">
+      </ContextState>
+      <ContextState
          contextName = "Window::renderSpring(Spring const&amp;):Window.cpp">
          <PersistentStrings>
             <PersistentString
                value = "(pos0 - pos1)">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Spring::update():Spring.cpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -15,6 +15,7 @@ class MassPoint: public IPoint {
 private:
     Mass M;
     Position pos;
+    Position oldPos;
     Force F;
     Velocity V;
     
@@ -28,6 +29,7 @@ public:
     void setPosition(Position _pos);
     
     Velocity getVelocity() const;
+    void setVelocity(Velocity _V);
     
     void update( Time_sec dt );
     bool isMovable() const;

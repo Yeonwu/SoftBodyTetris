@@ -7,7 +7,7 @@
 
 #include "ForceAdder.hpp"
 
-const double G = 9800;
+const double G = 10000;
 const double DampingC = 5;
 
 void ForceAdder::addForce(IPoint & p, Force & F) {

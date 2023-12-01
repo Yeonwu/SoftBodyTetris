@@ -26,6 +26,11 @@ public:
     Vec2D operator /(double n) const;
     
     double dot(const Vec2D& other) const;
+    double cross(const Vec2D& other) const;
+    double size() const;
+    Vec2D proj(const Vec2D& other) const;
 };
+
+Vec2D proj(const Vec2D& v, const Vec2D& u);
 
 #endif /* Vec2D_hpp */

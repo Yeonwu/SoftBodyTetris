@@ -13,8 +13,10 @@
 
 class FixedPoint: public IPoint {
     Position pos;
+    Mass M;
 public:
     FixedPoint( Position _pos );
+    FixedPoint( Position _pos, Mass _M);
     
     Mass getMass() const;
     

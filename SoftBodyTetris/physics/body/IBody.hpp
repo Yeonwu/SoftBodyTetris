@@ -25,6 +25,8 @@ protected:
     
 public:
     IBody(Position _pos);
+    ~IBody();
+    
     void update ( Time_sec dt );
     
     Position getPosition() const;

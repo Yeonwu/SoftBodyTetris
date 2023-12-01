@@ -16,7 +16,6 @@ SoftBody::SoftBody(Position _pos, double _K):
 {}
 
 SoftBody& SoftBody::addPoint(IPoint * p) {
-    p -> setPosition(p -> getPosition() + pos);
     points.push_back(p);
     
     return *this;

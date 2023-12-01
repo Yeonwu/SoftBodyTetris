@@ -28,16 +28,16 @@ Force ElasticConnector::calcForceTo( int idx, int otherIdx ) {
     Position p0Pos = p[idx] -> getPosition();
     Position p1Pos = p[otherIdx] -> getPosition();
     
-    double distance = ( p0Pos - p1Pos ).size();
+    Vec2D direction = ( p0Pos - p1Pos );
+    
+    double distance = direction.size();
     double forceSize = K * abs( distance - length );
     
     if ( distance > length ) {
-        
-        Position p0FValue = ( p1Pos - p0Pos ) / distance * forceSize;
+        Vec2D p0FValue = direction*-1 / distance * forceSize - proj(direction, p[idx] -> getVelocity());
         return Force(p0FValue.x, p0FValue.y);
-        
     } else if ( distance < length ) {
-        Position p0FValue = ( p0Pos - p1Pos ) / distance * forceSize;
+        Vec2D p0FValue = direction / distance * forceSize - proj(direction, p[idx] -> getVelocity());
         return Force(p0FValue.x, p0FValue.y);
     }
     

@@ -7,7 +7,7 @@
 
 #include "Position.hpp"
 
-Position::Position(double _x, double _y): x(_x), y(_y) {}
+Position::Position(double _x, double _y): x(_x), y(_y)  {}
 
 Position Position::operator +( Position pos ) const {
     pos.x += x;

@@ -10,7 +10,6 @@
 
 MassPoint::MassPoint( Position _pos, Mass _M ):
     pos(_pos),
-    oldPos(_pos),
     M(_M),
     F({0, 0}),
     V({0, 0})
@@ -19,7 +18,6 @@ MassPoint::MassPoint( Position _pos, Mass _M ):
 
 MassPoint::MassPoint( Position _pos, Mass _M, Velocity _V, Force _F):
     pos(_pos),
-    oldPos(_pos),
     M(_M),
     F(_F),
     V(_V)

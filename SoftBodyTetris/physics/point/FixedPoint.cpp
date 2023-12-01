@@ -7,10 +7,11 @@
 
 #include "FixedPoint.hpp"
 
-FixedPoint::FixedPoint( Position _pos ): pos(_pos) {}
+FixedPoint::FixedPoint( Position _pos ): FixedPoint(_pos, MASS_MAX)  {}
+FixedPoint::FixedPoint( Position _pos, Mass _M): pos(_pos), M(_M) {}
 
 Mass FixedPoint::getMass() const {
-    return MASS_MAX;
+    return M;
 }
 
 Position FixedPoint::getPosition() const {

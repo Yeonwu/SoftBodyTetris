@@ -16,6 +16,10 @@ IBody::IBody(Position _pos): pos(_pos) {
     radius = 0;
 }
 
+IBody::~IBody() {
+    
+}
+
 Position IBody::getPosition() const {
     return pos;
 }
@@ -40,22 +44,27 @@ void IBody::update( Time_sec dt ) {
         c -> update( dt );
     }
     
-    double distance;
+//    double distance;
     radius = 0;
+//    Position M(0, 0);
     for (IPoint *p: points) {
         p -> update( dt );
-        
-        distance = (p->getPosition() - pos).size();
-        if (radius < distance) {
-            radius = distance;
-        }
+//        M += p->getPosition();
     }
+//    M = M / points.size();
+//
+//    for (IPoint *p: points) {
+//        distance = (p->getPosition() - pos).size();
+//        if (radius < distance) {
+//            radius = distance;
+//        }
+//    }
 }
 
 std::pair<int, int> IBody::didColide (IBody * b) {
-    if (radius + b->getRadius() < (pos - b->getPosition()).size()) {
-        return std::pair(-1, -1);
-    }
+//    if (radius + b->getRadius() < (pos - b->getPosition()).size()) {
+//        return std::pair(-1, -1);
+//    }
     
     std::vector<IConnector *> connectors = b -> getCheckColideConnectors();
     
@@ -98,7 +107,7 @@ void IBody::calcColide (IBody * b) {
     std::pair colisionCheckResult = didColide(b);
     if (colisionCheckResult.first == -1) return;
     
-    IConnector* c = b->getConnectors().at(colisionCheckResult.second);
+    IConnector* c = b->getCheckColideConnectors().at(colisionCheckResult.second);
     
     IPoint* A = c->getPoint(0);
     IPoint* B = c->getPoint(1);

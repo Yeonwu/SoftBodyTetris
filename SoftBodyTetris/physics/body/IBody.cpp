@@ -44,27 +44,33 @@ void IBody::update( Time_sec dt ) {
         c -> update( dt );
     }
     
-//    double distance;
+    
     radius = 0;
-//    Position M(0, 0);
+    Position CoM(0, 0);
+    Mass totalM = 0;
     for (IPoint *p: points) {
         p -> update( dt );
-//        M += p->getPosition();
+        CoM += p->getPosition() * p->getMass();
+        totalM += p->getMass();
     }
-//    M = M / points.size();
-//
-//    for (IPoint *p: points) {
-//        distance = (p->getPosition() - pos).size();
-//        if (radius < distance) {
-//            radius = distance;
-//        }
-//    }
+    
+    pos = CoM / (totalM);
+
+    double distance;
+    radius = 0;
+    for (IPoint *p: points) {
+        distance = (p->getPosition() - pos).size();
+        if (radius < distance) {
+            radius = distance;
+        }
+    }
 }
 
-std::pair<int, int> IBody::didColide (IBody * b) {
-//    if (radius + b->getRadius() < (pos - b->getPosition()).size()) {
-//        return std::pair(-1, -1);
-//    }
+DidColideResult IBody::didColide (IBody * b) {
+    DidColideResult result = {false, };
+    if (radius + b->getRadius() < (pos - b->getPosition()).size()) {
+        return result;
+    }
     
     std::vector<IConnector *> connectors = b -> getCheckColideConnectors();
     
@@ -95,52 +101,62 @@ std::pair<int, int> IBody::didColide (IBody * b) {
             connectorIdx++;
         }
         
-        if ((intersectCnt % 2) == 1) return std::pair(pointIdx, mostCloseConnecterIdx);
+        if ((intersectCnt % 2) == 1) {
+            result.didColide = true;
+            result.colidePairs.push_back(std::pair(pointIdx, mostCloseConnecterIdx));
+        }
         
         pointIdx++;
     }
     
-    return std::pair(-1, -1);
+    return result;
 }
 
 void IBody::calcColide (IBody * b) {
-    std::pair colisionCheckResult = didColide(b);
-    if (colisionCheckResult.first == -1) return;
-    
-    IConnector* c = b->getCheckColideConnectors().at(colisionCheckResult.second);
-    
-    IPoint* A = c->getPoint(0);
-    IPoint* B = c->getPoint(1);
-    
-    IPoint* P = getPoints().at(colisionCheckResult.first);
-    
-    Position V = B->getPosition() - A->getPosition();
-    Position U = P->getPosition() - A->getPosition();
-
-    Position linePos(0, 0);
-    
-    if ( U.prod(V) < 0 ) linePos = A->getPosition();
-    else if ( U.prod(V) > V.prod(V) ) linePos = B->getPosition();
-    else linePos = A->getPosition() + V * (V.prod(U) / V.prod(V));
-    
-    
-    Position moveP = (linePos - P->getPosition());
-    moveP = moveP / moveP.size();
-    P->setPosition(P->getPosition() + moveP + moveP / moveP.size() / 100);
-
-    IPoint* linePoint = new MassPoint(linePos, A->getMass() + B->getMass());
-    linePoint->setVelocity((A->getMass()*A->getVelocity() + B->getMass()*B->getVelocity()) / (A->getMass()+B->getMass()));
-
-
-    IPoint::applyColision(P, linePoint);
-    
-    Position dP = (linePoint->getPosition() - linePos)*10;
-
-    A -> setPosition(A->getPosition() + dP);
-    B -> setPosition(B->getPosition() + dP);
-    
-    A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
-    B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
+    DidColideResult colisionCheckResult = didColide(b);
+    if (colisionCheckResult.didColide == false) return;
+    for (auto& colidePair: colisionCheckResult.colidePairs) {
+        IConnector* c = b->getCheckColideConnectors().at(colidePair.second);
+        
+        IPoint* A = c->getPoint(0);
+        IPoint* B = c->getPoint(1);
+        
+        IPoint* P = getPoints().at(colidePair.first);
+        
+        Position V = B->getPosition() - A->getPosition();
+        Position U = P->getPosition() - A->getPosition();
+        
+        Position linePos(0, 0);
+        // 수선의 발 계산
+        if ( U.prod(V) < 0 ) linePos = A->getPosition();
+        else if ( U.prod(V) > V.prod(V) ) linePos = B->getPosition();
+        else linePos = A->getPosition() + V * (V.prod(U) / V.prod(V));
+        
+        
+        Position moveP = (linePos - P->getPosition());
+        moveP = moveP / moveP.size();
+        P->setPosition(P->getPosition() + moveP + moveP / moveP.size() / 100);
+        
+        IPoint* linePoint = new MassPoint(linePos, A->getMass() + B->getMass());
+        linePoint->setVelocity((A->getMass()*A->getVelocity() + B->getMass()*B->getVelocity()) / (A->getMass()+B->getMass()));
+        
+        // Change position & velocity, Elastic collision.
+        IPoint::applyColision(P, linePoint);
+        
+        //Friction
+        //    Velocity PV = P->getVelocity();
+        //    Vec2D projV = proj(A->getPosition() - B->getPosition(), PV) * -100;
+        //    P->addForce({projV.x, projV.y});
+        
+        // Virtual linePoint -> Actual Points
+        Position dP = (linePoint->getPosition() - linePos) * 10;
+        
+        A -> setPosition(A->getPosition() + dP);
+        B -> setPosition(B->getPosition() + dP);
+        
+        A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
+        B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
+    }
 }
 
 

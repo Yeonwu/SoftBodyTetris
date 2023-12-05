@@ -14,6 +14,11 @@
 #include "IPoint.hpp"
 #include "IConnector.hpp"
 
+struct DidColideResult {
+    bool didColide;
+    std::vector<std::pair<int, int>> colidePairs;
+};
+
 class IBody: public Renderable {
     
 protected:
@@ -35,7 +40,7 @@ public:
     const std::vector<IConnector *>& getConnectors() const;
     const std::vector<IConnector *>& getCheckColideConnectors() const;
     
-    std::pair<int, int> didColide (IBody * b);
+    DidColideResult didColide (IBody * b);
     void calcColide (IBody * b);
     
     friend class ForceAdder;

@@ -32,9 +32,9 @@ void ForceAdder::addGravity(IBody & b) {
 }
 
 void ForceAdder::addDamping(IPoint & p) {
-    Position DampingVal = p.getVelocity() * -DampingC;
-    Force Damping = Force(DampingVal.x, DampingVal.y);
-    addForce(p, Damping);
+    Vec2D dampingVal = p.getVelocity() * -DampingC;
+    Force damping = Force(dampingVal.x, dampingVal.y);
+    addForce(p, damping);
 }
 
 void ForceAdder::addDamping(IBody & b) {

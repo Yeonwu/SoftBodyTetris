@@ -6,6 +6,7 @@
 //
 
 #include "ElasticConnector.hpp"
+#define DAMPING_C 10.0
 
 ElasticConnector::ElasticConnector(IPoint* _p0, IPoint * _p1, double _K):
     K(_K)
@@ -34,10 +35,10 @@ Force ElasticConnector::calcForceTo( int idx, int otherIdx ) {
     double forceSize = K * abs( distance - length );
     
     if ( distance > length ) {
-        Vec2D p0FValue = direction*-1 / distance * forceSize - proj(direction, p[idx] -> getVelocity());
+        Vec2D p0FValue = direction*-1 / distance * forceSize;// - proj(direction, p[idx] -> getVelocity()) * DAMPING_C;
         return Force(p0FValue.x, p0FValue.y);
     } else if ( distance < length ) {
-        Vec2D p0FValue = direction / distance * forceSize - proj(direction, p[idx] -> getVelocity());
+        Vec2D p0FValue = direction / distance * forceSize;// - proj(direction, p[idx] -> getVelocity()) * DAMPING_C;
         return Force(p0FValue.x, p0FValue.y);
     }
     

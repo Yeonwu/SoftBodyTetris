@@ -67,7 +67,10 @@ int main () {
     
     std::vector<SoftBody*> rectList;
     rectList.push_back(getSoftRect({360, 0}));
-    rectList.push_back(getSoftRect({362, 200}));
+    rectList.push_back(getSoftRect({410.1, 0}));
+    
+    rectList.push_back(getSoftRect({385, 200}));
+    rectList.push_back(getSoftRect({435.1, 200}));
     
     SDL_Event e;
     bool quit = false;
@@ -96,6 +99,8 @@ int main () {
                     
                 for (auto& rect: rectList) {
                     ForceAdder::addGravity(*rect);
+                    ForceAdder::addDamping(*rect);
+                    
                     rect->update( dt );
                     rect->calcColide( floor );
                     rect->calcColide( leftWall );

@@ -7,7 +7,7 @@
 
 #include "ForceAdder.hpp"
 
-const double G = 5000;
+const double G = 500;
 const double DampingC = 4;
 
 void ForceAdder::addForce(IPoint & p, Force & F) {
@@ -21,15 +21,15 @@ void ForceAdder::addForce(IBody & b, Force & F) {
 }
 
 void ForceAdder::addGravity(IPoint & p) {
-    Force gravity = Force(0, G);
+    Force gravity = Force(0, G * p.getMass());
     addForce(p, gravity);
 }
 
 void ForceAdder::addGravity(IBody & b) {
-    Force gravity = Force(0, G);
-    addForce(b, gravity);
+    for (IPoint* p: b.getPoints()) {
+        addGravity(*p);
+    }
 }
-
 
 void ForceAdder::addDamping(IPoint & p) {
     Position DampingVal = p.getVelocity() * -DampingC;

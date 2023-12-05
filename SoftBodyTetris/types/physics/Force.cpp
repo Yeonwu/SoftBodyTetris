@@ -26,6 +26,10 @@ double Force::size() {
     return std::sqrt( x * x + y * y );
 }
 
+Force Force::operator * ( const double n ) {
+    return {x * n, y * n};
+}
+
 Acceleration Force::operator /( const Mass m ) {
     return Acceleration(x / m, y / m);
 }

@@ -9,12 +9,12 @@
 const int SCREEN_WIDTH = 720;
 const int SCREEN_HEIGHT = 720;
 
-SoftBody* getSoftRect(Position pos, double size=50) {
-    SoftBody* softBody = new SoftBody(pos, 1000);
-    softBody->addPoint(new MassPoint({pos.x + size, pos.y + size}, 10))
-        .addPoint(new MassPoint({pos.x + size, pos.y - size}, 10))
-        .addPoint(new MassPoint({pos.x - size, pos.y - size}, 10))
-        .addPoint(new MassPoint({pos.x - size, pos.y + size}, 10))
+SoftBody* getSoftRect(Position pos, double size=25) {
+    SoftBody* softBody = new SoftBody(pos, 2000);
+    softBody->addPoint(new MassPoint({pos.x + size, pos.y + size}, 5))
+        .addPoint(new MassPoint({pos.x + size, pos.y - size}, 5))
+        .addPoint(new MassPoint({pos.x - size, pos.y - size}, 5))
+        .addPoint(new MassPoint({pos.x - size, pos.y + size}, 5))
         
         .connectPoints(0, 1)
         .connectPoints(1, 2)

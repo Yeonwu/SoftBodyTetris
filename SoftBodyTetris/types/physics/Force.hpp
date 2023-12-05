@@ -19,9 +19,9 @@ public:
     Force( double _x, double _y );
     
     Force operator + ( Force f );
-    
     void operator += ( const Force f );
     
+    Force operator * ( const double n );
     Acceleration operator /( const Mass m );
     
     double size();

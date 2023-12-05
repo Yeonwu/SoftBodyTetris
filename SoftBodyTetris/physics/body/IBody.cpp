@@ -143,11 +143,6 @@ void IBody::calcColide (IBody * b) {
         // Change position & velocity, Elastic collision.
         IPoint::applyColision(P, linePoint);
         
-        //Friction
-        //    Velocity PV = P->getVelocity();
-        //    Vec2D projV = proj(A->getPosition() - B->getPosition(), PV) * -100;
-        //    P->addForce({projV.x, projV.y});
-        
         // Virtual linePoint -> Actual Points
         Position dP = (linePoint->getPosition() - linePos) * 10;
         
@@ -156,6 +151,18 @@ void IBody::calcColide (IBody * b) {
         
         A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
         B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
+    }
+}
+
+void IBody::addForce(Force F) {
+    for (auto point: points) {
+        point->addForce(F);
+    }
+}
+
+void IBody::setVelocity(Velocity V) {
+    for (auto point: points) {
+        point->setVelocity(V);
     }
 }
 

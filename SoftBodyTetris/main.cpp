@@ -36,10 +36,20 @@ int main () {
     IEntity p1( fp1, new PointRenderer({0xFF, 0x00, 0x00}) );
     
     SoftBody* floor = new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100}, 1000);
-    floor->addPoint(new FixedPoint({-100, SCREEN_HEIGHT - 100}, 10))
-        .addPoint(new FixedPoint({SCREEN_WIDTH + 100, SCREEN_HEIGHT - 100}, 10))
+    floor->addPoint(new FixedPoint({-100, SCREEN_HEIGHT - 50}, 10))
+        .addPoint(new FixedPoint({SCREEN_WIDTH + 100, SCREEN_HEIGHT - 50}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 100, SCREEN_HEIGHT}, 10))
         .addPoint(new FixedPoint({-100, SCREEN_HEIGHT}, 10))
+        .connectPoints(0, 1)
+        .connectPoints(1, 2)
+        .connectPoints(2, 3)
+        .connectPoints(3, 0);
+    
+    SoftBody* ceiling = new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 50}, 1000);
+    ceiling->addPoint(new FixedPoint({-100, 50}, 10))
+        .addPoint(new FixedPoint({SCREEN_WIDTH + 100, 50}, 10))
+        .addPoint(new FixedPoint({SCREEN_WIDTH + 100, 0}, 10))
+        .addPoint(new FixedPoint({-100, 0}, 10))
         .connectPoints(0, 1)
         .connectPoints(1, 2)
         .connectPoints(2, 3)
@@ -66,11 +76,12 @@ int main () {
         .connectPoints(3, 0);
     
     std::vector<SoftBody*> rectList;
-    rectList.push_back(getSoftRect({360, 0}));
-    rectList.push_back(getSoftRect({410.1, 0}));
+    rectList.push_back(getSoftRect({100, 500}));
+    rectList.push_back(getSoftRect({100, 645}));
     
-    rectList.push_back(getSoftRect({385, 200}));
-    rectList.push_back(getSoftRect({435.1, 200}));
+    for (auto rect: rectList) {
+        rect->addForce({5000, 0});
+    }
     
     SDL_Event e;
     bool quit = false;
@@ -94,21 +105,23 @@ int main () {
 
                 p1.update( dt );
                 floor->update( dt );
+                ceiling->update( dt );
                 rightWall->update( dt );
                 leftWall->update( dt );
                     
                 for (auto& rect: rectList) {
-                    ForceAdder::addGravity(*rect);
-                    ForceAdder::addDamping(*rect);
+//                    ForceAdder::addGravity(*rect);
+//                    ForceAdder::addDamping(*rect);
                     
                     rect->update( dt );
                     rect->calcColide( floor );
+                    rect->calcColide( ceiling );
                     rect->calcColide( leftWall );
                     rect->calcColide( rightWall );
                     
                     for (auto& otherRect: rectList) {
                         if (rect == otherRect) continue;
-                        rect->calcColide(otherRect);
+                        rect->calcColide( otherRect );
                     }
                 }
             }
@@ -124,6 +137,7 @@ int main () {
                 window.renderBody(*rect);
             }
             window.renderBody(*floor);
+            window.renderBody(*ceiling);
             window.renderBody(*leftWall);
             window.renderBody(*rightWall);
             

@@ -43,6 +43,9 @@ public:
     DidColideResult didColide (IBody * b);
     void calcColide (IBody * b);
     
+    void addForce(Force F);
+    void setVelocity(Velocity V);
+    
     friend class ForceAdder;
     friend class Window;
 };

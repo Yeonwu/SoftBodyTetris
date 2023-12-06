@@ -29,6 +29,14 @@
       </ContextState>
       <ContextState
          contextName = "main:main.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "cur">
+            </PersistentString>
+            <PersistentString
+               value = "last_update">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "Spring::update():Spring.cpp">

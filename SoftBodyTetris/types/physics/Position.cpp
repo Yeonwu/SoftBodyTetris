@@ -56,12 +56,12 @@ void Position::operator /=( double n ) {
 }
 
 
-inline bool Position::operator==(const Position& other) const { return (x == other.x && y == other.y); }
-inline bool Position::operator!=(const Position& other) const { return !(*this == other); }
-inline bool Position::operator< (const Position& other) const { return (x < other.x || (x == other.x && y < other.y)); }
-inline bool Position::operator<=(const Position& other) const { return !(other < *this); }
-inline bool Position::operator> (const Position& other) const { return (other < *this); }
-inline bool Position::operator>=(const Position& other) const { return !(*this < other); }
+bool Position::operator==(const Position& other) const { return (x == other.x && y == other.y); }
+bool Position::operator!=(const Position& other) const { return !(*this == other); }
+bool Position::operator< (const Position& other) const { return (x < other.x || (x == other.x && y < other.y)); }
+bool Position::operator<=(const Position& other) const { return !(other < *this); }
+bool Position::operator> (const Position& other) const { return (other < *this); }
+bool Position::operator>=(const Position& other) const { return !(*this < other); }
 
 
 double Position::size() const {

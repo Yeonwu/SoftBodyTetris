@@ -8,10 +8,6 @@
 #include "IBody.hpp"
 #include "MassPoint.hpp"
 
-int crossProduct( Position a, Position b );
-int direction( Position a, Position b, Position c );
-bool isIntersect( Position pos0, Position pos1, Position pos2, Position pos3 );
-
 IBody::IBody(Position _pos): pos(_pos) {
     radius = 0;
 }
@@ -65,6 +61,8 @@ void IBody::update( Time_sec dt ) {
         }
     }
 }
+
+bool isIntersect( Position pos0, Position pos1, Position pos2, Position pos3 );
 
 DidColideResult IBody::didColide (IBody * b) {
     DidColideResult result = {false, };
@@ -167,20 +165,23 @@ void IBody::setVelocity(Velocity V) {
 }
 
 
-int crossProduct( Position a, Position b ) {
-    return ( a.x * b.y - a.y * b.x );
-}
+int ccw( Position a, Position b, Position c ) {
+    Vec2D ca( a.x - c.x, a.y - c.y );
+    Vec2D cb( b.x - c.x, b.y - c.y );
 
-int direction( Position a, Position b, Position c ) {
-    Position ca( a.x - c.x, a.y - c.y );
-    Position cb( b.x - c.x, b.y - c.y );
-
-    return (crossProduct(ca, cb) > 0) ? 1 : -1;
+    return (ca.cross(cb) > 0) ? 1 : -1;
 }
 
 bool isIntersect(Position pos0, Position pos1, Position pos2, Position pos3) {
-    return (
-            direction( pos0, pos1, pos2 ) * direction( pos0, pos1, pos3 ) < 0
-         && direction( pos2, pos3, pos0 ) * direction( pos2, pos3, pos1 ) < 0
-    );
+    int a = ccw( pos0, pos1, pos2 ) * ccw( pos0, pos1, pos3 );
+    int b = ccw( pos2, pos3, pos0 ) * ccw( pos2, pos3, pos1 );
+    
+    if ( a == 0 && b == 0 ) {
+        if (pos0 > pos1) std::swap(pos1, pos0);
+        if (pos2 > pos3) std::swap(pos2, pos3);
+        
+        return pos2 <= pos1 && pos0 <= pos3;
+    }
+    
+    return ( a <= 0 && b <= 0 );
 }

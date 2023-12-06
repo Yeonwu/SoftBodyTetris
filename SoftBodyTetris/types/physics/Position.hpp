@@ -31,12 +31,12 @@ public:
     void operator /=( double n );
     
     
-    inline bool operator==(const Position& other) const;
-    inline bool operator!=(const Position& other) const;
-    inline bool operator< (const Position& other) const;
-    inline bool operator<=(const Position& other) const;
-    inline bool operator> (const Position& other) const;
-    inline bool operator>=(const Position& other) const;
+    bool operator==(const Position& other) const;
+    bool operator!=(const Position& other) const;
+    bool operator< (const Position& other) const;
+    bool operator<=(const Position& other) const;
+    bool operator> (const Position& other) const;
+    bool operator>=(const Position& other) const;
     
     
     double size() const;

@@ -76,18 +76,20 @@ int main () {
         .connectPoints(3, 0);
     
     std::vector<SoftBody*> rectList;
-    rectList.push_back(getSoftRect({100, 500}));
-    rectList.push_back(getSoftRect({100, 645}));
-    
-    for (auto rect: rectList) {
-        rect->addForce({5000, 0});
-    }
+    rectList.push_back(getSoftRect({100, 545}, 30));
+    rectList.push_back(getSoftRect({160, 545}));
+    rectList.push_back(getSoftRect({220, 545}, 30));
+    rectList.push_back(getSoftRect({280, 545}));
+    rectList.push_back(getSoftRect({340, 545}, 30));
+    rectList.push_back(getSoftRect({400, 545}));
+    rectList.push_back(getSoftRect({460, 545}, 30));
+    rectList.push_back(getSoftRect({520, 545}));
     
     SDL_Event e;
     bool quit = false;
     Time_millis last_update = SDL_GetTicks64();
     
-    bool pause = false;
+    bool pause = true;
     
     while ( !quit ) {
         if (SDL_GetTicks() < last_update + 64) {
@@ -95,8 +97,8 @@ int main () {
             // input
             while ( SDL_PollEvent( &e ) ) {
                 if ( e.type == SDL_QUIT ) quit = true;
-                
                 if ( e.type == SDL_KEYDOWN ) pause = !pause;
+                
             }
             
             // update
@@ -110,8 +112,12 @@ int main () {
                 leftWall->update( dt );
                     
                 for (auto& rect: rectList) {
-//                    ForceAdder::addGravity(*rect);
+                    ForceAdder::addGravity(*rect);
 //                    ForceAdder::addDamping(*rect);
+                    
+                    if (rect == rectList.at(0)) {
+                        
+                    }
                     
                     rect->update( dt );
                     rect->calcColide( floor );

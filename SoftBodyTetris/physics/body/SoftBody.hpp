@@ -10,15 +10,20 @@
 
 #include <vector>
 #include "IPoint.hpp"
+#include "FixedPoint.hpp"
 #include "IConnector.hpp"
 #include "IBody.hpp"
 #include "Types.hpp"
 
 class SoftBody: public IBody {
+    std::vector<FixedPoint> shapePoints;
     double K;
     
 public:
     SoftBody(Position _pos, double _K);
+    
+    void update ( Time_sec dt ) override;
+    
     SoftBody& addPoint(IPoint * p);
     SoftBody& connectPoints(int idx1, int idx2);
     SoftBody& connectPoints(int idx1, int idx2, bool checkColide);

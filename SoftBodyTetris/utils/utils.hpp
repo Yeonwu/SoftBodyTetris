@@ -11,5 +11,6 @@
 #include "Types.hpp"
 
 Color HSVtoRGB(float H, float S,float V);
+Position rotate(Position pos, double angle);
 
 #endif /* utils_hpp */

@@ -14,6 +14,7 @@
 class MassPoint: public IPoint {
 private:
     Mass M;
+    Position oldPos;
     Position pos;
     Force F;
     Velocity V;

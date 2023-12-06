@@ -58,3 +58,10 @@ Color HSVtoRGB(float H, float S,float V) {
     return color;
 }
 
+Position rotate(Position pos, double angle) {
+    return {
+        pos.x * cos(angle) - pos.y * sin(angle),
+        pos.x * sin(angle) + pos.y * cos(angle)
+    };
+}
+

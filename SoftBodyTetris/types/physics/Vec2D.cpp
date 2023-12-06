@@ -31,6 +31,10 @@ double Vec2D::dot(const Vec2D& other) const {
     return x*other.x + y*other.y;
 }
 
+double Vec2D::cross(const Vec2D& other) const {
+    return ( x * other.y - y * other.x );
+}
+
 double Vec2D::size() const {
     return std::sqrt(x*x + y*y);
 }

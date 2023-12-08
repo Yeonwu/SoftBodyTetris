@@ -18,9 +18,11 @@ Position FixedPoint::getPosition() const {
     return pos;
 }
 
-void FixedPoint::setPosition(Position _pos) {
-    pos = _pos;
+Position FixedPoint::getOldPosition() const {
+    return pos;
 }
+
+void FixedPoint::setPosition(Position _pos) {}
 
 Velocity FixedPoint::getVelocity() const {
     return Velocity(0, 0);

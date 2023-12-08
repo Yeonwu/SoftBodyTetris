@@ -63,6 +63,7 @@ void IBody::update( Time_sec dt ) {
 }
 
 bool isIntersect( Position pos0, Position pos1, Position pos2, Position pos3 );
+int ccw( Position a, Position b, Position c );
 
 DidColideResult IBody::didColide (IBody * b) {
     DidColideResult result = {false, };
@@ -78,14 +79,17 @@ DidColideResult IBody::didColide (IBody * b) {
         int intersectCnt = 0;
         
         Position pos_p = p->getPosition();
+        Position pos_p_old = p->getOldPosition();
         
-        int mostCloseConnecterIdx = -1;
+        int colideConnecterIdx = -1;
         double minDistance = 10000000;
         
         for (int connectorIdx = 0; IConnector * c: connectors) {
             
             Position pos0 = c->getPoint(0)->getPosition();
             Position pos1 = c->getPoint(1)->getPosition();
+            Position pos0_old = c->getPoint(0)->getOldPosition();
+            Position pos1_old = c->getPoint(1)->getOldPosition();
             
             if (isIntersect(pos0, pos1, pos_p, pos_out)) {
                 intersectCnt += 1;
@@ -93,15 +97,27 @@ DidColideResult IBody::didColide (IBody * b) {
             
             if (minDistance > c -> distanceToPosition(pos_p)) {
                 minDistance = c -> distanceToPosition(pos_p);
-                mostCloseConnecterIdx = connectorIdx;
+                colideConnecterIdx = connectorIdx;
             }
+            // 아니면 그냥 이동 경로 - 현재 Connector, 이동 경로 - 과거 Connector 중 하나만 intersect하면 통과한거 아닌가?
+//            // Old line, position에 왼쪽, New line, position에 오른쪽일 경우 통과했다는 뜻.
+//            // 구현, 작성 필요함.
+//            int oldFlag = ccw(pos0_old, pos1_old, pos_p_old);
+//            int newFlag = ccw(pos0, pos1, pos_p);
+//            if ( oldFlag * newFlag < 0) {
+//                double oldDistance = c -> oldDistanceToPosition(pos_p_old);
+//                if (minDistance > oldDistance) {
+//                    minDistance = oldDistance;
+//                    colideConnecterIdx = connectorIdx;
+//                }
+//            }
             
             connectorIdx++;
         }
         
         if ((intersectCnt % 2) == 1) {
             result.didColide = true;
-            result.colidePairs.push_back(std::pair(pointIdx, mostCloseConnecterIdx));
+            result.colidePairs.push_back(std::pair(pointIdx, colideConnecterIdx));
         }
         
         pointIdx++;
@@ -114,6 +130,11 @@ void IBody::calcColide (IBody * b) {
     DidColideResult colisionCheckResult = didColide(b);
     if (colisionCheckResult.didColide == false) return;
     for (auto& colidePair: colisionCheckResult.colidePairs) {
+        if (colidePair.second == -1) {
+            printf("!!!!\n");
+            continue;
+        }
+        
         IConnector* c = b->getCheckColideConnectors().at(colidePair.second);
         
         IPoint* A = c->getPoint(0);
@@ -130,22 +151,23 @@ void IBody::calcColide (IBody * b) {
         else if ( U.prod(V) > V.prod(V) ) linePos = B->getPosition();
         else linePos = A->getPosition() + V * (V.prod(U) / V.prod(V));
         
-        
+        // Set position
         Position moveP = (linePos - P->getPosition());
-        moveP = moveP / moveP.size();
-        P->setPosition(P->getPosition() + moveP + moveP / moveP.size() / 100);
+        moveP = moveP / moveP.size() / 50;
+        Position mid = (linePos + P->getPosition()) / 2;
+        
+        P->setPosition(mid + moveP);
+        linePos = linePos - moveP;
         
         IPoint* linePoint = new MassPoint(linePos, A->getMass() + B->getMass());
         linePoint->setVelocity((A->getMass()*A->getVelocity() + B->getMass()*B->getVelocity()) / (A->getMass()+B->getMass()));
         
-        // Change position & velocity, Elastic collision.
+        // Change velocity, Elastic collision.
         IPoint::applyColision(P, linePoint);
         
         // Virtual linePoint -> Actual Points
-        Position dP = (linePoint->getPosition() - linePos) * 10;
-        
-        A -> setPosition(A->getPosition() + dP);
-        B -> setPosition(B->getPosition() + dP);
+        A -> setPosition(A->getPosition() - moveP);
+        B -> setPosition(B->getPosition() - moveP);
         
         A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
         B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );

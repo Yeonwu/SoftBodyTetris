@@ -73,19 +73,19 @@ int main () {
         .connectPoints(3, 0);
     
     std::vector<SoftBody*> rectList;
-    rectList.push_back(getSoftRect({100, 545}, 50));
+    rectList.push_back(getSoftRect({100, 545}, 10));
     rectList.push_back(getSoftRect({160, 545}));
-//    rectList.push_back(getSoftRect({220, 545}, 30));
-//    rectList.push_back(getSoftRect({280, 545}));
-//    rectList.push_back(getSoftRect({340, 545}, 30));
-//    rectList.push_back(getSoftRect({400, 545}));
-//    rectList.push_back(getSoftRect({460, 545}, 30));
-//    rectList.push_back(getSoftRect({520, 545}));
+    rectList.push_back(getSoftRect({220, 545}, 30));
+    rectList.push_back(getSoftRect({280, 545}));
+    rectList.push_back(getSoftRect({340, 545}, 30));
+    rectList.push_back(getSoftRect({400, 545}));
+    rectList.push_back(getSoftRect({460, 545}, 30));
+    rectList.push_back(getSoftRect({520, 545}));
     
-    FixedPoint* fp1 = new FixedPoint({100, 545});
+    MassPoint* fp1 = new MassPoint({100, 545}, 10);
     IEntity p1( fp1, new PointRenderer({0xFF, 0x00, 0x00}) );
     
-    ElasticConnector handle(rectList.at(0)->getPoints().at(0), fp1, 1000);
+//    ElasticConnector handle(rectList.at(0)->getPoints().at(0), fp1, 1000);
     
     SDL_Event e;
     bool quit = false;
@@ -112,6 +112,7 @@ int main () {
                 isMouseDown = true;
             } else if ( e.type == SDL_MOUSEBUTTONUP && isMouseDown ) {
                 isMouseDown = false;
+                rectList.push_back(getSoftRect(fp1->getPosition(), 30));
             } else if ( e.type == SDL_MOUSEMOTION && isMouseDown) {
                 fp1->setPosition({(double)e.button.x, (double)e.button.y});
             }
@@ -129,7 +130,7 @@ int main () {
             frame++;
             if (!pause) {
                 p1.update( dt );
-                handle.update( dt );
+//                handle.update( dt );
                 floor->update( dt );
                 ceiling->update( dt );
                 rightWall->update( dt );
@@ -139,7 +140,6 @@ int main () {
                     ForceAdder::addGravity(*rect);
                     ForceAdder::addDamping(*rect);
                     
-                    rect->update( dt );
                     rect->calcColide( floor );
                     rect->calcColide( ceiling );
                     rect->calcColide( leftWall );
@@ -149,6 +149,8 @@ int main () {
                         if (rect == otherRect) continue;
                         rect->calcColide( otherRect );
                     }
+                    
+                    rect->update( dt );
                 }
             }
         }
@@ -157,7 +159,7 @@ int main () {
         window.clear();
         
         p1.render();
-        window.renderConnector(handle);
+//        window.renderConnector(handle);
         
         for (auto& rect: rectList) {
             window.renderBody(*rect);

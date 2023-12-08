@@ -18,6 +18,7 @@ public:
     virtual Mass getMass() const = 0;
     
     virtual Position getPosition() const = 0;
+    virtual Position getOldPosition() const = 0;
     virtual void setPosition(Position _pos) = 0;
     
     virtual Velocity getVelocity() const = 0;

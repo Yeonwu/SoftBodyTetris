@@ -26,6 +26,7 @@ public:
     Mass getMass() const;
     
     Position getPosition() const;
+    Position getOldPosition() const;
     void setPosition(Position _pos);
     
     Velocity getVelocity() const;

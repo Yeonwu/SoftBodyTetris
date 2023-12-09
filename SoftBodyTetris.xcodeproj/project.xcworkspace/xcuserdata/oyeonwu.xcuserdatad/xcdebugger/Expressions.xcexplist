@@ -3,10 +3,16 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "FixedPoint::FixedPoint(Position, double):FixedPoint.cpp">
+         contextName = "Position::size():Types.hpp">
+      </ContextState>
+      <ContextState
+         contextName = "IPoint::applyColision(IPoint*, IPoint*):IPoint.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "main:main.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "IPoint::points">
+               value = "leftWall">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,44 +25,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Position::size():Types.hpp">
+         contextName = "Window::renderSpring(Spring const&amp;):Window.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "(pos0 - pos1)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "IBody::calcColide(IBody*):IBody.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "v.prod(v)">
-            </PersistentString>
-            <PersistentString
-               value = "u.prod(v)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Position::operator-(Position) const:Types.hpp">
-      </ContextState>
-      <ContextState
-         contextName = "main:main.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "cur">
-            </PersistentString>
-            <PersistentString
-               value = "last_update">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Spring::update():Spring.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "IPoint::applyColision(IPoint*, IPoint*):IPoint.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "Window::renderSpring(Spring const&amp;):Window.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "(pos0 - pos1)">
+               value = "V * (V.dot(UOld) / V.dot(V))">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -67,6 +47,23 @@
                value = "b-&gt;getPoints()">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Spring::update():Spring.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "MassPoint::updatePosition():MassPoint.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "FixedPoint::FixedPoint(Position, double):FixedPoint.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "IPoint::points">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Position::operator-(Position) const:Types.hpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

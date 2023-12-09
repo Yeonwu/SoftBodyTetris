@@ -35,9 +35,9 @@ const std::vector<IConnector *>& IBody::getCheckColideConnectors() const {
     return checkColideConnectors;
 }
 
-void IBody::update( Time_sec dt ) {
+void IBody::update() {
     for (IConnector *c: connectors) {
-        c -> update( dt );
+        c -> update();
     }
     
     
@@ -45,7 +45,7 @@ void IBody::update( Time_sec dt ) {
     Position CoM(0, 0);
     Mass totalM = 0;
     for (IPoint *p: points) {
-        p -> update( dt );
+        p -> update();
         CoM += p->getPosition() * p->getMass();
         totalM += p->getMass();
     }
@@ -125,9 +125,14 @@ DidColideResult IBody::didColide (IBody * b) {
     return result;
 }
 
+Position constrainDistance(Position& point, Position& anchor, double distance) {
+  return ((point - anchor).norm() * distance) + anchor;
+}
+
 void IBody::calcColide (IBody * b) {
     DidColideResult colisionCheckResult = didColide(b);
     if (colisionCheckResult.didColide == false) return;
+    
     for (auto& colidePair: colisionCheckResult.colidePairs) {
         if (colidePair.second == -1) {
             printf("!!!!\n");
@@ -156,20 +161,20 @@ void IBody::calcColide (IBody * b) {
         Position mid = (linePos + P->getPosition()) / 2;
         
         P->setPosition(mid + moveP);
-        linePos = linePos - moveP;
+//        linePos = linePos - moveP;
         
-        IPoint* linePoint = new MassPoint(linePos, A->getMass() + B->getMass());
-        linePoint->setVelocity((A->getMass()*A->getVelocity() + B->getMass()*B->getVelocity()) / (A->getMass()+B->getMass()));
-        
-        // Change velocity, Elastic collision.
-        IPoint::applyColision(P, linePoint);
+//        IPoint* linePoint = new MassPoint(linePos, A->getMass() + B->getMass());
+//        linePoint->setVelocity((A->getMass()*A->getVelocity() + B->getMass()*B->getVelocity()) / (A->getMass()+B->getMass()));
+//
+//        // Change velocity, Elastic collision.
+//        IPoint::applyColision(P, linePoint);
         
         // Virtual linePoint -> Actual Points
-        A -> setPosition(A->getPosition() - moveP);
-        B -> setPosition(B->getPosition() - moveP);
-        
-        A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
-        B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
+        A -> setPosition(A->getPosition() + mid - moveP - linePos);
+        B -> setPosition(B->getPosition() + mid - moveP - linePos);
+//
+//        A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
+//        B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
     }
 }
 

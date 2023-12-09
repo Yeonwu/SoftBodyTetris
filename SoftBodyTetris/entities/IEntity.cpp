@@ -33,6 +33,6 @@ void IEntity::render() {
     renderer -> render( physicsEntity, IEntity::SDLRenderer );
 }
 
-void IEntity::update( Time_sec dt ) {
-    physicsEntity -> update( dt );
+void IEntity::update() {
+    physicsEntity -> update();
 }

@@ -23,6 +23,7 @@ Position FixedPoint::getOldPosition() const {
 }
 
 void FixedPoint::setPosition(Position _pos) {}
+void FixedPoint::setOldPosition(Position _pos) {}
 
 Velocity FixedPoint::getVelocity() const {
     return {0, 0};
@@ -30,7 +31,7 @@ Velocity FixedPoint::getVelocity() const {
 
 void FixedPoint::setVelocity(Velocity _V) {}
 
-void FixedPoint::update( Time_sec dt ) {}
+void FixedPoint::update() {}
 
 bool FixedPoint::isMovable() const {
     return false;

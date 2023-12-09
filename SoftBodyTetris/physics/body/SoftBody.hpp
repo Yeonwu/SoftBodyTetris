@@ -22,7 +22,7 @@ class SoftBody: public IBody {
 public:
     SoftBody(Position _pos, double _K);
     
-    void update ( Time_sec dt ) override;
+    void update () override;
     
     SoftBody& addPoint(IPoint * p);
     SoftBody& connectPoints(int idx1, int idx2);

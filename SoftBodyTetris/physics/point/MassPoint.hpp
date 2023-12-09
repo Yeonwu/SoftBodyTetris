@@ -28,15 +28,16 @@ public:
     Position getPosition() const;
     Position getOldPosition() const;
     void setPosition(Position _pos);
+    void setOldPosition(Position _pos);
     
     Velocity getVelocity() const;
     void setVelocity(Velocity _V);
     
-    void update( Time_sec dt );
+    void update();
     bool isMovable() const;
     
-    void updatePosition( Time_sec dt );
-    void updateVelocity( Time_sec dt );
+    void updatePosition();
+    void updateVelocity();
     void addForce( Force _F );
 };
 

@@ -20,11 +20,12 @@ public:
     virtual Position getPosition() const = 0;
     virtual Position getOldPosition() const = 0;
     virtual void setPosition(Position _pos) = 0;
+    virtual void setOldPosition(Position _pos) = 0;
     
     virtual Velocity getVelocity() const = 0;
     virtual void setVelocity(Velocity _V) = 0;
     
-    virtual void update( Time_sec dt ) = 0;
+    virtual void update() = 0;
     virtual bool isMovable() const = 0;
     virtual void addForce( Force _F ) = 0;
     

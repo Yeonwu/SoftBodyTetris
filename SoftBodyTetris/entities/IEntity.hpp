@@ -28,7 +28,7 @@ public:
     IEntity& setRenderer( IRenderer* _renderer );
 
     void render();
-    void update( Time_sec dt );
+    void update();
 };
 
 #endif /* Entity_hpp */

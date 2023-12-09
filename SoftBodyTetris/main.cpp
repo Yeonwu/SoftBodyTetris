@@ -69,6 +69,11 @@ int main () {
         .connectPoints(2, 3)
         .connectPoints(3, 0);
     
+    floor->update();
+    ceiling->update();
+    rightWall->update();
+    leftWall->update();
+    
     std::vector<SoftBody*> rectList;
 //    rectList.push_back(getSoftRect({100, 545}, 10));
 //    rectList.push_back(getSoftRect({160, 545}));
@@ -89,9 +94,6 @@ int main () {
     
     Time_millis lastTimeAcc = SDL_GetTicks64();
     Time_millis acc = 0;
-    const Time_millis updateTimeGap = 1;
-    const Time_sec dt = (double)updateTimeGap / 1000;
-    
     Time_millis total_t = 0;
     long long frame = 0;
     
@@ -126,13 +128,6 @@ int main () {
             total_t += updateTimeGap;
             frame++;
             if (!pause) {
-                p1.update( dt );
-//                handle.update( dt );
-                floor->update( dt );
-                ceiling->update( dt );
-                rightWall->update( dt );
-                leftWall->update( dt );
-                
                 for (auto& rect: rectList) {
                     ForceAdder::addGravity(*rect);
                     ForceAdder::addDamping(*rect);
@@ -150,7 +145,7 @@ int main () {
                         rect->calcColide( otherRect );
                     }
                     
-                    rect->update( dt );
+                    rect->update();
                 }
             }
         }
@@ -172,7 +167,7 @@ int main () {
         window.update();
     }
     
-    printf("Total Times(millisec): %lld\n", total_t);
+    printf("Total Times(millisec): %lf\n", total_t);
     printf("Total Frmae: %lld\n", frame);
     
     delete floor;

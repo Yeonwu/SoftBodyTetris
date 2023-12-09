@@ -34,6 +34,7 @@ public:
     Vec2D proj(const Vec2D& other) const;
     
     double size() const;
+    Vec2D norm() const;
     double distanceTo(const Vec2D& other) const;
     
     bool operator==(const Vec2D& other) const;

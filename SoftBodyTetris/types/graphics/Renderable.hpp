@@ -10,7 +10,7 @@
 
 class Renderable {
 public:
-    virtual void update ( Time_sec dt ) = 0;
+    virtual void update() = 0;
 };
 
 

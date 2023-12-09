@@ -23,7 +23,7 @@ std::pair<Vec2D, Vec2D> getColisionVelocity(IPoint* A, IPoint* B) {
 }
 
 
-void IPoint::applyColision(IPoint* A, IPoint* B) {    
+void IPoint::applyColision(IPoint* A, IPoint* B) {
     auto vNew = getColisionVelocity(A, B);
     
     A->setVelocity({vNew.first.x, vNew.first.y});

@@ -34,17 +34,21 @@ void MassPoint::setPosition(Position _pos) {
     pos = _pos;
 }
 
+void MassPoint::setOldPosition(Position _pos) {
+    oldPos = _pos;
+}
+
 Velocity MassPoint::getVelocity() const {
-    return V;
+    return (pos - oldPos) / dt;
 }
 
 void MassPoint::setVelocity(Velocity _V) {
-    V = _V;
+    setPosition(_V * dt + pos);
 }
 
-void MassPoint::update( Time_sec dt ) {
-    updateVelocity( dt );
-    updatePosition( dt );
+void MassPoint::update() {
+    updateVelocity();
+    updatePosition();
     
     F.x = 0;
     F.y = 0;
@@ -54,13 +58,16 @@ bool MassPoint::isMovable() const {
     return true;
 }
 
-void MassPoint::updateVelocity( Time_sec dt ) {
+void MassPoint::updateVelocity() {
     V += F / M * dt;
 }
 
-void MassPoint::updatePosition( Time_sec dt ) {
-    oldPos = pos;
-    pos += V * dt;
+void MassPoint::updatePosition() {
+    Position curPos = pos;
+    pos = 2*curPos - oldPos + F / M * dt * dt;
+    oldPos = curPos;
+//    oldPos = pos;
+//    pos += V * dt;
 }
 
 void MassPoint::addForce( Force _F ) {

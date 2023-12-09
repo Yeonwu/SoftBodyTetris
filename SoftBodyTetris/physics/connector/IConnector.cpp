@@ -12,7 +12,7 @@ IPoint* IConnector::getPoint( int idx ) {
     return p[idx];
 }
 
-void IConnector::update( Time_sec dt ) {
+void IConnector::update() {
     
     Force p0F = calcForceTo(0, 1);
     Force p1F = calcForceTo(1, 0);

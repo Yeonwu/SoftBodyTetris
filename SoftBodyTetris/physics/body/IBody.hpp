@@ -32,7 +32,7 @@ public:
     IBody(Position _pos);
     ~IBody();
     
-    void update ( Time_sec dt );
+    void update ();
     
     Position getPosition() const;
     double getRadius() const;

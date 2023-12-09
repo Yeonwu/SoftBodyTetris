@@ -26,7 +26,7 @@ public:
     double distanceToPosition( const Position& pos ) const;
     double oldDistanceToPosition( const Position& pos ) const;
     
-    void update( Time_sec dt );
+    void update();
 };
 
 #endif /* IConnector_hpp */

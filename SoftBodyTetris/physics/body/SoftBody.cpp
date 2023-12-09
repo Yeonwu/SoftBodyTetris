@@ -8,6 +8,7 @@
 #include "SoftBody.hpp"
 #include "ElasticConnector.hpp"
 #include "FixedPoint.hpp"
+#include "MassPoint.hpp"
 #include "utils.hpp"
 #include <vector>
 
@@ -16,12 +17,12 @@ SoftBody::SoftBody(Position _pos, double _K):
     K(_K)
 {}
 
-void SoftBody::update ( Time_sec dt ) {
+void SoftBody::update () {
     radius = 0;
     Position CoM(0, 0);
     Mass totalM = 0;
     for (IPoint *p: points) {
-        p -> update( dt );
+        p -> update();
         CoM += p->getPosition() * p->getMass();
         totalM += p->getMass();
     }

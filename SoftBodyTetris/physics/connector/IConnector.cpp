@@ -25,10 +25,7 @@ void IConnector::update( Time_sec dt ) {
     }
 }
 
-double IConnector::distanceToPosition( const Position& pos ) const {
-    const Position& a = p[0] -> getPosition();
-    const Position& b = p[1] -> getPosition();
-    
+double calcDistanceToPosition ( const Position& pos, const Position& a, const Position& b) {
     double lineLen = a.distanceTo(b);
     if (lineLen == 0) return a.distanceTo(pos);
     
@@ -38,4 +35,18 @@ double IConnector::distanceToPosition( const Position& pos ) const {
     if (prj < 0) return a.distanceTo(pos);
     if (prj > lineLen) return b.distanceTo(pos);
     return abs( (pos.y - a.y) * (b.x - a.x) - (pos.x - a.x) * (b.y - a.y) ) / lineLen;
+}
+
+double IConnector::distanceToPosition( const Position& pos ) const {
+    const Position& a = p[0] -> getPosition();
+    const Position& b = p[1] -> getPosition();
+    
+    return calcDistanceToPosition(pos, a, b);
+}
+
+double IConnector::oldDistanceToPosition( const Position& pos ) const {
+    const Position& a = p[0] -> getOldPosition();
+    const Position& b = p[1] -> getOldPosition();
+    
+    return calcDistanceToPosition(pos, a, b);
 }

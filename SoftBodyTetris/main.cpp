@@ -19,10 +19,7 @@ SoftBody* getSoftRect(Position pos, double size=25) {
         .connectPoints(0, 1)
         .connectPoints(1, 2)
         .connectPoints(2, 3)
-        .connectPoints(3, 0)
-    
-        .connectPoints(0, 2, false, 1000.0)
-        .connectPoints(1, 3, false, 1000.0);
+        .connectPoints(3, 0);
     
     return softBody;
 }
@@ -73,14 +70,14 @@ int main () {
         .connectPoints(3, 0);
     
     std::vector<SoftBody*> rectList;
-    rectList.push_back(getSoftRect({100, 545}, 10));
-    rectList.push_back(getSoftRect({160, 545}));
-    rectList.push_back(getSoftRect({220, 545}, 30));
-    rectList.push_back(getSoftRect({280, 545}));
-    rectList.push_back(getSoftRect({340, 545}, 30));
-    rectList.push_back(getSoftRect({400, 545}));
-    rectList.push_back(getSoftRect({460, 545}, 30));
-    rectList.push_back(getSoftRect({520, 545}));
+//    rectList.push_back(getSoftRect({100, 545}, 10));
+//    rectList.push_back(getSoftRect({160, 545}));
+//    rectList.push_back(getSoftRect({220, 545}, 30));
+//    rectList.push_back(getSoftRect({280, 545}));
+//    rectList.push_back(getSoftRect({340, 545}, 30));
+//    rectList.push_back(getSoftRect({400, 545}));
+//    rectList.push_back(getSoftRect({460, 545}, 30));
+//    rectList.push_back(getSoftRect({520, 545}));
     
     MassPoint* fp1 = new MassPoint({100, 545}, 10);
     IEntity p1( fp1, new PointRenderer({0xFF, 0x00, 0x00}) );
@@ -92,7 +89,7 @@ int main () {
     
     Time_millis lastTimeAcc = SDL_GetTicks64();
     Time_millis acc = 0;
-    const Time_millis updateTimeGap = 2;
+    const Time_millis updateTimeGap = 1;
     const Time_sec dt = (double)updateTimeGap / 1000;
     
     Time_millis total_t = 0;
@@ -112,7 +109,7 @@ int main () {
                 isMouseDown = true;
             } else if ( e.type == SDL_MOUSEBUTTONUP && isMouseDown ) {
                 isMouseDown = false;
-                rectList.push_back(getSoftRect(fp1->getPosition(), 30));
+                rectList.push_back(getSoftRect(fp1->getPosition(), 47));
             } else if ( e.type == SDL_MOUSEMOTION && isMouseDown) {
                 fp1->setPosition({(double)e.button.x, (double)e.button.y});
             }
@@ -147,6 +144,9 @@ int main () {
                     
                     for (auto& otherRect: rectList) {
                         if (rect == otherRect) continue;
+                        if (rect->didColide( otherRect ).didColide) {
+                            rect->didColide( otherRect );
+                        }
                         rect->calcColide( otherRect );
                     }
                     

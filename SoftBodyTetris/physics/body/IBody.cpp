@@ -100,17 +100,16 @@ DidColideResult IBody::didColide (IBody * b) {
                 colideConnecterIdx = connectorIdx;
             }
             // 아니면 그냥 이동 경로 - 현재 Connector, 이동 경로 - 과거 Connector 중 하나만 intersect하면 통과한거 아닌가?
-//            // Old line, position에 왼쪽, New line, position에 오른쪽일 경우 통과했다는 뜻.
-//            // 구현, 작성 필요함.
-//            int oldFlag = ccw(pos0_old, pos1_old, pos_p_old);
-//            int newFlag = ccw(pos0, pos1, pos_p);
-//            if ( oldFlag * newFlag < 0) {
-//                double oldDistance = c -> oldDistanceToPosition(pos_p_old);
-//                if (minDistance > oldDistance) {
-//                    minDistance = oldDistance;
-//                    colideConnecterIdx = connectorIdx;
-//                }
-//            }
+            // Old line, position에 왼쪽, New line, position에 오른쪽일 경우 통과했다는 뜻.
+            bool oldFlag = isIntersect(pos0, pos1, pos_p, pos_p_old);
+            bool newFlag = isIntersect(pos0_old, pos1_old, pos_p, pos_p_old);
+            if ( !oldFlag && newFlag) {
+                double oldDistance = c -> oldDistanceToPosition(pos_p_old);
+                if (minDistance > oldDistance) {
+                    minDistance = oldDistance;
+                    colideConnecterIdx = connectorIdx;
+                }
+            }
             
             connectorIdx++;
         }
@@ -199,11 +198,11 @@ bool isIntersect(Position pos0, Position pos1, Position pos2, Position pos3) {
     int b = ccw( pos2, pos3, pos0 ) * ccw( pos2, pos3, pos1 );
     
     if ( a == 0 && b == 0 ) {
-        if (pos0 > pos1) std::swap(pos1, pos0);
-        if (pos2 > pos3) std::swap(pos2, pos3);
+//        if (pos0 > pos1) std::swap(pos1, pos0);
+//        if (pos2 > pos3) std::swap(pos2, pos3);
         
-        return pos2 <= pos1 && pos0 <= pos3;
+        return false;//pos2 <= pos1 && pos0 <= pos3;
     }
     
-    return ( a <= 0 && b <= 0 );
+    return ( a < 0 && b < 0 );
 }

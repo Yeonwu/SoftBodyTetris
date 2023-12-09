@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "FixedPoint::FixedPoint(Position, double):FixedPoint.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "IPoint::points">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "calcColisionVelocity(IPoint*, IPoint*):IPoint.cpp">
          <PersistentStrings>
             <PersistentString
@@ -49,6 +57,14 @@
          <PersistentStrings>
             <PersistentString
                value = "(pos0 - pos1)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "IBody::didColide(IBody*):IBody.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "b-&gt;getPoints()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

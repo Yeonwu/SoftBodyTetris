@@ -8,12 +8,21 @@
 #ifndef Types_h
 #define Types_h
 
-#include "Time.hpp"
-#include "Mass.hpp"
+#include <stdint.h>
+#include <limits>
+
 #include "Vec2D.hpp"
-#include "Position.hpp"
-#include "Velocity.hpp"
-#include "Force.hpp"
+
+typedef double Mass;
+extern const double MASS_MAX;
+
+typedef uint64_t Time_millis;
+typedef double Time_sec;
+
+typedef Vec2D Position;
+typedef Vec2D Velocity;
+typedef Vec2D Force;
+typedef Vec2D Acceleration;
 
 #include "Color.hpp"
 #include "Renderable.hpp"

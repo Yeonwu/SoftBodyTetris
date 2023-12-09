@@ -25,7 +25,7 @@ Position FixedPoint::getOldPosition() const {
 void FixedPoint::setPosition(Position _pos) {}
 
 Velocity FixedPoint::getVelocity() const {
-    return Velocity(0, 0);
+    return {0, 0};
 }
 
 void FixedPoint::setVelocity(Velocity _V) {}

@@ -5,6 +5,7 @@
 //  Created by 오연우 on 2023/11/03.
 //
 
+#include <cmath>
 #include "ElasticConnector.hpp"
 #define DAMPING_C 10.0
 

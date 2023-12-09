@@ -7,6 +7,7 @@
 
 #include "utils.hpp"
 #include "Types.hpp"
+#include <cmath>
 
 Color HSVtoRGB(float H, float S,float V) {
     if(H>360 || H<0 || S>100 || S<0 || V>100 || V<0){

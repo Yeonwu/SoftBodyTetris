@@ -146,9 +146,9 @@ void IBody::calcColide (IBody * b) {
         
         Position linePos(0, 0);
         // 수선의 발 계산
-        if ( U.prod(V) < 0 ) linePos = A->getPosition();
-        else if ( U.prod(V) > V.prod(V) ) linePos = B->getPosition();
-        else linePos = A->getPosition() + V * (V.prod(U) / V.prod(V));
+        if ( U.dot(V) < 0 ) linePos = A->getPosition();
+        else if ( U.dot(V) > V.dot(V) ) linePos = B->getPosition();
+        else linePos = A->getPosition() + V * (V.dot(U) / V.dot(V));
         
         // Set position
         Position moveP = (linePos - P->getPosition());

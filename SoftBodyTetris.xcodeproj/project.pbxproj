@@ -11,14 +11,10 @@
 		E33935332AE0E8E700CC9672 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33935322AE0E8E700CC9672 /* SDL2.framework */; };
 		E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF592AF4856C00A3F6C1 /* FixedPoint.cpp */; };
 		E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */; };
+		E35B77BD2B24546D0080F759 /* Types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77BB2B24546D0080F759 /* Types.cpp */; };
 		E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B29A72B0BA34700C8C568 /* IRenderer.cpp */; };
 		E36E31F42B184CAC00C5D9F7 /* IPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */; };
-		E36E31FB2B188C1A00C5D9F7 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E31F92B188C1A00C5D9F7 /* Position.cpp */; };
-		E36E32042B188D8400C5D9F7 /* Velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E32022B188D8400C5D9F7 /* Velocity.cpp */; };
-		E36E32072B188E1600C5D9F7 /* Force.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E32052B188E1600C5D9F7 /* Force.cpp */; };
 		E36E320C2B188E8900C5D9F7 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E320A2B188E8900C5D9F7 /* Color.cpp */; };
-		E36E32142B188F7D00C5D9F7 /* Mass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E32122B188F7D00C5D9F7 /* Mass.cpp */; };
-		E36E32172B18902800C5D9F7 /* Acceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E32152B18902800C5D9F7 /* Acceleration.cpp */; };
 		E36E321A2B1971A400C5D9F7 /* Vec2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E32182B1971A400C5D9F7 /* Vec2D.cpp */; };
 		E3B013F72AEA3DAB003C20E6 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3B013F52AEA3DAB003C20E6 /* Window.cpp */; };
 		E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3B013F82AEA45C5003C20E6 /* MassPoint.cpp */; };
@@ -53,25 +49,15 @@
 		E350FF5A2AF4856C00A3F6C1 /* FixedPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedPoint.hpp; sourceTree = "<group>"; };
 		E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ElasticConnector.cpp; sourceTree = "<group>"; };
 		E350FF5D2AF48ACA00A3F6C1 /* ElasticConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ElasticConnector.hpp; sourceTree = "<group>"; };
+		E35B77BB2B24546D0080F759 /* Types.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Types.cpp; sourceTree = "<group>"; };
+		E35B77BC2B24546D0080F759 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
 		E36B29A72B0BA34700C8C568 /* IRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IRenderer.cpp; sourceTree = "<group>"; };
 		E36B29A82B0BA34700C8C568 /* IRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderer.hpp; sourceTree = "<group>"; };
 		E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IPoint.cpp; sourceTree = "<group>"; };
 		E36E31F32B184CAC00C5D9F7 /* IPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IPoint.hpp; sourceTree = "<group>"; };
-		E36E31F62B188BD800C5D9F7 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
-		E36E31F92B188C1A00C5D9F7 /* Position.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Position.cpp; sourceTree = "<group>"; };
-		E36E31FA2B188C1A00C5D9F7 /* Position.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Position.hpp; sourceTree = "<group>"; };
-		E36E31FD2B188C5A00C5D9F7 /* Time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Time.hpp; sourceTree = "<group>"; };
-		E36E32022B188D8400C5D9F7 /* Velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Velocity.cpp; sourceTree = "<group>"; };
-		E36E32032B188D8400C5D9F7 /* Velocity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Velocity.hpp; sourceTree = "<group>"; };
-		E36E32052B188E1600C5D9F7 /* Force.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Force.cpp; sourceTree = "<group>"; };
-		E36E32062B188E1600C5D9F7 /* Force.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Force.hpp; sourceTree = "<group>"; };
 		E36E320A2B188E8900C5D9F7 /* Color.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		E36E320B2B188E8900C5D9F7 /* Color.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Color.hpp; sourceTree = "<group>"; };
 		E36E320E2B188EDC00C5D9F7 /* Renderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderable.hpp; sourceTree = "<group>"; };
-		E36E32122B188F7D00C5D9F7 /* Mass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mass.cpp; sourceTree = "<group>"; };
-		E36E32132B188F7D00C5D9F7 /* Mass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mass.hpp; sourceTree = "<group>"; };
-		E36E32152B18902800C5D9F7 /* Acceleration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Acceleration.cpp; sourceTree = "<group>"; };
-		E36E32162B18902800C5D9F7 /* Acceleration.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Acceleration.hpp; sourceTree = "<group>"; };
 		E36E32182B1971A400C5D9F7 /* Vec2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vec2D.cpp; sourceTree = "<group>"; };
 		E36E32192B1971A400C5D9F7 /* Vec2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec2D.hpp; sourceTree = "<group>"; };
 		E3B013F42AEA3D8F003C20E6 /* graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = graphics.hpp; sourceTree = "<group>"; };
@@ -179,7 +165,8 @@
 			children = (
 				E36E32092B188E7400C5D9F7 /* graphics */,
 				E36E32082B188E6500C5D9F7 /* physics */,
-				E36E31F62B188BD800C5D9F7 /* Types.hpp */,
+				E35B77BB2B24546D0080F759 /* Types.cpp */,
+				E35B77BC2B24546D0080F759 /* Types.hpp */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -187,17 +174,6 @@
 		E36E32082B188E6500C5D9F7 /* physics */ = {
 			isa = PBXGroup;
 			children = (
-				E36E31FD2B188C5A00C5D9F7 /* Time.hpp */,
-				E36E31F92B188C1A00C5D9F7 /* Position.cpp */,
-				E36E31FA2B188C1A00C5D9F7 /* Position.hpp */,
-				E36E32022B188D8400C5D9F7 /* Velocity.cpp */,
-				E36E32032B188D8400C5D9F7 /* Velocity.hpp */,
-				E36E32052B188E1600C5D9F7 /* Force.cpp */,
-				E36E32062B188E1600C5D9F7 /* Force.hpp */,
-				E36E32122B188F7D00C5D9F7 /* Mass.cpp */,
-				E36E32132B188F7D00C5D9F7 /* Mass.hpp */,
-				E36E32152B18902800C5D9F7 /* Acceleration.cpp */,
-				E36E32162B18902800C5D9F7 /* Acceleration.hpp */,
 				E36E32182B1971A400C5D9F7 /* Vec2D.cpp */,
 				E36E32192B1971A400C5D9F7 /* Vec2D.hpp */,
 			);
@@ -353,23 +329,19 @@
 				E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */,
 				E36E321A2B1971A400C5D9F7 /* Vec2D.cpp in Sources */,
 				E3F4617F2AF9FCE10078AE76 /* IConnector.cpp in Sources */,
-				E36E31FB2B188C1A00C5D9F7 /* Position.cpp in Sources */,
 				E3F03B582B12509C0080C2AE /* IEntity.cpp in Sources */,
 				E3F03B5E2B13365E0080C2AE /* ConnectorRenderer.cpp in Sources */,
 				E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */,
-				E36E32072B188E1600C5D9F7 /* Force.cpp in Sources */,
 				E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */,
 				E3F03B552B1248B70080C2AE /* PointRenderer.cpp in Sources */,
+				E35B77BD2B24546D0080F759 /* Types.cpp in Sources */,
 				E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */,
-				E36E32042B188D8400C5D9F7 /* Velocity.cpp in Sources */,
 				E3F03B622B1395390080C2AE /* utils.cpp in Sources */,
 				E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */,
 				E3B013F72AEA3DAB003C20E6 /* Window.cpp in Sources */,
 				E36E320C2B188E8900C5D9F7 /* Color.cpp in Sources */,
-				E36E32142B188F7D00C5D9F7 /* Mass.cpp in Sources */,
 				E36E31F42B184CAC00C5D9F7 /* IPoint.cpp in Sources */,
 				E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */,
-				E36E32172B18902800C5D9F7 /* Acceleration.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

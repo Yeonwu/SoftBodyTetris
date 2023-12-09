@@ -5,6 +5,7 @@
 //  Created by 오연우 on 2023/11/07.
 //
 
+#include <cmath>
 #include "IConnector.hpp"
 
 IPoint* IConnector::getPoint( int idx ) {

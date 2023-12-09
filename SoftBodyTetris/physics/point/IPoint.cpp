@@ -12,10 +12,10 @@ Vec2D calcColisionVelocity(Vec2D pa, Vec2D pb, Vec2D va, Vec2D vb, Mass ma, Mass
 }
 
 std::pair<Vec2D, Vec2D> getColisionVelocity(IPoint* A, IPoint* B) {
-    Vec2D pa(A->getPosition());
-    Vec2D pb(B->getPosition());
-    Vec2D va(A->getVelocity());
-    Vec2D vb(B->getVelocity());
+    Vec2D pa = A->getPosition();
+    Vec2D pb = B->getPosition();
+    Vec2D va = A->getVelocity();
+    Vec2D vb = B->getVelocity();
     Mass ma = A->getMass();
     Mass mb = B->getMass();
 

@@ -7,4 +7,4 @@
 
 #include "Mass.hpp"
 
-const double MASS_MAX = __DBL_MAX__;
+

@@ -6,6 +6,9 @@
          contextName = "Position::size():Types.hpp">
       </ContextState>
       <ContextState
+         contextName = "SoftBody::connectPoints(int, int, bool, double):SoftBody.cpp">
+      </ContextState>
+      <ContextState
          contextName = "IPoint::applyColision(IPoint*, IPoint*):IPoint.cpp">
       </ContextState>
       <ContextState
@@ -49,7 +52,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SoftBody::update():SoftBody.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "points.at(idx)-&gt;getPosition()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Spring::update():Spring.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "Window::renderPoint(IPoint const&amp;, _Color):Window.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "pos == p.getPosition()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Window::renderBody(IBody const&amp;, int):Window.cpp">
       </ContextState>
       <ContextState
          contextName = "MassPoint::updatePosition():MassPoint.cpp">

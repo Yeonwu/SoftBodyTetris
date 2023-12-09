@@ -71,44 +71,44 @@ DidColideResult IBody::didColide (IBody * b) {
         return result;
     }
     
-    std::vector<IConnector *> connectors = b -> getCheckColideConnectors();
+    Position pos_out({-100, -100});
+    Position pos_p;
+    Position pos_p_old;
+    Position pos0;
+    Position pos1;
+    Position pos0_old;
+    Position pos1_old;
     
-    Position pos_out({-1, -1});
+    int intersectCnt;
+    int colideConnecterIdx;
+    double minDistance;
+    double distance;
     
-    for (int pointIdx = 0; IPoint * p: points) {
-        int intersectCnt = 0;
+    int pointIdx, connectorIdx;
+    
+    for (pointIdx = 0; IPoint * p: points) {
+        intersectCnt = 0;
         
-        Position pos_p = p->getPosition();
-        Position pos_p_old = p->getOldPosition();
+        pos_p = p->getPosition();
+        pos_p_old = p->getOldPosition();
         
-        int colideConnecterIdx = -1;
-        double minDistance = 10000000;
+        colideConnecterIdx = -1;
+        minDistance = 10000000;
         
-        for (int connectorIdx = 0; IConnector * c: connectors) {
-            
-            Position pos0 = c->getPoint(0)->getPosition();
-            Position pos1 = c->getPoint(1)->getPosition();
-            Position pos0_old = c->getPoint(0)->getOldPosition();
-            Position pos1_old = c->getPoint(1)->getOldPosition();
+        for (connectorIdx = 0; IConnector * c: b -> getCheckColideConnectors()) {
+            pos0 = c->getPoint(0)->getPosition();
+            pos1 = c->getPoint(1)->getPosition();
+            pos0_old = c->getPoint(0)->getOldPosition();
+            pos1_old = c->getPoint(1)->getOldPosition();
             
             if (isIntersect(pos0, pos1, pos_p, pos_out)) {
                 intersectCnt += 1;
             }
             
-            if (minDistance > c -> distanceToPosition(pos_p)) {
-                minDistance = c -> distanceToPosition(pos_p);
+            distance = c -> distanceToPosition(pos_p);
+            if (minDistance > distance) {
+                minDistance = distance;
                 colideConnecterIdx = connectorIdx;
-            }
-            // 아니면 그냥 이동 경로 - 현재 Connector, 이동 경로 - 과거 Connector 중 하나만 intersect하면 통과한거 아닌가?
-            // Old line, position에 왼쪽, New line, position에 오른쪽일 경우 통과했다는 뜻.
-            bool oldFlag = isIntersect(pos0, pos1, pos_p, pos_p_old);
-            bool newFlag = isIntersect(pos0_old, pos1_old, pos_p, pos_p_old);
-            if ( !oldFlag && newFlag) {
-                double oldDistance = c -> oldDistanceToPosition(pos_p_old);
-                if (minDistance > oldDistance) {
-                    minDistance = oldDistance;
-                    colideConnecterIdx = connectorIdx;
-                }
             }
             
             connectorIdx++;
@@ -135,7 +135,6 @@ void IBody::calcColide (IBody * b) {
     
     for (auto& colidePair: colisionCheckResult.colidePairs) {
         if (colidePair.second == -1) {
-            printf("!!!!\n");
             continue;
         }
         
@@ -161,20 +160,10 @@ void IBody::calcColide (IBody * b) {
         Position mid = (linePos + P->getPosition()) / 2;
         
         P->setPosition(mid + moveP);
-//        linePos = linePos - moveP;
-        
-//        IPoint* linePoint = new MassPoint(linePos, A->getMass() + B->getMass());
-//        linePoint->setVelocity((A->getMass()*A->getVelocity() + B->getMass()*B->getVelocity()) / (A->getMass()+B->getMass()));
-//
-//        // Change velocity, Elastic collision.
-//        IPoint::applyColision(P, linePoint);
         
         // Virtual linePoint -> Actual Points
         A -> setPosition(A->getPosition() + mid - moveP - linePos);
         B -> setPosition(B->getPosition() + mid - moveP - linePos);
-//
-//        A -> setVelocity( A->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
-//        B -> setVelocity( B->getMass()/(A->getMass() + B->getMass()) * linePoint->getVelocity() );
     }
 }
 
@@ -192,10 +181,7 @@ void IBody::setVelocity(Velocity V) {
 
 
 int ccw( Position a, Position b, Position c ) {
-    Vec2D ca( a.x - c.x, a.y - c.y );
-    Vec2D cb( b.x - c.x, b.y - c.y );
-
-    return (ca.cross(cb) > 0) ? 1 : -1;
+    return ((a - c).cross(b - c) > 0) ? 1 : -1;
 }
 
 bool isIntersect(Position pos0, Position pos1, Position pos2, Position pos3) {
@@ -203,10 +189,7 @@ bool isIntersect(Position pos0, Position pos1, Position pos2, Position pos3) {
     int b = ccw( pos2, pos3, pos0 ) * ccw( pos2, pos3, pos1 );
     
     if ( a == 0 && b == 0 ) {
-//        if (pos0 > pos1) std::swap(pos1, pos0);
-//        if (pos2 > pos3) std::swap(pos2, pos3);
-        
-        return false;//pos2 <= pos1 && pos0 <= pos3;
+        return false;
     }
     
     return ( a < 0 && b < 0 );

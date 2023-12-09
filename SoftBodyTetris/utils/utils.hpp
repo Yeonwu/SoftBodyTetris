@@ -12,5 +12,6 @@
 
 Color HSVtoRGB(float H, float S,float V);
 Position rotate(Position pos, double angle);
+Position rotate(Position pos, double y, double x);
 
 #endif /* utils_hpp */

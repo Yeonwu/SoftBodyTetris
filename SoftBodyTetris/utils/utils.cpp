@@ -66,3 +66,15 @@ Position rotate(Position pos, double angle) {
     };
 }
 
+Position rotate(Position pos, double y, double x) {
+    double tmp = sqrt(y*y + x*x);
+    double sin = y / tmp;
+    double cos = x / tmp;
+    
+    return {
+        pos.x * cos - pos.y * sin,
+        pos.x * sin + pos.y * cos
+    };
+}
+
+

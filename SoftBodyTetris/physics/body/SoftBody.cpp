@@ -18,7 +18,6 @@ SoftBody::SoftBody(Position _pos, double _K):
 {}
 
 void SoftBody::update () {
-    radius = 0;
     Position CoM(0, 0);
     Mass totalM = 0;
     for (IPoint *p: points) {

@@ -12,20 +12,6 @@ IPoint* IConnector::getPoint( int idx ) {
     return p[idx];
 }
 
-void IConnector::update() {
-    
-    Force p0F = calcForceTo(0, 1);
-    Force p1F = calcForceTo(1, 0);
-    
-    if ( p[0] -> isMovable() ) {
-        p[0] -> addForce( p0F );
-    }
-    
-    if ( p[1] -> isMovable() ) {
-        p[1] -> addForce( p1F );
-    }
-}
-
 double calcDistanceToPosition ( const Position& pos, const Position& a, const Position& b) {
     double lineLen = a.distanceTo(b);
     if (lineLen == 0) return a.distanceTo(pos);

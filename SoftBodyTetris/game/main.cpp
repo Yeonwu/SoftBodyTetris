@@ -4,7 +4,8 @@
 #include "utils.hpp"
 #include "graphics.hpp"
 #include "physics.hpp"
-#include "IEntity.hpp"
+#include "entity.hpp"
+#include "engine.hpp"
 
 const int SCREEN_WIDTH = 400;
 const int SCREEN_HEIGHT = 800;
@@ -71,13 +72,29 @@ SoftBody* getSoftTetromino(Position pos, double size=25) {
     return NULL;
 }
 
+void softTetrominoRenderFunction(IBody* body, SDL_Renderer* renderer) {
+    for ( const IPoint* p: body->getPoints() ) {
+        Position pos = p->getPosition();
+        SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
+        
+        SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        SDL_RenderDrawRectF(renderer, &rect);
+    }
+    
+    for ( IConnector* c: body->getConnectors() ) {
+        Position pos0 = c->getPoint(0)->getPosition();
+        Position pos1 = c->getPoint(1)->getPosition();
+        
+        SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos1.x, pos1.y);
+    }
+}
+
 int main () {
-    Window window( SCREEN_WIDTH, SCREEN_HEIGHT );
+    Engine::init();
     
-    IEntity::setSDLRenderer(window.renderer);
-    
-    SoftBody* floor = new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100}, 1000);
-    floor->addPoint(new FixedPoint({-100, SCREEN_HEIGHT + 50}, 10))
+    Entity floor(new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100}, 1000), ENTITY_COLLIDABLE | ENTITY_GRAVITY, &softTetrominoRenderFunction);
+    floor.getBody()->addPoint(new FixedPoint({-100, SCREEN_HEIGHT + 50}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 100, SCREEN_HEIGHT + 50}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 100, SCREEN_HEIGHT}, 10))
         .addPoint(new FixedPoint({-100, SCREEN_HEIGHT}, 10))
@@ -116,103 +133,29 @@ int main () {
         .connectPoints(2, 3)
         .connectPoints(3, 0);
     
-    floor->update();
-    ceiling->update();
-    rightWall->update();
-    leftWall->update();
+    new Entity(
+               getSoftTetromino({100, 100}, 40),
+               ENTITY_COLLIDABLE | ENTITY_GRAVITY | ENTITY_DAMPING,
+               &softTetrominoRenderFunction
+               );
     
-    std::vector<SoftBody*> rectList;
+    Engine::addEventHandler(SDL_KEYDOWN, [](SDL_Event& event)->void {
+        Engine::pauseUpdate();
+    });
     
-    MassPoint* fp1 = new MassPoint({100, 545}, 10);
-    IEntity p1( fp1, new PointRenderer({0xFF, 0x00, 0x00}) );
+    Engine::addEventHandler(SDL_KEYUP, [](SDL_Event& event)->void {
+        Engine::restartUpdate();
+    });
     
-    SDL_Event e;
-    bool quit = false;
+    Engine::addEventHandler(SDL_MOUSEBUTTONUP, [](SDL_Event& event)->void {
+        new Entity(
+                   getSoftTetromino({(double)event.button.x, (double)event.button.y}, 40),
+                   ENTITY_COLLIDABLE | ENTITY_GRAVITY | ENTITY_DAMPING,
+                   &softTetrominoRenderFunction
+                   );
+    });
     
-    Time_millis lastTimeAcc = SDL_GetTicks64();
-    Time_millis curTime = SDL_GetTicks64();
-    
-    Time_millis lastRender = 0;
-    const Time_millis msPerFrame = 32;
-    
-    Time_millis acc = 0;
-    Time_millis total_t = 0;
-    long long frame = 0;
-    
-    bool pause = true;
-    bool isMouseDown = false;
-    
-    while ( !quit ) {
-        // input
-        while ( SDL_PollEvent( &e ) ) {
-            if ( e.type == SDL_QUIT ) {
-                quit = true;
-            } else if ( e.type == SDL_KEYDOWN ) {
-                pause = !pause;
-            } else if ( e.type == SDL_MOUSEBUTTONDOWN && !isMouseDown ) {
-                isMouseDown = true;
-            } else if ( e.type == SDL_MOUSEBUTTONUP && isMouseDown ) {
-                isMouseDown = false;
-                rectList.push_back(getSoftTetromino(fp1->getPosition(), 20));
-            } else if ( e.type == SDL_MOUSEMOTION && isMouseDown) {
-                fp1->setPosition({(double)e.button.x, (double)e.button.y});
-            }
-        }
-        
-        curTime = SDL_GetTicks64();
-        acc += curTime - lastTimeAcc;
-        lastTimeAcc = curTime;
-        
-        if (acc >= updateTimeGap) {
-            printf("%lf\n", acc);
-        }
-        // update
-        while ( acc >= updateTimeGap || lastRender + msPerFrame > SDL_GetTicks()) {
-            acc -= updateTimeGap;
-            total_t += updateTimeGap;
-            frame++;
-            if (!pause) {
-                for (auto& rect: rectList) {
-                    rect->update();
-                    
-                    ForceAdder::addGravity(*rect);
-                    ForceAdder::addDamping(*rect);
-                    
-                    rect->calcColide( floor );
-                    rect->calcColide( ceiling );
-                    rect->calcColide( leftWall );
-                    rect->calcColide( rightWall );
-                    
-                    for (auto& otherRect: rectList) {
-                        if (rect == otherRect) continue;
-                        rect->calcColide( otherRect );
-                    }
-                }
-            }
-        }
-            
-        // render
-        window.clear();
-        
-        p1.render();
-        
-        for (auto& rect: rectList) {
-            window.renderBody(*rect);
-        }
-        
-        window.update();
-    }
-    
-    printf("Total Times(millisec): %lf\n", total_t);
-    printf("Total Frmae: %lld\n", frame);
-    
-    delete floor;
-    delete leftWall;
-    delete rightWall;
-    
-    for (auto& rectEntity: rectList) {
-        delete rectEntity;
-    }
+    Engine::startLoop();
     
     return 0;
 }

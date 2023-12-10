@@ -12,10 +12,6 @@ IBody::IBody(Position _pos): pos(_pos) {
     radius = 0;
 }
 
-IBody::~IBody() {
-    
-}
-
 Position IBody::getPosition() const {
     return pos;
 }
@@ -123,10 +119,6 @@ DidColideResult IBody::didColide (IBody * b) {
     }
     
     return result;
-}
-
-Position constrainDistance(Position& point, Position& anchor, double distance) {
-  return ((point - anchor).norm() * distance) + anchor;
 }
 
 void IBody::calcColide (IBody * b) {

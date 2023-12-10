@@ -21,14 +21,15 @@ class SoftBody: public IBody {
     
 public:
     SoftBody(Position _pos, double _K);
+    ~SoftBody();
     
     void update () override;
     
-    SoftBody& addPoint(IPoint * p);
-    SoftBody& connectPoints(int idx1, int idx2);
-    SoftBody& connectPoints(int idx1, int idx2, bool checkColide);
-    SoftBody& connectPoints(int idx1, int idx2, double _K);
-    SoftBody& connectPoints(int idx1, int idx2, bool checkColide, double _K );
+    IBody& addPoint(IPoint * p) override;
+    IBody& connectPoints(int idx1, int idx2) override;
+    IBody& connectPoints(int idx1, int idx2, bool checkColide) override;
+    IBody& connectPoints(int idx1, int idx2, double _K);
+    IBody& connectPoints(int idx1, int idx2, bool checkColide, double _K );
 };
 
 #endif /* SoftBody_hpp */

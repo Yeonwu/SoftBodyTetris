@@ -52,8 +52,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Entity::update():entity.cpp">
+      </ContextState>
+      <ContextState
          contextName = "SoftBody::update():SoftBody.cpp">
          <PersistentStrings>
+            <PersistentString
+               value = "CoM">
+            </PersistentString>
             <PersistentString
                value = "points.at(idx)-&gt;getPosition()">
             </PersistentString>

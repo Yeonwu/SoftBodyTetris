@@ -12,6 +12,8 @@
 		E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF592AF4856C00A3F6C1 /* FixedPoint.cpp */; };
 		E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E350FF5C2AF48ACA00A3F6C1 /* ElasticConnector.cpp */; };
 		E35B77BD2B24546D0080F759 /* Types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77BB2B24546D0080F759 /* Types.cpp */; };
+		E35B77C22B25A9D40080F759 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77C02B25A9D40080F759 /* engine.cpp */; };
+		E35B77C62B25ACFD0080F759 /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77C42B25ACFD0080F759 /* entity.cpp */; };
 		E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B29A72B0BA34700C8C568 /* IRenderer.cpp */; };
 		E36E31F42B184CAC00C5D9F7 /* IPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */; };
 		E36E320C2B188E8900C5D9F7 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E320A2B188E8900C5D9F7 /* Color.cpp */; };
@@ -22,7 +24,6 @@
 		E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF336F2B07A859001B6B20 /* IBody.cpp */; };
 		E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF33722B07A861001B6B20 /* SoftBody.cpp */; };
 		E3F03B552B1248B70080C2AE /* PointRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B532B1248B70080C2AE /* PointRenderer.cpp */; };
-		E3F03B582B12509C0080C2AE /* IEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B562B12509C0080C2AE /* IEntity.cpp */; };
 		E3F03B5B2B13331B0080C2AE /* BodyRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B592B13331B0080C2AE /* BodyRenderer.cpp */; };
 		E3F03B5E2B13365E0080C2AE /* ConnectorRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B5C2B13365E0080C2AE /* ConnectorRenderer.cpp */; };
 		E3F03B622B1395390080C2AE /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B602B1395390080C2AE /* utils.cpp */; };
@@ -51,6 +52,10 @@
 		E350FF5D2AF48ACA00A3F6C1 /* ElasticConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ElasticConnector.hpp; sourceTree = "<group>"; };
 		E35B77BB2B24546D0080F759 /* Types.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Types.cpp; sourceTree = "<group>"; };
 		E35B77BC2B24546D0080F759 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
+		E35B77C02B25A9D40080F759 /* engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
+		E35B77C12B25A9D40080F759 /* engine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine.hpp; sourceTree = "<group>"; };
+		E35B77C42B25ACFD0080F759 /* entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entity.cpp; sourceTree = "<group>"; };
+		E35B77C52B25ACFD0080F759 /* entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = entity.hpp; sourceTree = "<group>"; };
 		E36B29A72B0BA34700C8C568 /* IRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IRenderer.cpp; sourceTree = "<group>"; };
 		E36B29A82B0BA34700C8C568 /* IRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderer.hpp; sourceTree = "<group>"; };
 		E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IPoint.cpp; sourceTree = "<group>"; };
@@ -74,8 +79,6 @@
 		E3EF33732B07A861001B6B20 /* SoftBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SoftBody.hpp; sourceTree = "<group>"; };
 		E3F03B532B1248B70080C2AE /* PointRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointRenderer.cpp; sourceTree = "<group>"; };
 		E3F03B542B1248B70080C2AE /* PointRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointRenderer.hpp; sourceTree = "<group>"; };
-		E3F03B562B12509C0080C2AE /* IEntity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IEntity.cpp; sourceTree = "<group>"; };
-		E3F03B572B12509C0080C2AE /* IEntity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IEntity.hpp; sourceTree = "<group>"; };
 		E3F03B592B13331B0080C2AE /* BodyRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BodyRenderer.cpp; sourceTree = "<group>"; };
 		E3F03B5A2B13331B0080C2AE /* BodyRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BodyRenderer.hpp; sourceTree = "<group>"; };
 		E3F03B5C2B13365E0080C2AE /* ConnectorRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectorRenderer.cpp; sourceTree = "<group>"; };
@@ -118,12 +121,8 @@
 		E339351F2AE0E1EA00CC9672 /* SoftBodyTetris */ = {
 			isa = PBXGroup;
 			children = (
-				E36E31F82B188BFC00C5D9F7 /* types */,
-				E3F03B5F2B13952D0080C2AE /* utils */,
-				E36B299B2B0B93D200C8C568 /* entities */,
-				E3B013F32AEA3D71003C20E6 /* graphics */,
-				E3B013F22AEA3D58003C20E6 /* physics */,
-				E33935202AE0E1EA00CC9672 /* main.cpp */,
+				E35B77BF2B25A9C10080F759 /* game */,
+				E35B77BE2B25A96A0080F759 /* engine */,
 			);
 			path = SoftBodyTetris;
 			sourceTree = "<group>";
@@ -136,13 +135,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E36B299B2B0B93D200C8C568 /* entities */ = {
+		E35B77BE2B25A96A0080F759 /* engine */ = {
 			isa = PBXGroup;
 			children = (
-				E3F03B562B12509C0080C2AE /* IEntity.cpp */,
-				E3F03B572B12509C0080C2AE /* IEntity.hpp */,
+				E35B77C32B25ACED0080F759 /* entity */,
+				E36E31F82B188BFC00C5D9F7 /* types */,
+				E3F03B5F2B13952D0080C2AE /* utils */,
+				E3B013F32AEA3D71003C20E6 /* graphics */,
+				E3B013F22AEA3D58003C20E6 /* physics */,
+				E35B77C02B25A9D40080F759 /* engine.cpp */,
+				E35B77C12B25A9D40080F759 /* engine.hpp */,
 			);
-			path = entities;
+			path = engine;
+			sourceTree = "<group>";
+		};
+		E35B77BF2B25A9C10080F759 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				E33935202AE0E1EA00CC9672 /* main.cpp */,
+			);
+			path = game;
+			sourceTree = "<group>";
+		};
+		E35B77C32B25ACED0080F759 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				E35B77C42B25ACFD0080F759 /* entity.cpp */,
+				E35B77C52B25ACFD0080F759 /* entity.hpp */,
+			);
+			path = entity;
 			sourceTree = "<group>";
 		};
 		E36B299F2B0B946A00C8C568 /* renderer */ = {
@@ -323,13 +344,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E35B77C62B25ACFD0080F759 /* entity.cpp in Sources */,
 				E3F03B5B2B13331B0080C2AE /* BodyRenderer.cpp in Sources */,
+				E35B77C22B25A9D40080F759 /* engine.cpp in Sources */,
 				E3EF33692B079B94001B6B20 /* ForceAdder.cpp in Sources */,
 				E33935212AE0E1EA00CC9672 /* main.cpp in Sources */,
 				E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */,
 				E36E321A2B1971A400C5D9F7 /* Vec2D.cpp in Sources */,
 				E3F4617F2AF9FCE10078AE76 /* IConnector.cpp in Sources */,
-				E3F03B582B12509C0080C2AE /* IEntity.cpp in Sources */,
 				E3F03B5E2B13365E0080C2AE /* ConnectorRenderer.cpp in Sources */,
 				E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */,
 				E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */,
@@ -468,6 +490,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				GCC_OPTIMIZATION_LEVEL = fast;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/opt/homebrew/Cellar/sdl2/2.28.4/include/**",
@@ -487,6 +510,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				GCC_OPTIMIZATION_LEVEL = fast;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/opt/homebrew/Cellar/sdl2/2.28.4/include/**",

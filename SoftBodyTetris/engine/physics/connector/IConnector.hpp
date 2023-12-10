@@ -16,8 +16,11 @@ protected:
     IPoint *p[2];
     
 public:
+    virtual ~IConnector() = default;
     
     IPoint* getPoint( int idx );
+    
+    virtual void update() = 0;
     
     virtual double getLength() const = 0;
     
@@ -25,8 +28,6 @@ public:
     
     double distanceToPosition( const Position& pos ) const;
     double oldDistanceToPosition( const Position& pos ) const;
-    
-    void update();
 };
 
 #endif /* IConnector_hpp */

@@ -26,6 +26,21 @@ ElasticConnector::ElasticConnector(IPoint* _p0, IPoint * _p1, double _length, do
     p[1] = _p1;
 }
 
+void ElasticConnector::update() {
+    
+    Force p0F = calcForceTo(0, 1);
+    Force p1F = -1 * p0F;
+    
+    if ( p[0] -> isMovable() ) {
+        p[0] -> addForce( p0F );
+    }
+    
+    if ( p[1] -> isMovable() ) {
+        p[1] -> addForce( p1F );
+    }
+}
+
+
 Force ElasticConnector::calcForceTo( int idx, int otherIdx ) {
     Position p0Pos = p[idx] -> getPosition();
     Position p1Pos = p[otherIdx] -> getPosition();

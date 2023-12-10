@@ -17,6 +17,15 @@ SoftBody::SoftBody(Position _pos, double _K):
     K(_K)
 {}
 
+SoftBody::~SoftBody() {
+    for (IPoint *p: points) {
+        delete p;
+    }
+    for (IConnector *c: connectors) {
+        delete c;
+    }
+}
+
 void SoftBody::update () {
     Position CoM(0, 0);
     Mass totalM = 0;
@@ -58,7 +67,7 @@ void SoftBody::update () {
     }
 }
 
-SoftBody& SoftBody::addPoint(IPoint * p) {
+IBody& SoftBody::addPoint(IPoint * p) {
     
     points.push_back(p);
     shapePoints.push_back({p->getPosition() - pos});
@@ -66,19 +75,19 @@ SoftBody& SoftBody::addPoint(IPoint * p) {
     return *this;
 }
 
-SoftBody& SoftBody::connectPoints(int idx1, int idx2) {
+IBody& SoftBody::connectPoints(int idx1, int idx2) {
     return connectPoints(idx1, idx2, true, K);
 }
 
-SoftBody& SoftBody::connectPoints(int idx1, int idx2, double _K) {
+IBody& SoftBody::connectPoints(int idx1, int idx2, double _K) {
     return connectPoints(idx1, idx2, true, _K);
 }
 
-SoftBody& SoftBody::connectPoints(int idx1, int idx2, bool checkColide) {
+IBody& SoftBody::connectPoints(int idx1, int idx2, bool checkColide) {
     return connectPoints(idx1, idx2, checkColide, K);
 }
 
-SoftBody& SoftBody::connectPoints(int idx1, int idx2, bool checkColide, double _K) {
+IBody& SoftBody::connectPoints(int idx1, int idx2, bool checkColide, double _K) {
     ElasticConnector* ec = new ElasticConnector(points.at(idx1), points.at(idx2), _K);
     
     if (checkColide) {

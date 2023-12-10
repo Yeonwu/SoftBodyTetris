@@ -77,4 +77,8 @@ Position rotate(Position pos, double y, double x) {
     };
 }
 
+Position constrainDistance(Position& point, Position& anchor, double distance) {
+  return ((point - anchor).norm() * distance) + anchor;
+}
+
 

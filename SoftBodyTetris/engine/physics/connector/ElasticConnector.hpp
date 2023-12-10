@@ -20,9 +20,10 @@ public:
     ElasticConnector(IPoint* _p0, IPoint * _p1, double _K);
     ElasticConnector(IPoint* _p0, IPoint * _p1, double _length, double _K);
     
-    double getLength() const;
+    void update() override;
+    double getLength() const override;
     
-    Force calcForceTo( int idx, int otherIdx );
+    Force calcForceTo( int idx, int otherIdx ) override;
 };
 
 #endif /* ElasticConnector_hpp */

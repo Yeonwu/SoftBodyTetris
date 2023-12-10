@@ -9,5 +9,5 @@
 
 const double MASS_MAX = __DBL_MAX__;
 
-const Time_sec updateTimeGap = 1;
+const Time_sec updateTimeGap = 2;
 const Time_millis dt = (double)updateTimeGap / 1000;

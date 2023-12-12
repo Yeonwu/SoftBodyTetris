@@ -8,14 +8,16 @@
 #include "Tetromino.hpp"
 #include <random>
 
-SoftBody* getSoftTetromino(Position pos, double size) {
+Entity* createTetrominoEntity(Position pos, int key) {
+    IBody* tetromino = getSoftTetromino(pos, 40, key);
+    TetrominoRenderer* renderer = new TetrominoRenderer(key, HSVtoRGB(rand()%360, 100, 100));
     
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dis(0, 6);
-    
+    return new Entity( tetromino, ENTITY_COLLIDABLE | ENTITY_GRAVITY | ENTITY_DAMPING, renderer );
+}
+
+SoftBody* getSoftTetromino(Position pos, double size, int key) {
     SoftBody* softBody;
-    switch (dis(gen)) {
+    switch (key) {
         // ###
         // #
         case 0:
@@ -74,7 +76,7 @@ SoftBody* getSoftTetromino(Position pos, double size) {
             .connectPoints(9, 0);
             return softBody;
         // ###
-        // #
+        //  #
         case 2:
             softBody = new SoftBody({pos.x, pos.y - size*0.2}, 10000);
             softBody->
@@ -225,24 +227,30 @@ SoftBody* getSoftTetromino(Position pos, double size) {
     return NULL;
 }
 
-void softTetrominoRenderFunction(IBody* body, SDL_Renderer* renderer) {
-    for ( const IPoint* p: body->getPoints() ) {
-        Position pos = p->getPosition();
-        SDL_FRect rect = {(float)pos.x - 3, (float)pos.y - 3, 6, 6};
-        
-        SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
-        SDL_RenderDrawRectF(renderer, &rect);
+TetrominoRenderer::TetrominoRenderer( int key, Color color ): Renderer(color) {
+    switch (key) {
+        case 0:
+            polygonIdx = {0, 1, 4, 1, 4, 5, 1, 2, 5, 2, 5, 6, 3, 2, 6, 3, 6, 7, 4, 5, 8, 5, 8, 9};
+            break;
+        case 1:
+            polygonIdx = {0, 4, 5, 5, 9, 0};
+            break;
+        case 2:
+            polygonIdx = {0, 1, 4, 1, 4, 5, 1, 2, 5, 2, 5, 6, 3, 2, 6, 3, 6, 7, 5, 6, 9, 5, 8, 9};
+            break;
+        case 3:
+            polygonIdx = {0, 1, 4, 1, 4, 5, 1, 2, 5, 2, 5, 6, 3, 4, 8, 3, 7, 8, 4, 5, 9, 4, 8, 9};
+            break;
+        case 4:
+            polygonIdx = {0, 1, 4, 0, 3, 4, 1, 2, 5, 1, 4, 5, 4, 5, 8, 4, 7, 8, 5, 6, 9, 5, 8, 9};
+            break;
+        case 5:
+            polygonIdx = {0, 2, 7, 0, 5, 7};
+            break;
+        case 6:
+            polygonIdx = {0, 1, 4, 1, 4, 5, 1, 2, 5, 2, 5, 6, 3, 2, 6, 3, 6, 7, 6, 7, 9, 6, 8, 9};
+            break;
+        default:
+            break;
     }
-    
-    for ( IConnector* c: body->getConnectors() ) {
-        Position pos0 = c->getPoint(0)->getPosition();
-        Position pos1 = c->getPoint(1)->getPosition();
-        
-        SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
-        SDL_RenderDrawLine( renderer, pos0.x, pos0.y, pos1.x, pos1.y);
-    }
-}
-
-Entity* createTetrominoEntity(Position pos) {
-    return new Entity(getSoftTetromino(pos, 40), ENTITY_COLLIDABLE | ENTITY_GRAVITY | ENTITY_DAMPING, &softTetrominoRenderFunction);
 }

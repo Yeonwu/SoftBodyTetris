@@ -12,9 +12,24 @@
 #include "physics.hpp"
 #include "Types.hpp"
 #include "entity.hpp"
+#include "utils.hpp"
 #include <vector>
 
-using EventHandler = void (*) (SDL_Event&);
+class EventHandler {
+private:
+public:
+    virtual void handleFunction(SDL_Event & event) = 0;
+};
+
+class DefaultQuitEventHandler: public EventHandler {
+public:
+    void handleFunction(SDL_Event & event);
+};
+
+enum Engine_EventType {
+    PHYSICS_UPDATE,
+    RENDER_UPDATE
+};
 
 class Engine {
 private:
@@ -33,15 +48,21 @@ private:
     static Time_millis total_t;
     
     
-    static std::vector<std::pair<SDL_EventType, std::vector<EventHandler>>> eventHandlers;
+    static std::vector<std::pair<SDL_EventType, std::vector<EventHandler*>>> eventHandlers;
     static void handleEvent(SDL_Event& event);
+
     
 public:
     static void init();
+    
     static void startLoop();
+    static void escapeLoop();
+    
     static void pauseUpdate();
     static void restartUpdate();
-    static void addEventHandler(SDL_EventType eventType, EventHandler handler);
+    
+    static void addEventHandler(SDL_EventType eventType, EventHandler* handler);
+    static void addEventHandler(Engine_EventType eventType, EventHandler* handler);
 };
 
 #endif /* engine_hpp */

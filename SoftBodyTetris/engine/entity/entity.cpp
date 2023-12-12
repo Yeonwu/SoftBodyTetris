@@ -32,24 +32,32 @@ void Entity::update() {
 void Entity::render() {
     window->clear();
     for (auto entity: allEntities) {
-        entity->renderFunction(entity->body, Entity::window->renderer);
+        if ( entity->renderer != NULL ) {
+            entity->renderer->render(entity->body, Entity::window->renderer);
+        }
     }
     window->update();
 }
 
 
-Entity::Entity(IBody* _body, int flag, RenderFunction _renderFunction): body(_body), renderFunction(_renderFunction) {
+Entity::Entity(IBody* _body, int flag, Renderer* _renderer): body(_body), renderer(_renderer) {
     gravity = flag & ENTITY_GRAVITY;
     damping = flag & ENTITY_DAMPING;
-    
+    isCollidable = flag & ENTITY_COLLIDABLE;
+    isActivated = false;
+}
+
+int Entity::activate() {
     Entity::allEntities.push_back(this);
     idx = (int)Entity::allEntities.size() - 1;
-    if (flag & ENTITY_COLLIDABLE) {
+    if (isCollidable) {
         Entity::collidableEntitiesIdx.push_back(idx);
         collideIdx = (int)Entity::collidableEntitiesIdx.size() - 1;
     } else {
         collideIdx = -1;
     }
+    isActivated = true;
+    return idx;
 }
 
 IBody* Entity::getBody() {
@@ -63,7 +71,10 @@ void Entity::setBody(IBody* _body) {
 
 Entity::~Entity() {
     delete body;
+    delete renderer;
     
-    Entity::allEntities.erase(Entity::allEntities.begin() + idx);
-    Entity::collidableEntitiesIdx.erase(Entity::collidableEntitiesIdx.begin() + collideIdx);
+    if (isActivated) {
+        Entity::allEntities.erase(Entity::allEntities.begin() + idx);
+        Entity::collidableEntitiesIdx.erase(Entity::collidableEntitiesIdx.begin() + collideIdx);
+    }
 }

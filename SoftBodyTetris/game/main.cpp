@@ -1,4 +1,5 @@
 #include "engine.hpp"
+#include "eventHandlers.hpp"
 #include "Border.hpp"
 #include "Tetromino.hpp"
 
@@ -7,22 +8,23 @@ const int SCREEN_HEIGHT = 800;
 
 int main () {
     Engine::init();
+
+    Engine::addEventHandler(SDL_KEYUP, new PauseEventHandler());
+
+    auto createTetrominoEventHandler = new CreateTetrominoEventHandler();
+    Engine::addEventHandler(SDL_MOUSEBUTTONUP, createTetrominoEventHandler);
+
+    auto tetromino = createTetrominoEntity({200, 400}, 0);
+    tetromino->activate();
+    auto controlEventHandler = new ControlEventHandler(tetromino);
+    Engine::addEventHandler(SDL_KEYDOWN, controlEventHandler);
     
-    createBorderEntities(SCREEN_WIDTH, SCREEN_HEIGHT);
-    
-    Engine::addEventHandler(SDL_KEYDOWN, [](SDL_Event& event)->void {
-        Engine::pauseUpdate();
-    });
-    
-    Engine::addEventHandler(SDL_KEYUP, [](SDL_Event& event)->void {
-        Engine::restartUpdate();
-    });
-    
-    Engine::addEventHandler(SDL_MOUSEBUTTONUP, [](SDL_Event& event)->void {
-        createTetrominoEntity({(double)event.button.x, (double)event.button.y});
-    });
-    
+    auto borderEntities = createBorderEntities(SCREEN_WIDTH, SCREEN_HEIGHT);
+    for (auto borderEntity: borderEntities) {
+        borderEntity->activate();
+    }
+
     Engine::startLoop();
-    
+
     return 0;
 }

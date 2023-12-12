@@ -13,11 +13,10 @@
 #include "SoftBody.hpp"
 #include <vector>
 
+#define ENTITY_NOFLAG     0b00000000
 #define ENTITY_COLLIDABLE 0b00000001
 #define ENTITY_GRAVITY    0b00000010
 #define ENTITY_DAMPING    0b00000100
-
-using RenderFunction = void (*)(IBody*, SDL_Renderer*);
 
 class Entity {
 private:
@@ -25,7 +24,7 @@ private:
     static std::vector<int> collidableEntitiesIdx;
     
     IBody* body;
-    RenderFunction renderFunction;
+    Renderer* renderer;
     
     int idx;
     int collideIdx;
@@ -36,8 +35,11 @@ public:
     static Window* window;
     bool gravity;
     bool damping;
+    bool isCollidable;
+    bool isActivated;
     
-    Entity(IBody* _body=NULL, int flag=0, RenderFunction _renderFunction=NULL);
+    Entity(IBody* _body=NULL, int flag=0, Renderer* _renderer=NULL);
+    int activate();
     IBody* getBody();
     void setBody(IBody* _body);
     ~Entity();

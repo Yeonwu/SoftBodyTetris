@@ -8,6 +8,8 @@
 #include "utils.hpp"
 #include "Types.hpp"
 #include <cmath>
+#include <random>
+
 
 Color HSVtoRGB(float H, float S,float V) {
     if(H>360 || H<0 || S>100 || S<0 || V>100 || V<0){
@@ -59,6 +61,15 @@ Color HSVtoRGB(float H, float S,float V) {
     return color;
 }
 
+Color adjustBrightness(const Color& color, const uint8_t val) {
+    return {
+        (uint8_t)(color.R * val/100),
+        (uint8_t)(color.G * val/100),
+        (uint8_t)(color.B * val/100),
+        color.A
+    };
+}
+
 Position rotate(Position pos, double angle) {
     return {
         pos.x * cos(angle) - pos.y * sin(angle),
@@ -81,4 +92,10 @@ Position constrainDistance(Position& point, Position& anchor, double distance) {
   return ((point - anchor).norm() * distance) + anchor;
 }
 
-
+int realRandom(int start, int end) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(start, end);
+    
+    return dis(gen);
+}

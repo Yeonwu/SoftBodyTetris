@@ -7,11 +7,9 @@
 
 #include "Border.hpp"
 
-void borderRendererFunction(IBody* body, SDL_Renderer* renderer) {}
-
 std::vector<Entity*> createBorderEntities(double SCREEN_WIDTH, double SCREEN_HEIGHT) {
     
-    Entity* floor = new Entity(new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100}, 1000), ENTITY_COLLIDABLE, &borderRendererFunction);
+    Entity* floor = new Entity(new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100}, 1000), ENTITY_COLLIDABLE);
     floor->getBody()->addPoint(new FixedPoint({-100, SCREEN_HEIGHT + 50}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 100, SCREEN_HEIGHT + 50}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 100, SCREEN_HEIGHT}, 10))
@@ -21,7 +19,7 @@ std::vector<Entity*> createBorderEntities(double SCREEN_WIDTH, double SCREEN_HEI
         .connectPoints(2, 3)
         .connectPoints(3, 0);
 
-    Entity* ceiling = new Entity(new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 50}, 1000), ENTITY_COLLIDABLE, &borderRendererFunction);
+    Entity* ceiling = new Entity(new SoftBody({SCREEN_WIDTH / 2, SCREEN_HEIGHT - 50}, 1000), ENTITY_COLLIDABLE);
     ceiling->getBody()->addPoint(new FixedPoint({-100, -50}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 100, -50}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 100, 0}, 10))
@@ -31,7 +29,7 @@ std::vector<Entity*> createBorderEntities(double SCREEN_WIDTH, double SCREEN_HEI
         .connectPoints(2, 3)
         .connectPoints(3, 0);
 
-    Entity* rightWall = new Entity(new SoftBody({SCREEN_WIDTH, SCREEN_HEIGHT / 2}, 1000), ENTITY_COLLIDABLE, &borderRendererFunction);
+    Entity* rightWall = new Entity(new SoftBody({SCREEN_WIDTH, SCREEN_HEIGHT / 2}, 1000), ENTITY_COLLIDABLE);
     rightWall->getBody()->addPoint(new FixedPoint({SCREEN_WIDTH + 50, 0}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH + 50, SCREEN_HEIGHT}, 10))
         .addPoint(new FixedPoint({SCREEN_WIDTH, SCREEN_HEIGHT}, 10))
@@ -41,7 +39,7 @@ std::vector<Entity*> createBorderEntities(double SCREEN_WIDTH, double SCREEN_HEI
         .connectPoints(2, 3)
         .connectPoints(3, 0);
 
-    Entity* leftWall = new Entity(new SoftBody({0, SCREEN_HEIGHT / 2}, 1000), ENTITY_COLLIDABLE, &borderRendererFunction);
+    Entity* leftWall = new Entity(new SoftBody({0, SCREEN_HEIGHT / 2}, 1000), ENTITY_COLLIDABLE);
     leftWall->getBody()->addPoint(new FixedPoint({0, 0}, 10))
         .addPoint(new FixedPoint({0, SCREEN_HEIGHT}, 10))
         .addPoint(new FixedPoint({-50, SCREEN_HEIGHT}, 10))

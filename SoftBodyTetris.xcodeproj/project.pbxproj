@@ -16,7 +16,10 @@
 		E35B77C62B25ACFD0080F759 /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77C42B25ACFD0080F759 /* entity.cpp */; };
 		E35B77C92B25F4D50080F759 /* Border.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77C72B25F4D50080F759 /* Border.cpp */; };
 		E35B77CC2B25F6100080F759 /* Tetromino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77CA2B25F6100080F759 /* Tetromino.cpp */; };
-		E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36B29A72B0BA34700C8C568 /* IRenderer.cpp */; };
+		E35B77D52B28421E0080F759 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77D32B28421E0080F759 /* Renderer.cpp */; };
+		E35B77D92B2876270080F759 /* PauseEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77D72B2876270080F759 /* PauseEventHandler.cpp */; };
+		E35B77DF2B2877290080F759 /* CreateTetrominoEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77DD2B2877290080F759 /* CreateTetrominoEventHandler.cpp */; };
+		E35B77E32B2880A30080F759 /* ControlEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77E12B2880A30080F759 /* ControlEventHandler.cpp */; };
 		E36E31F42B184CAC00C5D9F7 /* IPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */; };
 		E36E320C2B188E8900C5D9F7 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E320A2B188E8900C5D9F7 /* Color.cpp */; };
 		E36E321A2B1971A400C5D9F7 /* Vec2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E32182B1971A400C5D9F7 /* Vec2D.cpp */; };
@@ -25,9 +28,6 @@
 		E3EF33692B079B94001B6B20 /* ForceAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF33672B079B94001B6B20 /* ForceAdder.cpp */; };
 		E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF336F2B07A859001B6B20 /* IBody.cpp */; };
 		E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3EF33722B07A861001B6B20 /* SoftBody.cpp */; };
-		E3F03B552B1248B70080C2AE /* PointRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B532B1248B70080C2AE /* PointRenderer.cpp */; };
-		E3F03B5B2B13331B0080C2AE /* BodyRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B592B13331B0080C2AE /* BodyRenderer.cpp */; };
-		E3F03B5E2B13365E0080C2AE /* ConnectorRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B5C2B13365E0080C2AE /* ConnectorRenderer.cpp */; };
 		E3F03B622B1395390080C2AE /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F03B602B1395390080C2AE /* utils.cpp */; };
 		E3F4617F2AF9FCE10078AE76 /* IConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3F4617D2AF9FCE10078AE76 /* IConnector.cpp */; };
 /* End PBXBuildFile section */
@@ -62,8 +62,15 @@
 		E35B77C82B25F4D50080F759 /* Border.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Border.hpp; sourceTree = "<group>"; };
 		E35B77CA2B25F6100080F759 /* Tetromino.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tetromino.cpp; sourceTree = "<group>"; };
 		E35B77CB2B25F6100080F759 /* Tetromino.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tetromino.hpp; sourceTree = "<group>"; };
-		E36B29A72B0BA34700C8C568 /* IRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IRenderer.cpp; sourceTree = "<group>"; };
-		E36B29A82B0BA34700C8C568 /* IRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderer.hpp; sourceTree = "<group>"; };
+		E35B77D32B28421E0080F759 /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		E35B77D42B28421E0080F759 /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
+		E35B77D72B2876270080F759 /* PauseEventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PauseEventHandler.cpp; sourceTree = "<group>"; };
+		E35B77D82B2876270080F759 /* PauseEventHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PauseEventHandler.hpp; sourceTree = "<group>"; };
+		E35B77DB2B2876B20080F759 /* eventHandlers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = eventHandlers.hpp; sourceTree = "<group>"; };
+		E35B77DD2B2877290080F759 /* CreateTetrominoEventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CreateTetrominoEventHandler.cpp; sourceTree = "<group>"; };
+		E35B77DE2B2877290080F759 /* CreateTetrominoEventHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CreateTetrominoEventHandler.hpp; sourceTree = "<group>"; };
+		E35B77E12B2880A30080F759 /* ControlEventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlEventHandler.cpp; sourceTree = "<group>"; };
+		E35B77E22B2880A30080F759 /* ControlEventHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ControlEventHandler.hpp; sourceTree = "<group>"; };
 		E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IPoint.cpp; sourceTree = "<group>"; };
 		E36E31F32B184CAC00C5D9F7 /* IPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IPoint.hpp; sourceTree = "<group>"; };
 		E36E320A2B188E8900C5D9F7 /* Color.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
@@ -83,12 +90,6 @@
 		E3EF33702B07A859001B6B20 /* IBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBody.hpp; sourceTree = "<group>"; };
 		E3EF33722B07A861001B6B20 /* SoftBody.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoftBody.cpp; sourceTree = "<group>"; };
 		E3EF33732B07A861001B6B20 /* SoftBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SoftBody.hpp; sourceTree = "<group>"; };
-		E3F03B532B1248B70080C2AE /* PointRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointRenderer.cpp; sourceTree = "<group>"; };
-		E3F03B542B1248B70080C2AE /* PointRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointRenderer.hpp; sourceTree = "<group>"; };
-		E3F03B592B13331B0080C2AE /* BodyRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BodyRenderer.cpp; sourceTree = "<group>"; };
-		E3F03B5A2B13331B0080C2AE /* BodyRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BodyRenderer.hpp; sourceTree = "<group>"; };
-		E3F03B5C2B13365E0080C2AE /* ConnectorRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectorRenderer.cpp; sourceTree = "<group>"; };
-		E3F03B5D2B13365E0080C2AE /* ConnectorRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConnectorRenderer.hpp; sourceTree = "<group>"; };
 		E3F03B602B1395390080C2AE /* utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		E3F03B612B1395390080C2AE /* utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = utils.hpp; sourceTree = "<group>"; };
 		E3F4617D2AF9FCE10078AE76 /* IConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IConnector.cpp; sourceTree = "<group>"; };
@@ -158,11 +159,9 @@
 		E35B77BF2B25A9C10080F759 /* game */ = {
 			isa = PBXGroup;
 			children = (
+				E35B77D62B2874A20080F759 /* eventHandlers */,
+				E35B77CD2B26FF610080F759 /* entities */,
 				E33935202AE0E1EA00CC9672 /* main.cpp */,
-				E35B77C72B25F4D50080F759 /* Border.cpp */,
-				E35B77C82B25F4D50080F759 /* Border.hpp */,
-				E35B77CA2B25F6100080F759 /* Tetromino.cpp */,
-				E35B77CB2B25F6100080F759 /* Tetromino.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -176,19 +175,29 @@
 			path = entity;
 			sourceTree = "<group>";
 		};
-		E36B299F2B0B946A00C8C568 /* renderer */ = {
+		E35B77CD2B26FF610080F759 /* entities */ = {
 			isa = PBXGroup;
 			children = (
-				E36B29A72B0BA34700C8C568 /* IRenderer.cpp */,
-				E36B29A82B0BA34700C8C568 /* IRenderer.hpp */,
-				E3F03B532B1248B70080C2AE /* PointRenderer.cpp */,
-				E3F03B542B1248B70080C2AE /* PointRenderer.hpp */,
-				E3F03B5C2B13365E0080C2AE /* ConnectorRenderer.cpp */,
-				E3F03B5D2B13365E0080C2AE /* ConnectorRenderer.hpp */,
-				E3F03B592B13331B0080C2AE /* BodyRenderer.cpp */,
-				E3F03B5A2B13331B0080C2AE /* BodyRenderer.hpp */,
+				E35B77C72B25F4D50080F759 /* Border.cpp */,
+				E35B77C82B25F4D50080F759 /* Border.hpp */,
+				E35B77CA2B25F6100080F759 /* Tetromino.cpp */,
+				E35B77CB2B25F6100080F759 /* Tetromino.hpp */,
 			);
-			path = renderer;
+			path = entities;
+			sourceTree = "<group>";
+		};
+		E35B77D62B2874A20080F759 /* eventHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				E35B77DB2B2876B20080F759 /* eventHandlers.hpp */,
+				E35B77D72B2876270080F759 /* PauseEventHandler.cpp */,
+				E35B77D82B2876270080F759 /* PauseEventHandler.hpp */,
+				E35B77DD2B2877290080F759 /* CreateTetrominoEventHandler.cpp */,
+				E35B77DE2B2877290080F759 /* CreateTetrominoEventHandler.hpp */,
+				E35B77E12B2880A30080F759 /* ControlEventHandler.cpp */,
+				E35B77E22B2880A30080F759 /* ControlEventHandler.hpp */,
+			);
+			path = eventHandlers;
 			sourceTree = "<group>";
 		};
 		E36E31F82B188BFC00C5D9F7 /* types */ = {
@@ -236,10 +245,11 @@
 		E3B013F32AEA3D71003C20E6 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
-				E36B299F2B0B946A00C8C568 /* renderer */,
 				E3B013F42AEA3D8F003C20E6 /* graphics.hpp */,
 				E3B013F52AEA3DAB003C20E6 /* Window.cpp */,
 				E3B013F62AEA3DAB003C20E6 /* Window.hpp */,
+				E35B77D32B28421E0080F759 /* Renderer.cpp */,
+				E35B77D42B28421E0080F759 /* Renderer.hpp */,
 			);
 			path = graphics;
 			sourceTree = "<group>";
@@ -355,24 +365,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				E35B77C62B25ACFD0080F759 /* entity.cpp in Sources */,
-				E3F03B5B2B13331B0080C2AE /* BodyRenderer.cpp in Sources */,
 				E35B77C22B25A9D40080F759 /* engine.cpp in Sources */,
 				E3EF33692B079B94001B6B20 /* ForceAdder.cpp in Sources */,
 				E33935212AE0E1EA00CC9672 /* main.cpp in Sources */,
 				E350FF5B2AF4856C00A3F6C1 /* FixedPoint.cpp in Sources */,
 				E36E321A2B1971A400C5D9F7 /* Vec2D.cpp in Sources */,
 				E3F4617F2AF9FCE10078AE76 /* IConnector.cpp in Sources */,
-				E3F03B5E2B13365E0080C2AE /* ConnectorRenderer.cpp in Sources */,
+				E35B77E32B2880A30080F759 /* ControlEventHandler.cpp in Sources */,
 				E3EF33712B07A859001B6B20 /* IBody.cpp in Sources */,
 				E350FF5E2AF48ACA00A3F6C1 /* ElasticConnector.cpp in Sources */,
-				E3F03B552B1248B70080C2AE /* PointRenderer.cpp in Sources */,
 				E35B77BD2B24546D0080F759 /* Types.cpp in Sources */,
-				E36B29A92B0BA34700C8C568 /* IRenderer.cpp in Sources */,
 				E3F03B622B1395390080C2AE /* utils.cpp in Sources */,
 				E3EF33742B07A861001B6B20 /* SoftBody.cpp in Sources */,
 				E3B013F72AEA3DAB003C20E6 /* Window.cpp in Sources */,
+				E35B77D52B28421E0080F759 /* Renderer.cpp in Sources */,
+				E35B77DF2B2877290080F759 /* CreateTetrominoEventHandler.cpp in Sources */,
 				E35B77CC2B25F6100080F759 /* Tetromino.cpp in Sources */,
 				E35B77C92B25F4D50080F759 /* Border.cpp in Sources */,
+				E35B77D92B2876270080F759 /* PauseEventHandler.cpp in Sources */,
 				E36E320C2B188E8900C5D9F7 /* Color.cpp in Sources */,
 				E36E31F42B184CAC00C5D9F7 /* IPoint.cpp in Sources */,
 				E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */,

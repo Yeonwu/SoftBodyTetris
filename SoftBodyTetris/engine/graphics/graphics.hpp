@@ -9,10 +9,6 @@
 #define graphics_h
 
 #include "Window.hpp"
-
-#include "IRenderer.hpp"
-#include "PointRenderer.hpp"
-#include "ConnectorRenderer.hpp"
-#include "BodyRenderer.hpp"
+#include "Renderer.hpp"
 
 #endif /* graphics_h */

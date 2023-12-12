@@ -30,7 +30,7 @@ Window::Window( int screen_width, int screen_height ) {
         throw 0;
     }
     
-    renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+    renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     
     if ( renderer == NULL ) {
         printf( "Couldn't create renderer! SDL Error: %s\n", SDL_GetError() );

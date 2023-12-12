@@ -63,9 +63,6 @@ int ccw( Position a, Position b, Position c );
 
 DidColideResult IBody::didColide (IBody * b) {
     DidColideResult result = {false, };
-    if (radius + b->getRadius() < (pos - b->getPosition()).size()) {
-        return result;
-    }
     
     Position pos_out({-100, -100});
     Position pos_p;
@@ -122,6 +119,38 @@ DidColideResult IBody::didColide (IBody * b) {
 }
 
 void IBody::calcColide (IBody * b) {
+    if (radius + b->getRadius() < pos.distanceTo(b->getPosition())) {
+        return;
+    }
+    
+    std::vector<IPoint*> targetPoints;
+    std::vector<IPoint*> targetOtherPoints;
+
+    for (auto point: points) {
+        if (point->getPosition().distanceTo(b->getPosition()) < b->getRadius()) {
+            targetPoints.push_back(point);
+        }
+    }
+
+    for (auto point: targetOtherPoints) {
+        if (point->getPosition().distanceTo(pos) < radius) {
+            targetOtherPoints.push_back(point);
+        }
+    }
+    
+    Vec2D dir;
+    for (auto point: targetPoints) {
+        for (auto otherPoint: targetOtherPoints) {
+            dir = point->getPosition() - otherPoint->getPosition();
+            if ( dir.size() < 1 ) {
+//                IPoint::applyColision(point, otherPoint);
+                dir = dir.norm() * ((1 - dir.size()) / 2);
+                point->setPosition(point->getPosition() + dir);
+                otherPoint->setPosition(otherPoint->getPosition() - dir);
+            }
+        }
+    }
+    
     DidColideResult colisionCheckResult = didColide(b);
     if (colisionCheckResult.didColide == false) return;
     

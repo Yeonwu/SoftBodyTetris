@@ -31,6 +31,7 @@ public:
     void update();
     bool isMovable() const;
     void addForce( Force _F );
+    Force getForce();
 };
 
 #endif /* FixedPoint_hpp */

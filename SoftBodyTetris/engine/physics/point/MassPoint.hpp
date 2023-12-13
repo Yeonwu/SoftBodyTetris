@@ -38,7 +38,9 @@ public:
     
     void updatePosition();
     void updateVelocity();
+    
     void addForce( Force _F );
+    Force getForce ();
 };
 
 #endif /* MassPoint_hpp */

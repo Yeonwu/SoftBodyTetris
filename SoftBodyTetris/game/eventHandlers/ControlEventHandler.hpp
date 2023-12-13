@@ -9,12 +9,14 @@
 #define ControlEventHandler_hpp
 
 #include "engine.hpp"
+#include "Tetromino.hpp"
 
 class ControlEventHandler: public EventHandler {
 private:
-    Entity* targetTetromino;
+    Tetromino* targetTetromino;
 public:
-    ControlEventHandler(Entity* tetromino);
+    ControlEventHandler();
+    void setTargetTetromino(Tetromino* _targetTetromino);
     void handleFunction(SDL_Event& event);
 };
 

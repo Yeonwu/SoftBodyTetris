@@ -9,13 +9,17 @@
 #define CreateTetrominoEventHandler_hpp
 
 #include "engine.hpp"
+#include "Tetromino.hpp"
+#include "ControlEventHandler.hpp"
 
 class CreateTetrominoEventHandler: public EventHandler {
 private:
-    int nextTetrominoKey;
+    TetrominoKey nextTetrominoKey;
+    ControlEventHandler* controlEventHandler;
 public:
-    CreateTetrominoEventHandler();
+    CreateTetrominoEventHandler(ControlEventHandler* _controlEventHandler);
     void handleFunction(SDL_Event& event);
+    int getNextTetrominoKey;
 };
 
 #endif /* CreateTetrominoEventHandler_hpp */

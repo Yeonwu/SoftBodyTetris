@@ -20,6 +20,7 @@
 		E35B77D92B2876270080F759 /* PauseEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77D72B2876270080F759 /* PauseEventHandler.cpp */; };
 		E35B77DF2B2877290080F759 /* CreateTetrominoEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77DD2B2877290080F759 /* CreateTetrominoEventHandler.cpp */; };
 		E35B77E32B2880A30080F759 /* ControlEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77E12B2880A30080F759 /* ControlEventHandler.cpp */; };
+		E35B77E92B288A3E0080F759 /* NextTetromino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E35B77E72B288A3E0080F759 /* NextTetromino.cpp */; };
 		E36E31F42B184CAC00C5D9F7 /* IPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */; };
 		E36E320C2B188E8900C5D9F7 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E320A2B188E8900C5D9F7 /* Color.cpp */; };
 		E36E321A2B1971A400C5D9F7 /* Vec2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E36E32182B1971A400C5D9F7 /* Vec2D.cpp */; };
@@ -71,6 +72,9 @@
 		E35B77DE2B2877290080F759 /* CreateTetrominoEventHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CreateTetrominoEventHandler.hpp; sourceTree = "<group>"; };
 		E35B77E12B2880A30080F759 /* ControlEventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlEventHandler.cpp; sourceTree = "<group>"; };
 		E35B77E22B2880A30080F759 /* ControlEventHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ControlEventHandler.hpp; sourceTree = "<group>"; };
+		E35B77E52B2889E40080F759 /* entities.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = entities.hpp; sourceTree = "<group>"; };
+		E35B77E72B288A3E0080F759 /* NextTetromino.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NextTetromino.cpp; sourceTree = "<group>"; };
+		E35B77E82B288A3E0080F759 /* NextTetromino.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NextTetromino.hpp; sourceTree = "<group>"; };
 		E36E31F22B184CAC00C5D9F7 /* IPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IPoint.cpp; sourceTree = "<group>"; };
 		E36E31F32B184CAC00C5D9F7 /* IPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IPoint.hpp; sourceTree = "<group>"; };
 		E36E320A2B188E8900C5D9F7 /* Color.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
@@ -182,6 +186,9 @@
 				E35B77C82B25F4D50080F759 /* Border.hpp */,
 				E35B77CA2B25F6100080F759 /* Tetromino.cpp */,
 				E35B77CB2B25F6100080F759 /* Tetromino.hpp */,
+				E35B77E52B2889E40080F759 /* entities.hpp */,
+				E35B77E72B288A3E0080F759 /* NextTetromino.cpp */,
+				E35B77E82B288A3E0080F759 /* NextTetromino.hpp */,
 			);
 			path = entities;
 			sourceTree = "<group>";
@@ -383,6 +390,7 @@
 				E35B77CC2B25F6100080F759 /* Tetromino.cpp in Sources */,
 				E35B77C92B25F4D50080F759 /* Border.cpp in Sources */,
 				E35B77D92B2876270080F759 /* PauseEventHandler.cpp in Sources */,
+				E35B77E92B288A3E0080F759 /* NextTetromino.cpp in Sources */,
 				E36E320C2B188E8900C5D9F7 /* Color.cpp in Sources */,
 				E36E31F42B184CAC00C5D9F7 /* IPoint.cpp in Sources */,
 				E3B013FA2AEA45C5003C20E6 /* MassPoint.cpp in Sources */,

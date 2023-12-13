@@ -41,10 +41,14 @@ void Entity::render() {
 
 
 Entity::Entity(IBody* _body, int flag, Renderer* _renderer): body(_body), renderer(_renderer) {
+    setFlag(flag);
+    isActivated = false;
+}
+
+void Entity::setFlag(int flag) {
     gravity = flag & ENTITY_GRAVITY;
     damping = flag & ENTITY_DAMPING;
     isCollidable = flag & ENTITY_COLLIDABLE;
-    isActivated = false;
 }
 
 int Entity::activate() {
@@ -65,8 +69,17 @@ IBody* Entity::getBody() {
 }
 
 void Entity::setBody(IBody* _body) {
-    delete body;
+    if (body != NULL) delete body;
     body = _body;
+}
+
+Renderer* Entity::getRenderer() {
+    return renderer;
+}
+
+void Entity::setRenderer(Renderer* _renderer) {
+    if (renderer != NULL) delete renderer;
+    renderer = _renderer;
 }
 
 Entity::~Entity() {

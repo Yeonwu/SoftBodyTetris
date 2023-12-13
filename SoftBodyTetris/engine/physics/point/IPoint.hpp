@@ -27,6 +27,8 @@ public:
     
     virtual void update() = 0;
     virtual bool isMovable() const = 0;
+    
+    virtual Force getForce () = 0;
     virtual void addForce( Force _F ) = 0;
     
     static void applyColision(IPoint* A, IPoint* B);

@@ -8,12 +8,14 @@
 #include "CreateTetrominoEventHandler.hpp"
 #include "Tetromino.hpp"
 
-CreateTetrominoEventHandler::CreateTetrominoEventHandler() {
-    nextTetrominoKey = realRandom(0, 6);
+CreateTetrominoEventHandler::CreateTetrominoEventHandler(ControlEventHandler* _controlEventHandler): controlEventHandler(_controlEventHandler) {
+    nextTetrominoKey = static_cast<TetrominoKey>(realRandom(0, 6));
 }
 
 void CreateTetrominoEventHandler::handleFunction(SDL_Event &event) {
-    Entity* tetromino = createTetrominoEntity({(double)event.button.x, (double)event.button.y}, nextTetrominoKey);
+    auto* tetromino = new Tetromino ({(double)event.button.x, (double)event.button.y}, nextTetrominoKey);
     tetromino->activate();
-    nextTetrominoKey = realRandom(0, 6);
+    nextTetrominoKey = static_cast<TetrominoKey>(realRandom(0, 6));
+    
+    controlEventHandler->setTargetTetromino(tetromino);
 }

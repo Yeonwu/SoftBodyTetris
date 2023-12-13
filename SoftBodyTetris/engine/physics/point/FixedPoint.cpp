@@ -38,3 +38,7 @@ bool FixedPoint::isMovable() const {
 }
 
 void FixedPoint::addForce( Force _F ) {}
+
+Force FixedPoint::getForce () {
+    return {0, 0};
+}

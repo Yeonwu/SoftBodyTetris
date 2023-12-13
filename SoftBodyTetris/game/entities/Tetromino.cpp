@@ -8,34 +8,44 @@
 #include "Tetromino.hpp"
 #include <random>
 
-Entity* createTetrominoEntity(Position pos, int key) {
-    IBody* tetromino = getSoftTetromino(pos, 40, key);
-    TetrominoRenderer* renderer = new TetrominoRenderer(key, HSVtoRGB(rand()%360, 100, 100));
-    
-    return new Entity( tetromino, ENTITY_COLLIDABLE | ENTITY_GRAVITY | ENTITY_DAMPING, renderer );
+Tetromino::Tetromino(Position pos, TetrominoKey key) {
+    buildTetromino(pos, 40, key);
+    setRenderer(new TetrominoRenderer(key, HSVtoRGB(rand()%360, 78, 92)));
+    setFlag(ENTITY_COLLIDABLE | ENTITY_GRAVITY | ENTITY_DAMPING);
 }
 
-SoftBody* getSoftTetromino(Position pos, double size, int key) {
-    SoftBody* softBody;
-    switch (key) {
+void Tetromino::turnCW() {
+    for (auto thruster: CWThrusters) {
+        thruster.thrust();
+    }
+}
+
+void Tetromino::turnCCW() {
+    for (auto thruster: CCWThrusters) {
+        thruster.thrust();
+    }
+}
+
+void Tetromino::buildTetromino(Position pos, double size, TetrominoKey key) {
+    SoftBody* softBody = NULL;
+    if (key == TetrominoKey_L ) {
         // ###
         // #
-        case 0:
-            softBody = new SoftBody({pos.x + size*0.3, pos.y - size*0.2}, 5000);
-            softBody->
-             addPoint(new MassPoint({pos.x - size  , pos.y - size  }, 5))
+        softBody = new SoftBody({pos.x + size*0.3, pos.y - size*0.2}, 5000);
+        softBody->
+        addPoint(new MassPoint({pos.x - size  , pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x         , pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size  , pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size*2, pos.y - size  }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size  , pos.y         }, 5))
             .addPoint(new MassPoint({pos.x         , pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size  , pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size*2, pos.y         }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size  , pos.y + size  }, 5))
             .addPoint(new MassPoint({pos.x         , pos.y + size  }, 5))
-            
+        
             .connectPoints(0, 1)
             .connectPoints(1, 2)
             .connectPoints(2, 3)
@@ -46,24 +56,37 @@ SoftBody* getSoftTetromino(Position pos, double size, int key) {
             .connectPoints(9, 8)
             .connectPoints(8, 4)
             .connectPoints(4, 0);
-            return softBody;
+        auto points = softBody->getPoints();
+        CWThrusters = {
+            TetrominoThruster {points.at(8), points.at(4)},
+            TetrominoThruster {points.at(9), points.at(5)},
+            TetrominoThruster {points.at(2), points.at(6)},
+            TetrominoThruster {points.at(3), points.at(9)},
+        };
         
+        CCWThrusters = {
+            TetrominoThruster {points.at(0), points.at(4)},
+            TetrominoThruster {points.at(1), points.at(5)},
+            TetrominoThruster {points.at(6), points.at(2)},
+            TetrominoThruster {points.at(9), points.at(3)},
+        };
+    } else if (key == TetrominoKey_I) {
         // ####
-        case 1:
-            softBody = new SoftBody({pos.x, pos.y - size*0.5}, 10000);
-            softBody->
-             addPoint(new MassPoint({pos.x - size*2, pos.y - size  }, 5))
+        
+        softBody = new SoftBody({pos.x, pos.y - size*0.5}, 10000);
+        softBody->
+        addPoint(new MassPoint({pos.x - size*2, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x - size  , pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x         , pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size  , pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size*2, pos.y - size  }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x + size*2, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size  , pos.y         }, 5))
             .addPoint(new MassPoint({pos.x         , pos.y         }, 5))
             .addPoint(new MassPoint({pos.x - size  , pos.y         }, 5))
             .addPoint(new MassPoint({pos.x - size*2, pos.y         }, 5))
-            
+        
             .connectPoints(0, 1)
             .connectPoints(1, 2)
             .connectPoints(2, 3)
@@ -74,25 +97,38 @@ SoftBody* getSoftTetromino(Position pos, double size, int key) {
             .connectPoints(7, 8)
             .connectPoints(8, 9)
             .connectPoints(9, 0);
-            return softBody;
+        auto points = softBody->getPoints();
+        CWThrusters = {
+            TetrominoThruster {points.at(9), points.at(0)},
+            TetrominoThruster {points.at(8), points.at(1)},
+            TetrominoThruster {points.at(3), points.at(6)},
+            TetrominoThruster {points.at(4), points.at(5)},
+        };
+        
+        CCWThrusters = {
+            TetrominoThruster {points.at(0), points.at(9)},
+            TetrominoThruster {points.at(1), points.at(8)},
+            TetrominoThruster {points.at(6), points.at(3)},
+            TetrominoThruster {points.at(5), points.at(4)},
+        };
+    } else if (key == TetrominoKey_T) {
         // ###
         //  #
-        case 2:
-            softBody = new SoftBody({pos.x, pos.y - size*0.2}, 10000);
-            softBody->
-             addPoint(new MassPoint({pos.x - size*1.5, pos.y - size  }, 5))
+        softBody = new SoftBody({pos.x, pos.y - size*0.2}, 10000);
+        softBody->
+        addPoint(new MassPoint({pos.x - size*1.5, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size*1.5, pos.y - size  }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size*1.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size*1.5, pos.y         }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y + size  }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y + size  }, 5))
-            
+        
             .connectPoints(0, 1)
             .connectPoints(1, 2)
             .connectPoints(2, 3)
@@ -103,25 +139,39 @@ SoftBody* getSoftTetromino(Position pos, double size, int key) {
             .connectPoints(8, 5)
             .connectPoints(5, 4)
             .connectPoints(4, 0);
-            return softBody;
+        
+        auto points = softBody->getPoints();
+        CWThrusters = {
+            TetrominoThruster {points.at(4), points.at(0)},
+            TetrominoThruster {points.at(5), points.at(1)},
+            TetrominoThruster {points.at(2), points.at(3)},
+            TetrominoThruster {points.at(3), points.at(7)},
+        };
+        
+        CCWThrusters = {
+            TetrominoThruster {points.at(0), points.at(4)},
+            TetrominoThruster {points.at(1), points.at(5)},
+            TetrominoThruster {points.at(3), points.at(2)},
+            TetrominoThruster {points.at(7), points.at(3)},
+        };
+    } else if (key == TetrominoKey_S) {
         //  ##
         // ##
-        case 3:
-            softBody = new SoftBody({pos.x, pos.y}, 10000);
-            softBody->
-             addPoint(new MassPoint({pos.x - size*0.5, pos.y - size  }, 5))
+        softBody = new SoftBody({pos.x, pos.y}, 10000);
+        softBody->
+        addPoint(new MassPoint({pos.x - size*0.5, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size*1.5, pos.y - size  }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size*1.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size*1.5, pos.y         }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size*1.5, pos.y + size  }, 5))
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y + size  }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y + size  }, 5))
-            
+        
             .connectPoints(0, 1)
             .connectPoints(1, 2)
             .connectPoints(2, 6)
@@ -132,27 +182,40 @@ SoftBody* getSoftTetromino(Position pos, double size, int key) {
             .connectPoints(7, 3)
             .connectPoints(3, 4)
             .connectPoints(4, 0);
-            return softBody;
+        auto points = softBody->getPoints();
+        CWThrusters = {
+            TetrominoThruster {points.at(7), points.at(3)},
+            TetrominoThruster {points.at(8), points.at(4)},
+            TetrominoThruster {points.at(1), points.at(5)},
+            TetrominoThruster {points.at(2), points.at(6)},
             
+        };
+        
+        CCWThrusters = {
+            TetrominoThruster {points.at(3), points.at(7)},
+            TetrominoThruster {points.at(4), points.at(8)},
+            TetrominoThruster {points.at(5), points.at(1)},
+            TetrominoThruster {points.at(6), points.at(2)},
+        };
+    } else if (key == TetrominoKey_Z) {
         // ##
         //  ##
-        case 4:
-            softBody = new SoftBody({pos.x, pos.y}, 10000);
-            softBody->
-             addPoint(new MassPoint({pos.x - size*1.5, pos.y - size  }, 5))
+        softBody = new SoftBody({pos.x, pos.y}, 10000);
+        softBody->
+        addPoint(new MassPoint({pos.x - size*1.5, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y - size  }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y - size  }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size*1.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y         }, 5))
             .addPoint(new MassPoint({pos.x + size*1.5, pos.y         }, 5))
-            
+        
             .addPoint(new MassPoint({pos.x - size*0.5, pos.y + size  }, 5))
             .addPoint(new MassPoint({pos.x + size*0.5, pos.y + size  }, 5))
             .addPoint(new MassPoint({pos.x + size*1.5, pos.y + size  }, 5))
-            
-            
+        
+        
             .connectPoints(0, 1)
             .connectPoints(1, 2)
             .connectPoints(2, 5)
@@ -163,68 +226,105 @@ SoftBody* getSoftTetromino(Position pos, double size, int key) {
             .connectPoints(7, 4)
             .connectPoints(4, 3)
             .connectPoints(3, 0);
-            return softBody;
-            
-            // ##
-            // ##
-            case 5:
-                softBody = new SoftBody({pos.x, pos.y}, 10000);
-                softBody->
-                 addPoint(new MassPoint({pos.x - size, pos.y - size  }, 5))
-                .addPoint(new MassPoint({pos.x       , pos.y - size  }, 5))
-                .addPoint(new MassPoint({pos.x + size, pos.y - size  }, 5))
-                
-                .addPoint(new MassPoint({pos.x - size, pos.y         }, 5))
-                .addPoint(new MassPoint({pos.x + size, pos.y         }, 5))
-                
-                .addPoint(new MassPoint({pos.x - size, pos.y + size  }, 5))
-                .addPoint(new MassPoint({pos.x       , pos.y + size  }, 5))
-                .addPoint(new MassPoint({pos.x + size, pos.y + size  }, 5))
-                
-                
-                .connectPoints(0, 1)
-                .connectPoints(1, 2)
-                .connectPoints(2, 4)
-                .connectPoints(4, 7)
-                .connectPoints(7, 6)
-                .connectPoints(6, 5)
-                .connectPoints(5, 3)
-                .connectPoints(3, 0);
-                return softBody;
-            
-            // ###
-            // #
-            case 6:
-                softBody = new SoftBody({pos.x + size*0.7, pos.y - size*0.2}, 10000);
-                softBody->
-                addPoint(new MassPoint({pos.x - size  , pos.y - size  }, 5))
-               .addPoint(new MassPoint({pos.x         , pos.y - size  }, 5))
-               .addPoint(new MassPoint({pos.x + size  , pos.y - size  }, 5))
-               .addPoint(new MassPoint({pos.x + size*2, pos.y - size  }, 5))
-               
-               .addPoint(new MassPoint({pos.x - size  , pos.y         }, 5))
-               .addPoint(new MassPoint({pos.x         , pos.y         }, 5))
-               .addPoint(new MassPoint({pos.x + size  , pos.y         }, 5))
-               .addPoint(new MassPoint({pos.x + size*2, pos.y         }, 5))
-               
-               .addPoint(new MassPoint({pos.x + size  , pos.y + size  }, 5))
-               .addPoint(new MassPoint({pos.x + size*2, pos.y + size  }, 5))
-                
-                
-                .connectPoints(0, 1)
-                .connectPoints(1, 2)
-                .connectPoints(2, 3)
-                .connectPoints(3, 7)
-                .connectPoints(7, 9)
-                .connectPoints(9, 8)
-                .connectPoints(8, 6)
-                .connectPoints(6, 5)
-                .connectPoints(5, 4)
-                .connectPoints(4, 0);
-                return softBody;
+        auto points = softBody->getPoints();
+        CWThrusters = {
+            TetrominoThruster {points.at(3), points.at(0)},
+            TetrominoThruster {points.at(4), points.at(1)},
+            TetrominoThruster {points.at(5), points.at(8)},
+            TetrominoThruster {points.at(6), points.at(9)},
+        };
+        
+        CCWThrusters = {
+            TetrominoThruster {points.at(0), points.at(3)},
+            TetrominoThruster {points.at(1), points.at(4)},
+            TetrominoThruster {points.at(8), points.at(5)},
+            TetrominoThruster {points.at(9), points.at(6)},
+        };
+    } else if (key == TetrominoKey_O) {
+        // ##
+        // ##
+        softBody = new SoftBody({pos.x, pos.y}, 10000);
+        softBody->
+        addPoint(new MassPoint({pos.x - size, pos.y - size  }, 5))
+            .addPoint(new MassPoint({pos.x       , pos.y - size  }, 5))
+            .addPoint(new MassPoint({pos.x + size, pos.y - size  }, 5))
+        
+            .addPoint(new MassPoint({pos.x - size, pos.y         }, 5))
+            .addPoint(new MassPoint({pos.x + size, pos.y         }, 5))
+        
+            .addPoint(new MassPoint({pos.x - size, pos.y + size  }, 5))
+            .addPoint(new MassPoint({pos.x       , pos.y + size  }, 5))
+            .addPoint(new MassPoint({pos.x + size, pos.y + size  }, 5))
+        
+        
+            .connectPoints(0, 1)
+            .connectPoints(1, 2)
+            .connectPoints(2, 4)
+            .connectPoints(4, 7)
+            .connectPoints(7, 6)
+            .connectPoints(6, 5)
+            .connectPoints(5, 3)
+            .connectPoints(3, 0);
+        auto points = softBody->getPoints();
+        CWThrusters = {
+            TetrominoThruster {points.at(5), points.at(0)},
+            TetrominoThruster {points.at(6), points.at(1)},
+            TetrominoThruster {points.at(1), points.at(6)},
+            TetrominoThruster {points.at(2), points.at(7)},
+        };
+        
+        CCWThrusters = {
+            TetrominoThruster {points.at(0), points.at(5)},
+            TetrominoThruster {points.at(1), points.at(6)},
+            TetrominoThruster {points.at(6), points.at(1)},
+            TetrominoThruster {points.at(7), points.at(2)},
+        };
+    } else if (key == TetrominoKey_J) {
+        // ###
+        //   #
+        softBody = new SoftBody({pos.x + size*0.7, pos.y - size*0.2}, 10000);
+        softBody->
+        addPoint(new MassPoint({pos.x - size  , pos.y - size  }, 5))
+            .addPoint(new MassPoint({pos.x         , pos.y - size  }, 5))
+            .addPoint(new MassPoint({pos.x + size  , pos.y - size  }, 5))
+            .addPoint(new MassPoint({pos.x + size*2, pos.y - size  }, 5))
+        
+            .addPoint(new MassPoint({pos.x - size  , pos.y         }, 5))
+            .addPoint(new MassPoint({pos.x         , pos.y         }, 5))
+            .addPoint(new MassPoint({pos.x + size  , pos.y         }, 5))
+            .addPoint(new MassPoint({pos.x + size*2, pos.y         }, 5))
+        
+            .addPoint(new MassPoint({pos.x + size  , pos.y + size  }, 5))
+            .addPoint(new MassPoint({pos.x + size*2, pos.y + size  }, 5))
+        
+        
+            .connectPoints(0, 1)
+            .connectPoints(1, 2)
+            .connectPoints(2, 3)
+            .connectPoints(3, 7)
+            .connectPoints(7, 9)
+            .connectPoints(9, 8)
+            .connectPoints(8, 6)
+            .connectPoints(6, 5)
+            .connectPoints(5, 4)
+            .connectPoints(4, 0);
+        auto points = softBody->getPoints();
+        CWThrusters = {
+            TetrominoThruster {points.at(4), points.at(0)},
+            TetrominoThruster {points.at(5), points.at(1)},
+            TetrominoThruster {points.at(2), points.at(6)},
+            TetrominoThruster {points.at(3), points.at(7)},
+        };
+        
+        CCWThrusters = {
+            TetrominoThruster {points.at(0), points.at(4)},
+            TetrominoThruster {points.at(1), points.at(5)},
+            TetrominoThruster {points.at(6), points.at(2)},
+            TetrominoThruster {points.at(7), points.at(3)},
+        };
     }
     
-    return NULL;
+    setBody(softBody);
 }
 
 TetrominoRenderer::TetrominoRenderer( int key, Color color ): Renderer(color) {
@@ -253,4 +353,10 @@ TetrominoRenderer::TetrominoRenderer( int key, Color color ): Renderer(color) {
         default:
             break;
     }
+}
+
+
+TetrominoThruster::TetrominoThruster(IPoint* _pushPoint, IPoint* _dirPoint): pushPoint(_pushPoint), dirPoint(_dirPoint) {}
+void TetrominoThruster::thrust() {
+    pushPoint->addForce( (dirPoint->getPosition() - pushPoint->getPosition()).norm() * 100000 );
 }

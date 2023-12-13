@@ -73,3 +73,7 @@ void MassPoint::updatePosition() {
 void MassPoint::addForce( Force _F ) {
     F += _F;
 }
+
+Force MassPoint::getForce () {
+    return F;
+}

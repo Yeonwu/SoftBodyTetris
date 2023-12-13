@@ -39,9 +39,15 @@ public:
     bool isActivated;
     
     Entity(IBody* _body=NULL, int flag=0, Renderer* _renderer=NULL);
+    void setFlag(int flag=0);
     int activate();
+    
     IBody* getBody();
     void setBody(IBody* _body);
+    
+    Renderer* getRenderer();
+    void setRenderer(Renderer* _renderer);
+    
     ~Entity();
     
     friend class Engine;

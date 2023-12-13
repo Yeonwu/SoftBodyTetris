@@ -48,13 +48,34 @@ $$x_{n+1}=x_{n}+\frac{x_{n}-x_{n-1}}{\Delta t} \Delta t+\frac{f_{n}}{m}\Delta t^
 
 $$=2x_{n}-x_{n-1}+\frac{f_{n}}{m}\Delta t^{2}$$
 
-으로 깔끔하게 정리됩니다.
+으로 깔끔하게 정리됩니다. [구현된 코드](https://github.com/Yeonwu/SoftBodyTetris/blob/master/SoftBodyTetris/engine/physics/point/MassPoint.cpp#L49)
 
 ## Collision
 그 다음은 가장 중요한 충돌입니다.
 ### Collision Detection
 가장 먼저 충돌을 감지해야겠죠. 그림처럼 질점이 다른 물체 안에 들어가 있으면 충돌했다고 볼 수 있습니다. 질점이 다른 물체 안에 들어갔는지 알아내는 방법은 간단합니다. 바깥에 있는 임의의 점과 이은 다음에 교점의 개수가 홀수개이면 안에 들어간 것이고, 짝수개이면 밖에 있는 것입니다.
 <p align="center"><img width="355" alt="스크린샷 2023-12-13 오후 10 17 07" src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/d4f93351-a3e0-4c7b-a8a2-0289b54d7359"></p>
+바깥에 있는 점과 도형을 이룬 선분이 교차했는지 알아내기 위해 ccw 알고리즘을 사용했습니다. ccw 알고리즘은 아래 이미지와 같이 3개의 점이 반시계 방향을 이루는지 확인하여 교차를 알아내는 알고리즘입니다. 쉽게 말해, 점 2개 중 하나는 위에, 하나는 아래에 있음을 확인하는 것입니다. 이는 외적의 오른손 법칙을 이용해 알아낼 수 있는데, 반시계/시계 방향에 따라 z축 부호가 결정되기 때문입니다.
+<p align="center"><img width="427" alt="스크린샷 2023-12-13 오후 10 23 25" src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/c14801a8-58c0-4502-bd60-838f3f557ab5"></p>
+
+[구현된 코드](https://github.com/Yeonwu/SoftBodyTetris/blob/master/SoftBodyTetris/engine/physics/body/IBody.cpp#L64)
+
+### Collision Reaction
+충돌 중인 질점을 알아냈으면 이제 충돌을 처리해야합니다. 가장 가까운 선분을 알아낸 다음 수선을 내리고, 양 끝의 질점의 질량과 힘을 갖는 가상의 질점을 만듭니다. 질점과 선분의 충돌은 어렵지만, 질점과 질점의 충돌은 간단하게 해결할 수 있습니다. 저는 완전 탄성 충돌을 가정하고 계산했습니다.
+
+<p align="center"><img width="573" alt="스크린샷 2023-12-13 오후 10 28 21" src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/f3f30099-8c41-463d-88ef-d057f573afb3"></p>
+
+마지막으로 가상의 질점에 가해진 물리적 변화를 원래 질점에 적용시키면 그림과 같이 충돌이 처리된 상태가 됩니다.
+
+질점과 질점 사이의 충돌도 처리해주어야합니다. 질점의 위치가 겹치게되면 가장 가까운 선분 검출에 문제가 생기기 때문입니다. 일정 거리 안으로 들어올 경우 거리를 벌려주는 방식으로 처리했습니다.
+
+[구현된 코드](https://github.com/Yeonwu/SoftBodyTetris/blob/master/SoftBodyTetris/engine/physics/body/IBody.cpp#L121)
+
+## Shape Matching
+
+작성중...
+
+
 
 
 

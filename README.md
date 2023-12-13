@@ -1,9 +1,13 @@
 # Soft Body Tetris
+## Demo Video
+[![Watch the video](https://img.youtube.com/vi/9RKrUTAszdo/hqdefault.jpg)](https://www.youtube.com/embed/9RKrUTAszdo)
+
 ## What is a Soft Body?
 
 연체는 형태가 바뀌지 않는 강체와 반대로 형태가 바뀔 수 있는 물체입니다. 좀 더 정확한 표현으로는 물체 안의 두 점의 상대적인 위치가 변할 수 있다고 할 수 있겠습니다. 부드러운 천, 머리카락, 푸딩, 근육, 살과 같은 것들이 대표적인 연체죠. 애니메이션, 게임에서 연체가 자주 사용되기 때문에 오래전부터 연구되어왔던 분야입니다.
-<p align="center">![DB2W9Fz](https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/c9627cde-b113-4dd2-a3c4-7cb939f893d3)></p>
-[이미지 출처=https://www.reddit.com/r/gifs/comments/1zeqym/cloth_simulation/](https://www.reddit.com/r/gifs/comments/1zeqym/cloth_simulation/)
+<p align="center"><img src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/c9627cde-b113-4dd2-a3c4-7cb939f893d3"></p>
+
+<p align="center">이미지 출처=https://www.reddit.com/r/gifs/comments/1zeqym/cloth_simulation/</p>
 
 ## Development Environment
 - XCode 14.3.1
@@ -36,7 +40,8 @@ $$v_{n+1}=v_{n}+\frac{f_{n}}{m}\Delta t$$
 하지만 Eluer Method는 아래 그래프와 같이 시간이 지날수록 오차가 누적된다는 단점이 있습니다. 또한 충돌시 위치와 속도를 모두 계산하여 바꿔주어야 한다는 단점이 있죠.
 
 <p align="center"><img width="230" alt="스크린샷 2023-12-13 오후 10 05 56" src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/72dcedf4-aac1-4468-b1e5-65218a124425"></p>
-[이미지 출처=https://en.wikipedia.org/wiki/Euler_method](https://en.wikipedia.org/wiki/Euler_method)
+
+<p align="center">이미지 출처=https://en.wikipedia.org/wiki/Euler_method</p>
 
 ### Verlet Integration
 Verlet Integration은 Euler Method의 단점을 해결한 방식입니다. 속도를 위치와 시간 간격으로 유도하여 소거하고, 위치와 힘만을 갖고 다음 시점의 위치를 계산해냅니다. 오차가 크지 않으며, 충돌시 위치만 바꿔주면 됩니다.
@@ -51,7 +56,9 @@ $$x_{n+1}=x_{n}+\frac{x_{n}-x_{n-1}}{\Delta t} \Delta t+\frac{f_{n}}{m}\Delta t^
 
 $$=2x_{n}-x_{n-1}+\frac{f_{n}}{m}\Delta t^{2}$$
 
-으로 깔끔하게 정리됩니다. [구현된 코드](https://github.com/Yeonwu/SoftBodyTetris/blob/master/SoftBodyTetris/engine/physics/point/MassPoint.cpp#L49)
+으로 깔끔하게 정리됩니다. 
+
+[구현된 코드](https://github.com/Yeonwu/SoftBodyTetris/blob/master/SoftBodyTetris/engine/physics/point/MassPoint.cpp#L49)
 
 ## Collision
 그 다음은 가장 중요한 충돌입니다.
@@ -76,9 +83,19 @@ $$=2x_{n}-x_{n-1}+\frac{f_{n}}{m}\Delta t^{2}$$
 
 ## Shape Matching
 
-작성중...
+마지막으로 모양을 유지하기 위한 처리입니다. 그냥 스프링으로 연결해도 어느 정도는 시뮬레이션이 가능하지만, 강한 힘을 받으면 모양이 깨질 수 있습니다. 그림과 같이 원래 모양과 변형된 모양의 각 점을 질량 중심을 시점으로 하는 벡터로 나타낸 뒤, 가장 차이가 적은 각도 세타를 구해 회전시킨 후 변형된 모양의 점을 원래 모양의 점과 스프링으로 연결해 모양을 유지할 수 있습니다.
 
+<p align="center"><img width="440" alt="스크린샷 2023-12-14 오전 12 18 40" src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/a5da1af5-04fd-477f-908f-b9060f8a4ed8"></p>
 
+$i$번째 원래 모양 벡터 $O_{i} $i$번째 변형된 모양 벡터 $D_{i}$ 회전 행렬 $R_{\theta}$에 대해 차이 $E_{\theta}$는 다음과 같이 나타나며,  
+
+$$E_{\theta}=\sum_{i=1}^{N}||O_{i}-R_{\theta}D_{i}||$$
+
+이를 미분하여 최소를 찾으면 다음과 같이 정리됩니다. [출처](https://lisyarus.github.io/blog/physics/2023/05/10/soft-body-physics.html#collision-resolution)
+
+$$ \theta=-tan^{-1}(\frac{\sum D_{i} \times O_{i}}{ \sum D_{i} \cdot O_{i} })$$
+
+[구현된 코드](https://github.com/Yeonwu/SoftBodyTetris/blob/master/SoftBodyTetris/engine/physics/body/SoftBody.cpp#L29)
 
 
 

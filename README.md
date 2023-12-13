@@ -2,6 +2,8 @@
 ## What is a Soft Body?
 
 연체는 형태가 바뀌지 않는 강체와 반대로 형태가 바뀔 수 있는 물체입니다. 좀 더 정확한 표현으로는 물체 안의 두 점의 상대적인 위치가 변할 수 있다고 할 수 있겠습니다. 부드러운 천, 머리카락, 푸딩, 근육, 살과 같은 것들이 대표적인 연체죠. 애니메이션, 게임에서 연체가 자주 사용되기 때문에 오래전부터 연구되어왔던 분야입니다.
+<p align="center">![DB2W9Fz](https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/c9627cde-b113-4dd2-a3c4-7cb939f893d3)></p>
+[이미지 출처=https://www.reddit.com/r/gifs/comments/1zeqym/cloth_simulation/](https://www.reddit.com/r/gifs/comments/1zeqym/cloth_simulation/)
 
 ## Development Environment
 - XCode 14.3.1
@@ -34,6 +36,7 @@ $$v_{n+1}=v_{n}+\frac{f_{n}}{m}\Delta t$$
 하지만 Eluer Method는 아래 그래프와 같이 시간이 지날수록 오차가 누적된다는 단점이 있습니다. 또한 충돌시 위치와 속도를 모두 계산하여 바꿔주어야 한다는 단점이 있죠.
 
 <p align="center"><img width="230" alt="스크린샷 2023-12-13 오후 10 05 56" src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/72dcedf4-aac1-4468-b1e5-65218a124425"></p>
+[이미지 출처=https://en.wikipedia.org/wiki/Euler_method](https://en.wikipedia.org/wiki/Euler_method)
 
 ### Verlet Integration
 Verlet Integration은 Euler Method의 단점을 해결한 방식입니다. 속도를 위치와 시간 간격으로 유도하여 소거하고, 위치와 힘만을 갖고 다음 시점의 위치를 계산해냅니다. 오차가 크지 않으며, 충돌시 위치만 바꿔주면 됩니다.

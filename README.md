@@ -87,7 +87,7 @@ $$=2x_{n}-x_{n-1}+\frac{f_{n}}{m}\Delta t^{2}$$
 
 <p align="center"><img width="440" alt="스크린샷 2023-12-14 오전 12 18 40" src="https://github.com/Yeonwu/SoftBodyTetris/assets/61102178/a5da1af5-04fd-477f-908f-b9060f8a4ed8"></p>
 
-$i$번째 원래 모양 벡터 $O_{i} $i$번째 변형된 모양 벡터 $D_{i}$ 회전 행렬 $R_{\theta}$에 대해 차이 $E_{\theta}$는 다음과 같이 나타나며,  
+$i$번째 원래 모양 벡터 $O_{i}$, $i$번째 변형된 모양 벡터 $D_{i}$, 회전 행렬 $R_{\theta}$에 대해 차이 $E_{\theta}$는 다음과 같이 나타나며,  
 
 $$E_{\theta}=\sum_{i=1}^{N}||O_{i}-R_{\theta}D_{i}||$$
 
